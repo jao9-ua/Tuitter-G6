@@ -17,7 +17,7 @@ class Hilo extends Model
 
     public function categoria()
     {
-        return $this->hasMany(Categoria::class);
+        return $this->belongsTo(Categoria::class);
     }
 
     public function tuit()
