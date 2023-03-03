@@ -13,11 +13,30 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('HILO', function (Blueprint $table) {
+        Schema::create('hilos', function (Blueprint $table) {
             $table->id();
-            $table->string('Texto');
-            $table->string('Imagen');
-            $table->date('Fecha');
+            $table->text('texto');
+            $table->string('imagen')->nullable();
+            $table->timestamp('fecha');
+        });
+
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_hilo');
+            $table->foreign('id_hilo')->references('id')->on('hilos')->onDelete('cascade');
+            $table->string('hastag');
+            $table->integer('views');
+            $table->string('imagen')->nullable();
+        });
+
+        Schema::create('tuits', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_hilo');
+            $table->foreign('id_hilo')->references('id')->on('hilos')->onDelete('cascade');
+            $table->text('texto');
+            $table->string('imagen')->nullable();
+            $table->timestamp('fecha');
+            $table->integer('orden');
         });
     }
 
@@ -28,6 +47,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('HILO');
+        Schema::dropIfExists('hilo');
+        Schema::dropIfExists('tuits');
+        Schema::dropIfExists('categorias');
     }
 };
