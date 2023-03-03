@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-
+        // Creamos la tabla Categoria
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->id();
+            $table->string('hashtag');
+            $table->integer('views');
+            $table->string('imagen')->nullable();
+        });
+         // Creamos la tabla Hilo
          Schema::create('hilos', function (Blueprint $table) {
             $table->id();
             $table->text('texto');
@@ -23,13 +30,8 @@ return new class extends Migration
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('set null');
         });
 
-        Schema::create('categorias', function (Blueprint $table) {
-            $table->id();
-            $table->string('hashtag');
-            $table->integer('views');
-            $table->string('imagen')->nullable();
-        });
 
+        // Creamos la tabla Tuit
         Schema::create('tuits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('hilo_id');
