@@ -17,6 +17,6 @@ class Categoria extends Model
 
     public function hilo()
     {
-        return $this->belongsTo(Hilo::class);
+        return $this->hasMany(Hilo::class);
     }
 }
