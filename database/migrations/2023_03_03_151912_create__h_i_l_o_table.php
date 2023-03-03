@@ -25,7 +25,7 @@ return new class extends Migration
             $table->id();
             $table->text('texto');
             $table->string('imagen')->nullable();
-            $table->date('fecha');
+            $table->date('fecha')->default(now());
             $table->unsignedBigInteger('categoria_id')->nullable();
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('set null');
         });
