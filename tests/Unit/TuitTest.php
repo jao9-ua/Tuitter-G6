@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\Hilo;
 use App\Models\Tuit;
+use App\Models\Categoria;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

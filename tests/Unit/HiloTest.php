@@ -2,38 +2,32 @@
 
 namespace Tests\Unit\Models;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\Hilo;
+use App\Models\Tuit;
+use App\Models\Categoria;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
 
 class HiloTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase;
 
-    public function test_hilo_tiene_atributos()
-    {
-        $hilo = new Hilo();
-        $this->assertClassHasAttribute('texto', get_class($hilo));
-        $this->assertClassHasAttribute('imagen', get_class($hilo));
-        $this->assertClassHasAttribute('fecha', get_class($hilo));
-        $this->assertClassHasAttribute('categoria_id', get_class($hilo));
-    }
-
-    public function test_hilo_tiene_relacion_con_categoria()
+    public function test_hilo_puede_pertenecer_a_una_categoria()
     {
         $categoria = Categoria::factory()->create();
         $hilo = Hilo::factory()->create(['categoria_id' => $categoria->id]);
 
         $this->assertInstanceOf('App\Models\Categoria', $hilo->categoria);
+        $this->assertEquals($categoria->id, $hilo->categoria->id);
     }
 
-    public function test_hilo_tiene_relacion_con_tuits()
+    public function test_hilo_puede_tener_varios_tuits()
     {
         $hilo = Hilo::factory()->create();
-        $tuit = Tuit::factory()->create(['hilo_id' => $hilo->id]);
+        $tuits = Tuit::factory()->count(5)->create(['hilo_id' => $hilo->id]);
 
-        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $hilo->tuits);
-        $this->assertInstanceOf('App\Models\Tuit', $hilo->tuits->first());
+        $this->assertEquals(5, $hilo->tuit->count());
+        $this->assertInstanceOf('App\Models\Tuit', $hilo->tuit->first());
     }
 }
