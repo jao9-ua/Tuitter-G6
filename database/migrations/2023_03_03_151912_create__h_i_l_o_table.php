@@ -25,7 +25,7 @@ return new class extends Migration
             $table->id();
             $table->text('texto');
             $table->string('imagen')->nullable();
-            $table->timestamp('fecha');
+            $table->date('fecha');
             $table->unsignedBigInteger('categoria_id')->nullable();
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('set null');
         });
@@ -38,7 +38,7 @@ return new class extends Migration
             $table->foreign('hilo_id')->references('id')->on('hilos')->onDelete('cascade');
             $table->text('texto');
             $table->string('imagen')->nullable();
-            $table->timestamp('fecha');
+            $table->date('fecha');
             $table->integer('orden');
         });
     }

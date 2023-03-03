@@ -9,7 +9,7 @@ class Tuit extends Model
 {
     use HasFactory;
 
-    public $timestamps =false;
+    public $timestamps = false;
 
     protected $table = 'tuits';
 

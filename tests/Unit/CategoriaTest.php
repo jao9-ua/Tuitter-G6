@@ -2,30 +2,31 @@
 
 namespace Tests\Unit\Models;
 
+use App\Models\Categoria;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Models\Categoria;
 
 class CategoriaTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase;
 
-    public function test_categoria_tiene_atributos()
+    /** @test */
+    public function categoria_tiene_atributos_correctos()
     {
         $categoria = new Categoria();
+        $atributos = ['hashtag', 'views', 'imagen'];
 
-        $this->assertClassHasAttribute('hashtag', get_class($categoria));
-        $this->assertClassHasAttribute('views', get_class($categoria));
-        $this->assertClassHasAttribute('imagen', get_class($categoria));
+        $this->assertEquals($atributos, $categoria->getFillable());
     }
 
-    public function test_categoria_tiene_relacion_con_hilos()
+    /** @test */
+    public function categoria_tiene_hilos()
     {
         $categoria = Categoria::factory()->create();
-        $hilo = Hilo::factory()->create(['categoria_id' => $categoria->id]);
+        $hilo = $categoria->hilo()->create(['texto' => 'Un hilo de prueba']);
 
-        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $categoria->hilos);
-        $this->assertInstanceOf('App\Models\Hilo', $categoria->hilos->first());
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $categoria->hilo);
+        $this->assertTrue($categoria->hilo->contains($hilo));
     }
 }
