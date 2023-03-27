@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        
         // Creamos la tabla Categoria
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
