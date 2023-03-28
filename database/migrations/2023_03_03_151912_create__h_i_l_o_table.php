@@ -73,6 +73,8 @@ return new class extends Migration
         Schema::dropIfExists('categorias');
         Schema::dropIfExists('hilo');
         Schema::dropIfExists('tuits');
+        Schema::dropIfExists('Evento');
+        Schema::dropIfExists('Usuario');
         
     }
 };

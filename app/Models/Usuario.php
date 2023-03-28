@@ -30,12 +30,12 @@ class Usuario extends Model
         return $this->belongsToMany(Hilo::class);
     }
 
-    public function tuit()
+    public function like_t()
     {
         return $this->belongsToMany(Tuit::class,'usuario_tuit');
     }
 
-    public function like()
+    public function like_h()
     {
         return $this->belongsToMany(Tuit::class,'usuario_hilo');
     }
