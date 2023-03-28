@@ -52,6 +52,15 @@ return new class extends Migration
             $table->foreign('usuario_id')->references('id')->on('Usuario');
             $table->foreign('tuit_id')->references('id')->on('Tuit');
         });
+        Schema::create('usuario_hilo', function (Blueprint $table) {
+            $table->if();
+            $table->date('Fecha')->default(now());
+            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('hilo_id');
+
+            $table->foreign('usuario_id')->references('id')->on('Usuario');
+            $table->foreign('hilo_id')->references('id')->on('Hilo');
+        });
     }
 
     /**

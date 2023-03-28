@@ -35,5 +35,8 @@ class Usuario extends Model
         return $this->belongsToMany(Tuit::class,'usuario_tuit');
     }
 
-    //segunda relacion de crear?
+    public function like()
+    {
+        return $this->belongsToMany(Tuit::class,'usuario_hilo');
+    }
 }

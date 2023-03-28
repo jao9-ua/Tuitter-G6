@@ -24,4 +24,9 @@ class Hilo extends Model
     {
         return $this->hasMany(Tuit::class);
     }
+
+    public function usuario()
+    {
+        return $this->belongsToMany(usuario::class,'usuario_hilo');
+    }
 }
