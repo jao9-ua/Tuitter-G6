@@ -11,12 +11,17 @@ class Tuit extends Model
 
     public $timestamps = false;
 
-    protected $table = 'tuits';
+    protected $table = 'Tuit';
 
     protected $fillable = ['texto', 'imagen', 'fecha', 'orden'];
 
     public function hilo()
     {
         return $this->belongsTo(Hilo::class);
+    }
+
+    public function usuario()
+    {
+        return $this->belongsToMany(Usuario::class,'usuario_tuit');
     }
 }

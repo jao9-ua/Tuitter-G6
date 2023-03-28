@@ -11,12 +11,22 @@ class Categoria extends Model
 
     public $timestamps =false;
 
-    protected $table = 'categorias';
+    protected $table = 'Categoria';
 
     protected $fillable = ['hashtag', 'views', 'imagen'];
 
     public function hilo()
     {
-        return $this->hasMany(Hilo::class);
+        return $this->belongsToMany(Hilo::class);
+    }
+
+    public function usuarios()
+    {
+        return $this->belongsToMany(Usuario::class);
+    }
+
+    public function evento()
+    {
+        return $this->belongsToMany(Evento::class);
     }
 }

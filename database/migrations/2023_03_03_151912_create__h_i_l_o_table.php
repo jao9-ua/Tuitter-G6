@@ -15,14 +15,14 @@ return new class extends Migration
     {
         
         // Creamos la tabla Categoria
-        Schema::create('categorias', function (Blueprint $table) {
+        Schema::create('Categoria', function (Blueprint $table) {
             $table->id();
             $table->string('hashtag');
             $table->integer('views');
             $table->string('imagen')->nullable();
         });
          // Creamos la tabla Hilo
-         Schema::create('hilos', function (Blueprint $table) {
+         Schema::create('Hilo', function (Blueprint $table) {
             $table->id();
             $table->text('texto');
             $table->string('imagen')->nullable();
@@ -33,7 +33,7 @@ return new class extends Migration
 
 
         // Creamos la tabla Tuit
-        Schema::create('tuits', function (Blueprint $table) {
+        Schema::create('Tuit', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('hilo_id');
             $table->foreign('hilo_id')->references('id')->on('hilos')->onDelete('cascade');
@@ -41,6 +41,16 @@ return new class extends Migration
             $table->string('imagen')->nullable();
             $table->date('fecha');
             $table->integer('orden');
+        });
+
+        Schema::create('usuario_tuit', function (Blueprint $table) {
+            $table->if();
+            $table->date('Fecha')->default(now());
+            $table->unsignedBigInteger('usuario_id');
+            $table->unsignedBigInteger('tuit_id');
+
+            $table->foreign('usuario_id')->references('id')->on('Usuario');
+            $table->foreign('tuit_id')->references('id')->on('Tuit');
         });
     }
 

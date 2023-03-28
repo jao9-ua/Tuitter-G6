@@ -3,12 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use App\Models\Hilo;
+use App\Models\Tuit;
+use App\Models\Categoria;
+use App\Models\Evento;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class UsuarioFactory extends Factory
 {
     /**
      * Define the model's default state.
