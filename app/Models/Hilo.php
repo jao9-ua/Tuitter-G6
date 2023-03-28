@@ -11,7 +11,7 @@ class Hilo extends Model
 
     public $timestamps =false;
 
-    protected $table = 'hilos';
+    protected $table = 'Hilo';
 
     protected $fillable = ['texto', 'imagen', 'fecha'];
 
