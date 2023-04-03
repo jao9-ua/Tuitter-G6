@@ -21,6 +21,7 @@ class UsuarioFactory extends Factory
     public function definition()
     {
         return [
+            'id' => $this->faker->text(),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),

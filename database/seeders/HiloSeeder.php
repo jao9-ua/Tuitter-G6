@@ -9,23 +9,29 @@ class HiloSeeder extends Seeder
 {
     public function run()
     {
-        Hilo::create([
-            'id' => '1',
-            'texto' => 'Este es el primer hilo',
-            'imagen' => 'imagen1.jpg',
-            'fecha' => '2022-01-01'
-        ]);
+        $hilo1 = new Hilo();
+        $hilo1->texto = 'hola';
+        $hilo1->fecha = '2023-04-03';
+        $hilo1->save();
 
-        Hilo::create([
-            'texto' => 'Este es el segundo hilo',
-            'imagen' => 'imagen2.jpg',
-            'fecha' => '2022-01-02'
-        ]);
+        $tuit1 = new Hilo();
+        $tuit1->texto = 'hola';
+        $tuit1->fecha = '2023-04-03';
+        $tuit1->orden = '1';
 
-        Hilo::create([
-            'texto' => 'Este es el tercer hilo',
-            'imagen' => 'imagen3.jpg',
-            'fecha' => '2022-01-03'
-        ]);
+        $tuit2 = new Hilo();
+        $tuit2->texto = 'hola';
+        $tuit2->fecha = '2023-04-03';
+        $tuit2->orden = '2';
+
+        $hilo1->tuit()->saveMany([$tuit1, $tuit2]);
+
+        $hilo2 = new Hilo();
+        $hilo2->texto = 'adios';
+        $hilo2->fecha = '2023-04-03';
+        $hilo2->save();
+
+
+
     }
 }

@@ -9,28 +9,16 @@ class TuitSeeder extends Seeder
 {
     public function run()
     {
-        Tuit::create([
-            'texto' => 'Primer tuit',
-            'imagen' => 'imagen1.jpg',
-            'fecha' => '2022-02-01',
-            'orden' => 1,
-            'hilo_id' => 1,
-        ]);
+        $tuit1 = new Hilo();
+        $tuit1->texto = 'hola';
+        $tuit1->fecha = '2023-04-03';
+        $tuit1->orden = '1';
+        $tuit1->save();
 
-        Tuit::create([
-            'texto' => 'Segundo tuit',
-            'imagen' => 'imagen2.jpg',
-            'fecha' => '2022-02-02',
-            'orden' => 2,
-            'hilo_id' => 1,
-        ]);
-
-        Tuit::create([
-            'texto' => 'Tercer tuit',
-            'imagen' => 'imagen3.jpg',
-            'fecha' => '2022-02-03',
-            'orden' => 1,
-            'hilo_id' => 2,
-        ]);
+        $tuit2 = new Hilo();
+        $tuit2->texto = 'hola';
+        $tuit2->fecha = '2023-04-03';
+        $tuit2->orden = '2';
+        $tuit2->save();
     }
 }
