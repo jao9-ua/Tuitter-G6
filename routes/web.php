@@ -19,11 +19,13 @@ use Illuminate\Support\Facades\Route;
 
 //GET -> recuperacion de datos
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
+Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
+Route::get('/hilos', 'HiloController@index')->name('hilos.index');
+Route::get('/hilos/{id}', 'HiloController@show')->name('hilos.show');
 //Route::get('usuarios/{id}/tuits', 'SearchController@index-xxxx')->name('usertuits.index');
 Route::get('/categorias', 'CategoriaController@index')->name('categorias.index');
 Route::get('/eventos', 'EventoController@index')->name('eventos.index');
 Route::get('/eventos/{texto}/{fecha?}', 'EventoController@search')->name('eventos.busqueda');
-Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
 Route::get('/usuarios', 'UsuarioController@index')->name('usuarios.index');
 Route::get('/usuarios/{id}', 'UsuarioController@show')->name('usuarios.show');
 
@@ -36,6 +38,7 @@ Route::post('/eventos', 'EventoController@store')->name('eventos.store');
 //DELETE -> elimina un recurso
 Route::delete('/eventos/{id}', 'EventoController@destroy')->name('eventos.destroy');
 Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
+Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
 
 
 
