@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hilo;
 use App\Models\Tuit;
+use App\Models\Categoria;
+use App\Models\Evento;
 
 class SearchController extends Controller
 {
@@ -27,10 +29,21 @@ class SearchController extends Controller
     {
         $query = $request->input('q');
 
-        $hilo = Tuit::where('texto', 'LIKE', "%$query%")
+        $tuit = Tuit::where('texto', 'LIKE', "%$query%")
                     ->paginate(10);
 
         return view('search.results', compact('tuit'));
+    }
+
+
+    public function searchCategoria(Request $request)
+    {
+        $query = $request->input('q');
+
+        $categoria = Categoria::where('texto', 'LIKE', "%$query%")
+                    ->paginate(10);
+
+        return view('search.results', compact('categoria'));
     }
 
 }

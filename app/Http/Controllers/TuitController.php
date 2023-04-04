@@ -14,11 +14,8 @@ class TuitController extends Controller
         
         return view('tuits.index', ['tuits' => $tuits]);
     }
-    public function create()
-    {
-        return view('tuits.create');
-    }
-    
+
+   
     /*public function store(Request $request)
     {
         // Validar los datos del formulario
