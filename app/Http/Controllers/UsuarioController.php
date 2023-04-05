@@ -20,5 +20,51 @@ class UsuarioController extends Controller
         return view('users.show', ['user' => $user]);
     }
 
-    //public function edit($id) {}
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'correo' => 'required|email|unique:usuarios',
+            'password' => 'required|min:8',
+            'es_admin' => 'required|boolean'
+        ]);
+
+        $usuario = new Usuario;
+        $usuario->nombre = $request->nombre;
+        $usuario->correo = $request->correo;
+        $usuario->foto = $request->foto;
+        $usuario->biografia = $request->biografia;
+        $usuario->password = bcrypt($request->password);
+        $usuario->es_admin = $request->es_admin;
+        $usuario->save();
+
+        return response()->json(['message' => 'Usuario creado exitosamente'], 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $usuario = Usuario::find($id);
+        if (!$usuario) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        $request->validate([
+            'nombre' => 'required',
+            'correo' => 'required|email|unique:usuarios,correo,'.$usuario->id,
+            'password' => 'sometimes|min:8',
+            'es_admin' => 'required|boolean'
+        ]);
+
+        $usuario->nombre = $request->nombre;
+        $usuario->correo = $request->correo;
+        $usuario->foto = $request->foto;
+        $usuario->biografia = $request->biografia;
+        if ($request->password) {
+            $usuario->password = bcrypt($request->password);
+        }
+        $usuario->es_admin = $request->es_admin;
+        $usuario->save();
+
+        return response()->json(['message' => 'Usuario actualizado exitosamente'], 200);
+    }
 }

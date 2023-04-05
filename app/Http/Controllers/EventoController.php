@@ -47,6 +47,19 @@ class EventoController extends Controller
         return response()->json(['message' => 'Evento creado exitosamente', 'evento' => $evento], 201);
     }
 
+    public function update(Request $request, Evento $evento)
+    {
+        $validatedData = $request->validate([
+            'Texto' => 'required|string',
+            'fecha_ini' => 'required|date',
+            'fecha_fin' => 'required|date|after_or_equal:fecha_ini'
+        ]);
+
+        $evento->update($validatedData);
+
+        return redirect()->route('eventos.show', ['evento' => $evento->id]);
+    }
+
     public function destroy($id)
     {
         $evento = Evento::find($id);
