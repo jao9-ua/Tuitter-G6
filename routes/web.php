@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HiloController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MicontroladorHilo;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+Route::view('/main', 'main');
 
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
 Route::get('/tuits/create', 'TuitController@create')->name('tuits.create');
