@@ -67,4 +67,12 @@ class UsuarioController extends Controller
 
         return response()->json(['message' => 'Usuario actualizado exitosamente'], 200);
     }
+    
+    public function edit($id)
+    {
+        $usuario = Usuario::findOrFail($id);
+        return view('editar_usuario', compact('usuario'));
+    }
+    
+
 }

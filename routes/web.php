@@ -17,10 +17,6 @@ use Illuminate\Support\Facades\Route;
     return view('welcome');
 });*/
 
-// - post and put para categoria, tuit, hilo, evento y usuario 
-//post - categoria, evento, usuario, hilo, tuit
-//put - categoria, evento, usuario, hilo, tuit
-
 //GET -> recuperacion de datos
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
 Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
@@ -32,6 +28,8 @@ Route::get('/eventos', 'EventoController@index')->name('eventos.index');
 Route::get('/eventos/{texto}/{fecha?}', 'EventoController@search')->name('eventos.busqueda');
 Route::get('/usuarios', 'UsuarioController@index')->name('usuarios.index');
 Route::get('/usuarios/{id}', 'UsuarioController@show')->name('usuarios.show');
+Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.edit');
+Route::get('/usuarios/{id}/editar', 'UsuarioController@edit')->name('usuarios.edit');
 
 //POST -> envia datos y crea nuevo recurso
 Route::post('/eventos', 'EventoController@store')->name('eventos.store');
@@ -46,6 +44,8 @@ Route::put('/eventos/{id}', 'EventoController@update')->name('eventos.update');
 Route::put('/usuarios/{id}', 'UsuarioController@update')->name('usuario.update');
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
 //Route::put('/hilos/{id}/tuits/{id}', 'TuitController@update')->name('tuit.update');
+Route::put('/eventos/{id}', 'EventoController@update')->name('eventos.update');
+Route::put('/usuarios/{id}', 'UsuarioController@update')->name('usuarios.update');
 
 //DELETE -> elimina un recurso
 Route::delete('/eventos/{id}', 'EventoController@destroy')->name('eventos.destroy');

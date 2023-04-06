@@ -72,4 +72,12 @@ class EventoController extends Controller
 
         return response()->json(['message' => 'El evento ha sido eliminado correctamente'], 200);
     }
+
+    public function edit($id)
+    {
+    $evento = Evento::findOrFail($id);
+    return view('editar_evento', compact('evento'));
+    }
+
+
 }
