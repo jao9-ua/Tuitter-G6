@@ -20,7 +20,7 @@ use App\Http\Controllers;
 
 //Route::get('/', 'HiloController@getHilos')->name('hilos.index');
 Route::get('/', function () {
-    return view('crearObjetos.evento');
+    return view('crearObjetos.usuario');
 });
 
 
@@ -40,7 +40,7 @@ Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('evento
 Route::get('/usuarios', 'UsuarioController@index')->name('usuarios.index');
 Route::get('/usuarios/{id}',[UsuarioController::class, 'show'])->name('usuario.show');
 Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.edit');
-Route::get('/usuarios/{id}/editar', 'UsuarioController@edit')->name('usuarios.edit');
+Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
 
@@ -64,7 +64,7 @@ Route::put('/usuarios/{id}', 'UsuarioController@update')->name('usuarios.update'
 Route::delete('/eventos/{id}', 'EventoController@destroy')->name('eventos.destroy');
 Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
 Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
-Route::delete('/usuarios/{usuario}', 'UserController@destroy')->name('usuarios.destroy');
+Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
 
 
 
