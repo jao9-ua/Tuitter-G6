@@ -7,13 +7,28 @@ use App\Models\Evento;
 
 class EventoController extends Controller
 {
-    public function index()
+    
+    public function index(Request $request)
     {
-        $eventos = Evento::all();
-        
-        return view('eventos.index', ['eventos' => $eventos]);
-    }
+        $texto = $request->input('texto');
+        $fecha = $request->input('fecha');
 
+        $eventos = Evento::query();
+
+        if ($texto) {
+            $eventos->where('texto', 'like', '%'.$texto.'%');
+        }
+
+        if ($fecha) {
+            $eventos->where('fecha_inicio', '<', $fecha)
+                    ->where('fecha_fin', '>', $fecha);
+        }
+
+        $eventos = $eventos->get();
+
+        return view('eventos.index', ['eventos' => $eventos, 'texto' => $texto, 'fecha' => $fecha]);
+    }
+ 
     public function search(Request $request, $texto, $fecha = null)
     {
         $eventos = Evento::where('texto', 'like', '%'.$texto.'%');
@@ -81,6 +96,9 @@ class EventoController extends Controller
     $evento = Evento::findOrFail($id);
     return view('editar_evento', compact('evento'));
     }
-
+        public function show(Evento $evento)
+    {
+        return view('eventos.show', compact('evento'));
+    }
 
 }

@@ -7,11 +7,39 @@ use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
-    public function index()
+      public function index()
     {
+        // Obtener todos los usuarios
         $usuarios = Usuario::all();
-        
-        return view('usuarios.index', ['usuarios' => $usuarios]);
+
+        return view('usuarios.index', compact('usuarios'));
+    }
+
+    public function filtrar(Request $request)
+    {
+        $nombre = $request->input('nombre');
+        $email = $request->input('email');
+        $es_admin = $request->input('es_admin');
+
+        // Filtrar los usuarios según los parámetros recibidos
+        $usuarios = Usuario::when($nombre, function ($query, $nombre) {
+                            return $query->where('Nombre', 'like', '%'.$nombre.'%');
+                        })
+                        ->when($email, function ($query, $email) {
+                            return $query->where('email', 'like', '%'.$email.'%');
+                        })
+                        ->when($es_admin, function ($query, $es_admin) {
+                            return $query->where('es_Admin?', $es_admin);
+                        })
+                        ->get();
+
+        return view('usuarios.index', compact('usuarios'));
+    }
+    public function buscar(Request $request)
+    {
+        $nombre = $request->input('nombre');
+        $usuarios = Usuario::where('Nombre', 'like', '%' . $nombre . '%')->paginate(10);
+        return view('usuarios.lista', compact('usuarios'));
     }
 
     public function show($id)
@@ -77,6 +105,17 @@ class UsuarioController extends Controller
         $usuario = Usuario::findOrFail($id);
         return view('editar_usuario', compact('usuario'));
     }
-    
+    public function destroy($id)
+    {
+        $usuario = Usuario::find($id);
+
+        if (!$usuario) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        $usuario->delete();
+
+        return response()->json(['message' => 'Usuario eliminado exitosamente'], 200);
+    }
 
 }
