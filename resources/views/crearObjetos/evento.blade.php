@@ -1,23 +1,32 @@
-@extends('main')
+@extends('layouts.master')
 
 @section('content')
-    <div class="container">
-        <h1>Crear evento</h1>
-        <form method="POST" action="{{ route('eventos.store') }}">
-            
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" name="nombre" id="nombre" required>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Crear Evento</div>
+                <div class="panel-body">
+                    <form method="POST" action="{{ route('evento.store') }}" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="form-group{{ $errors->has('Texto') ? ' has-error' : '' }}">
+                            <label for="Texto">Texto:</label>
+                            <textarea id="Texto" name="Texto" class="form-control">{{ old('Texto') }}</textarea>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('Imagen') ? ' has-error' : '' }}">
+                            <label for="Imagen">Imagen:</label>
+                            <input type="file" id="Imagen" name="Imagen">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Crear</button>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="fecha">Fecha:</label>
-                <input type="date" class="form-control" name="fecha" id="fecha" required>
-            </div>
-            <div class="form-group">
-                <label for="descripcion">Descripción:</label>
-                <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Crear evento</button>
-        </form>
+        </div>
     </div>
+</div>
+
 @endsection

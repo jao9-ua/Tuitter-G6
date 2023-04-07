@@ -3,6 +3,7 @@
 use App\Http\Controllers\HiloController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\EventoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use App\Http\Controllers\UsuarioController;
 
 //Route::get('/', 'HiloController@getHilos')->name('hilos.index');
 Route::get('/', function () {
-    return view('crearObjetos.usuario');
+    return view('crearObjetos.evento');
 });
 
 
@@ -42,7 +43,7 @@ Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.edit'
 Route::get('/usuarios/{id}/editar', 'UsuarioController@edit')->name('usuarios.edit');
 
 //POST -> envia datos y crea nuevo recurso
-Route::post('/eventos', 'EventoController@store')->name('eventos.store');
+Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
 Route::post('/categorias', 'CategoriaController@store')->name('categorias.store');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
 Route::post('/hilos', 'HiloController@store')->name('hilo.store');

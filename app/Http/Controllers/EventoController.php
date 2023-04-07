@@ -30,21 +30,24 @@ class EventoController extends Controller
    
     public function store(Request $request)
     {
-        $request->validate([
-            'Texto' => 'required|string|max:255',
-            'fecha_ini' => 'required|date',
-            'fecha_fin' => 'required|date|after:fecha_ini',
-        ]);
-    
-        $evento = new Evento;
-        $evento->Texto = $request->input('Texto');
-        $evento->fecha_ini = $request->input('fecha_ini');
-        $evento->fecha_fin = $request->input('fecha_fin');
-        $evento->fecha_post = now();
-    
-        $evento->save();
-    
-        return response()->json(['message' => 'Evento creado exitosamente', 'evento' => $evento], 201);
+        try{
+            $request->validate([
+                'Texto' => 'required|string|max:255',
+            ]);
+        
+            $evento = new Evento;
+            $evento->Texto = $request->input('Texto');
+            $evento->Imagen = $request->input('Imagen');
+            $evento->fecha_ini = $request->input('fecha_ini');
+            $evento->fecha_fin = $request->input('fecha_fin');
+            $evento->fecha_post = now();
+        
+            $evento->save();
+        
+            return response()->json(['message' => 'Evento creado exitosamente', 'evento' => $evento], 201);
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
+        }
     }
 
     public function update(Request $request, Evento $evento)

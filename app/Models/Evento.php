@@ -13,7 +13,7 @@ class Evento extends Model
 
     protected $table = 'Evento';
 
-    protected $fillable = ['Texto', 'Imagen', 'Fecha_ini', 'Fecha_fin', 'Fecha_post'];
+    protected $fillable = ['Texto', 'Imagen'];
 
     public function categoria()
     {

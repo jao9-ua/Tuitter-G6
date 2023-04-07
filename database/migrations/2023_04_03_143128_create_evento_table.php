@@ -18,9 +18,9 @@ return new class extends Migration
                 $table->id();
                 $table->text('texto');
                 $table->string('imagen')->nullable();
-                $table->date('fecha_ini')->default(now());
-                $table->date('fecha_post')->default(now());
-                $table->date('fecha_fin')->default(now());
+                $table->date('fecha_ini')->nullable()->default(now());
+                $table->date('fecha_post')->nullable()->default(now());
+                $table->date('fecha_fin')->nullable()->default(now());
                 $table->unsignedBigInteger('categoria_id')->nullable();
                 $table->unsignedBigInteger('usuario_id')->nullable();
                 $table->foreign('categoria_id')->references('id')->on('Categoria')->onDelete('set null');
