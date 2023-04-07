@@ -105,4 +105,17 @@ class UsuarioController extends Controller
         $usuario = Usuario::findOrFail($id);
         return view('editar_usuario', compact('usuario'));
     }
+    public function destroy($id)
+    {
+        $usuario = Usuario::find($id);
+
+        if (!$usuario) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
+
+        $usuario->delete();
+
+        return response()->json(['message' => 'Usuario eliminado exitosamente'], 200);
+    }
+
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\HiloController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +34,9 @@ Route::get('/tuits', 'TuitController@index')->name('tuits.index');
 Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
 Route::get('/hilos', 'HiloController@index')->name('hilos.index');
 Route::get('/hilos/{id}', 'HiloController@show')->name('hilos.show');
-//Route::get('usuarios/{id}/tuits', 'SearchController@index-xxxx')->name('usertuits.index');
 Route::get('/categorias', 'CategoriaController@index')->name('categorias.index');
-Route::get('/eventos', 'EventoController@index')->name('eventos.index');
-Route::get('/eventos/{texto}/{fecha?}', 'EventoController@search')->name('eventos.busqueda');
+Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('eventos.show');
 Route::get('/usuarios', 'UsuarioController@index')->name('usuarios.index');
 Route::get('/usuarios/{id}', 'UsuarioController@show')->name('usuarios.show');
 Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.edit');
@@ -64,6 +64,7 @@ Route::put('/usuarios/{id}', 'UsuarioController@update')->name('usuarios.update'
 Route::delete('/eventos/{id}', 'EventoController@destroy')->name('eventos.destroy');
 Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
 Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
+Route::delete('/usuarios/{usuario}', 'UserController@destroy')->name('usuarios.destroy');
 
 
 
