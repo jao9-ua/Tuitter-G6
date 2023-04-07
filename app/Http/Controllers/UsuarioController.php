@@ -22,23 +22,27 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'correo' => 'required|email|unique:usuarios',
-            'password' => 'required|min:8',
-            'es_admin' => 'required|boolean'
-        ]);
+        try{
+            $request->validate([
+                'Nombre' => 'required',
+                'email' => 'required|email|unique:Usuario',
+                'password' => 'required|min:8',
+                'es_Admin' => 'required|boolean'
+            ]);
 
-        $usuario = new Usuario;
-        $usuario->nombre = $request->nombre;
-        $usuario->correo = $request->correo;
-        $usuario->foto = $request->foto;
-        $usuario->biografia = $request->biografia;
-        $usuario->password = bcrypt($request->password);
-        $usuario->es_admin = $request->es_admin;
-        $usuario->save();
+            $usuario = new Usuario;
+            $usuario->Nombre = $request->Nombre;
+            $usuario->email = $request->email;
+            $usuario->foto = $request->foto;
+            $usuario->biografia = $request->biografia;
+            $usuario->password = bcrypt($request->password);
+            $usuario->es_Admin = $request->es_Admin;
+            $usuario->save();
 
-        return response()->json(['message' => 'Usuario creado exitosamente'], 201);
+            return response()->json(['message' => 'Usuario creado exitosamente'], 201);
+        }catch (\Exception $e) {
+            return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
+        }
     }
 
     public function update(Request $request, $id)

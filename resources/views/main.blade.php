@@ -1,3 +1,4 @@
+@extends('layouts.master')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -151,31 +152,10 @@
         }
     </style>
 </head>
-
+@section('header')
 <body class="antialiased">
-    <div class="rectangle-12">
-
-        <img src="{{ asset('images/Logo_tuit.jpeg')}}" alt="tuit_logo" class=rectangle-1>
-        <div class="rectangle-11">
-            <p class="admin-1">
-                admin
-            </p>
-        </div>
-        <div class="botones">
-            <button class="rectangle-21">
-                <p class="tuits-2"> Tuits</p>
-            </button>
-            <button class="rectangle-22">
-                <p class="profile-2"> Profile</p>
-            </button>
-            <button class="rectangle-23">
-                <p class="eventos-2"> Eventos</p>
-            </button>
-            <button class="rectangle-25">
-                <p class="categorias-4"> categorias</p>
-            </button>
-        </div>
-    </div>
+    @endsection
+    @yield('content')
 </body>
 
 </html>

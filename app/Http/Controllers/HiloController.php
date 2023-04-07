@@ -4,69 +4,67 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hilo;
+use Illuminate\Support\Facades\Redirect;
 
 class HiloController extends Controller
 {
     public function store(Request $request)
     {
-    $validatedData = $request->validate([
-        'texto' => 'required|string',
-        'imagen' => 'nullable|image',
-    ]);
+        $validatedData = $request->validate([
+            'texto' => 'required|string',
+            'imagen' => 'nullable|image',
+        ]);
 
-    $hilo = new Hilo();
-    $hilo->texto = $request->texto;
+        $hilo = new Hilo();
+        $hilo->texto = $request->texto;
 
-    if ($request->hasFile('imagen')) {
-        $path = $request->file('imagen')->store('public/images');
-        $hilo->imagen = $path;
-    }
+        if ($request->hasFile('imagen')) {
+            $path = $request->file('imagen')->store('public/images');
+            $hilo->imagen = $path;
+        }
 
-    $hilo->fecha= now();
+        $hilo->fecha = now();
 
-    $hilo->save();
+        $hilo->save();
 
-    return response()->json([
-        'message' => 'Hilo creado exitosamente',
-        'data' => $hilo
-    ]);
+        return response()->json([
+            'message' => 'Hilo creado exitosamente',
+            'data' => $hilo
+        ]);
     }
 
     public function update(Request $request, $id)
     {
-    $validatedData = $request->validate([
-        'texto' => 'nullable|string',
-        'imagen' => 'nullable|image',
-    ]);
+        $validatedData = $request->validate([
+            'texto' => 'nullable|string',
+            'imagen' => 'nullable|image',
+        ]);
 
-    $hilo = Hilo::findOrFail($id);
+        $hilo = Hilo::findOrFail($id);
 
-    if ($request->has('texto')) {
-        $hilo->texto = $request->texto;
-    }
+        if ($request->has('texto')) {
+            $hilo->texto = $request->texto;
+        }
 
-    /*if ($request->hasFile('imagen')) {
+        /*if ($request->hasFile('imagen')) {
         Storage::delete($hilo->imagen);
         $path = $request->file('imagen')->store('public/images');
         $hilo->imagen = $path;
     }*/
 
-    $hilo->save();
+        $hilo->save();
 
-    return response()->json([
-        'message' => 'Hilo actualizado exitosamente',
-        'data' => $hilo
-    ]);
-}
-
-
-
+        return response()->json([
+            'message' => 'Hilo actualizado exitosamente',
+            'data' => $hilo
+        ]);
+    }
 
     public function index()
     {
         $hilos = Hilo::all();
-        
-        return view('hilos.index', ['hilos' => $hilos]);
+
+        return view('listarObjetos.listar', ['hilos' => $hilos]);
     }
 
     public function show($id)
@@ -75,7 +73,7 @@ class HiloController extends Controller
 
         return view('hilos.show', ['hilo' => $hilo]);
     }
-    
+
     public function destroy($id)
     {
 
@@ -84,20 +82,10 @@ class HiloController extends Controller
 
         return redirect()->route('hilos.index');
     }
-}
-<?php
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
-use App\Models\Hilo;
-
-class HiloController extends Controller
-{
     public function getHilos()
     {
         $hilo = Hilo::paginate(10);
-        return view('hilo', ['hilo' => $hilo]);
+        return view('/layouts/master', ['hilo' => $hilo]);
     }
 }

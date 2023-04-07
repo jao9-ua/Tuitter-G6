@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\HiloController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MicontroladorHilo;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +15,17 @@ use App\Http\Controllers\MicontroladorHilo;
 |
 */
 
-Route::view('/main', 'main');
+
+//Route::get('/', 'HiloController@getHilos')->name('hilos.index');
+Route::get('/', function () {
+    return view('crearObjetos.usuario');
+});
+
+
+Route::get('/boton1', [HiloController::class, 'index'])->name('boton1');
+Route::get('/boton2', [BotonesController::class, 'mostrarBoton1'])->name('boton2');
+Route::get('/boton3', [BotonesController::class, 'mostrarBoton1'])->name('boton3');
+Route::get('/boton4', [BotonesController::class, 'mostrarBoton1'])->name('boton4');
 
 //GET -> recuperacion de datos
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
@@ -34,7 +44,7 @@ Route::get('/usuarios/{id}/editar', 'UsuarioController@edit')->name('usuarios.ed
 //POST -> envia datos y crea nuevo recurso
 Route::post('/eventos', 'EventoController@store')->name('eventos.store');
 Route::post('/categorias', 'CategoriaController@store')->name('categorias.store');
-Route::post('/usuarios', 'UsuarioController@store')->name('usuario.store');
+Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
 Route::post('/hilos', 'HiloController@store')->name('hilo.store');
 Route::post('/hilos/{id}/tuits', 'TuitController@store')->name('tuit.store');
 

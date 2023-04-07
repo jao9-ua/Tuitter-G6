@@ -13,16 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('usuario_hilo', function (Blueprint $table) {
-            $table->id();
-            $table->date('Fecha')->default(now());
-            $table->unsignedBigInteger('usuario_id');
-            $table->unsignedBigInteger('hilo_id');
+        if (!Schema::hasTable('usuario_hilo')) {
+            Schema::create('usuario_hilo', function (Blueprint $table) {
+                $table->id();
+                $table->date('Fecha')->default(now());
+                $table->unsignedBigInteger('usuario_id');
+                $table->unsignedBigInteger('hilo_id');
 
-            $table->foreign('usuario_id')->references('id')->on('Usuario');
-            $table->foreign('hilo_id')->references('id')->on('Hilo');
-            $table->timestamps();
-        });
+                $table->foreign('usuario_id')->references('id')->on('Usuario');
+                $table->foreign('hilo_id')->references('id')->on('Hilo');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

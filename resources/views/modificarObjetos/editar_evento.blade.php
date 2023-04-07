@@ -1,6 +1,5 @@
-<!-- @extends('')
-
-@section('')-->
+@extends('layouts.master')
+@section('content')
 
 <div class="container">
     <h1>Editar evento</h1>
@@ -14,4 +13,4 @@
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
     </form>
 </div>
-<!-- @endsection-->
+@endsection

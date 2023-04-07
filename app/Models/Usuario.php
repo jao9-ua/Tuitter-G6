@@ -13,7 +13,7 @@ class Usuario extends Model
 
     protected $table = 'Usuario';
 
-    protected $fillable = ['Nombre', 'Correo', 'Foto', 'Biografía', 'Password', 'Es_Admin?'];
+    protected $fillable = ['Nombre', 'email', 'foto', 'biografia', 'password', 'es_Admin?'];
 
     public function categoria()
     {

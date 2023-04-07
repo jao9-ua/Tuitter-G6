@@ -1,6 +1,6 @@
-<!-- @extends('')
+@extends('main')
 
-@section('')-->
+@section('content')
 <div class="container">
     <h1>Editar usuario</h1>
     <form action="{{ route('usuarios.update', $usuario->id) }}" method="POST">
@@ -25,4 +25,4 @@
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
     </form>
 </div>
-<!-- @endsection-->
+@endsection
