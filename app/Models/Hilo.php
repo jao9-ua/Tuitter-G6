@@ -20,7 +20,7 @@ class Hilo extends Model
         return $this->belongsTo(Categoria::class);
     }
 
-    public function tuit()
+    public function tuits()
     {
         return $this->hasMany(Tuit::class);
     }

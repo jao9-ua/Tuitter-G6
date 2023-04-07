@@ -13,6 +13,7 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($usuarios)
                 @foreach($usuarios as $usuario)
                     <tr>
                         <td>{{ $usuario->id }}</td>
@@ -24,6 +25,7 @@
                     </tr>
                 @endforeach
                 {{ $usuarios->links() }}
+                @endif
             </tbody>
         </table>
     </div>

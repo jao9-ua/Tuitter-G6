@@ -19,22 +19,22 @@ class UsuarioController extends Controller
     {
         $nombre = $request->input('nombre');
         $email = $request->input('email');
-        $es_admin = $request->input('es_admin');
 
-        // Filtrar los usuarios según los parámetros recibidos
-        $usuarios = Usuario::when($nombre, function ($query, $nombre) {
-                            return $query->where('Nombre', 'like', '%'.$nombre.'%');
-                        })
-                        ->when($email, function ($query, $email) {
-                            return $query->where('email', 'like', '%'.$email.'%');
-                        })
-                        ->when($es_admin, function ($query, $es_admin) {
-                            return $query->where('es_Admin?', $es_admin);
-                        })
-                        ->get();
+        $usuarios = User::query();
 
-        return view('usuarios.index', compact('usuarios'));
+        if ($nombre) {
+            $usuarios->where('nombre', 'like', '%' . $nombre . '%');
+        }
+
+        if ($email) {
+            $usuarios->where('email', 'like', '%' . $email . '%');
+        }
+
+        $usuarios = $usuarios->get();
+
+        return view('usuarios.filtrar', ['usuarios' => $usuarios]);
     }
+
     public function buscar(Request $request)
     {
         $nombre = $request->input('nombre');
