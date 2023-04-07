@@ -20,7 +20,7 @@ use App\Http\Controllers;
 
 //Route::get('/', 'HiloController@getHilos')->name('hilos.index');
 Route::get('/', function () {
-    return view('crearObjetos.usuario');
+    return view('layouts.master');
 });
 
 
@@ -61,7 +61,7 @@ Route::put('/eventos/{id}', 'EventoController@update')->name('eventos.update');
 Route::put('/usuarios/{id}', 'UsuarioController@update')->name('usuarios.update');
 
 //DELETE -> elimina un recurso
-Route::delete('/eventos/{id}', 'EventoController@destroy')->name('eventos.destroy');
+Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('evento.destroy');
 Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
 Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
 Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
