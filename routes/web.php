@@ -38,7 +38,7 @@ Route::get('/categorias', 'CategoriaController@index')->name('categorias.index')
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
 Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('eventos.show');
 Route::get('/usuarios', 'UsuarioController@index')->name('usuarios.index');
-Route::get('/usuarios/{id}', 'UsuarioController@show')->name('usuarios.show');
+Route::get('/usuarios/{id}',[UsuarioController::class, 'show'])->name('usuario.show');
 Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.edit');
 Route::get('/usuarios/{id}/editar', 'UsuarioController@edit')->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');

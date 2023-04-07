@@ -44,8 +44,8 @@ class UsuarioController extends Controller
 
     public function show($id)
     {
-        $user = Usuario::find($id);
-        return view('users.show', ['user' => $user]);
+        $usuarios = Usuario::find($id);
+        return view('usuarios.filtrar', ['usuarios' => $usuarios]);
     }
 
     public function store(Request $request)
