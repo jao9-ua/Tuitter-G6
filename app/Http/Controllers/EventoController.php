@@ -20,8 +20,8 @@ class EventoController extends Controller
         }
 
         if ($fecha) {
-            $eventos->where('fecha_inicio', '<', $fecha)
-                    ->where('fecha_fin', '>', $fecha);
+            $eventos->where('fecha_ini', '<=', $fecha)
+                    ->where('fecha_fin', '>=', $fecha);
         }
 
         $eventos = $eventos->get();
