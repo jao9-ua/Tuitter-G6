@@ -31,6 +31,12 @@ Route::get('/boton3', [BotonesController::class, 'mostrarBoton1'])->name('boton3
 Route::get('/boton4', [BotonesController::class, 'mostrarBoton1'])->name('boton4');
 
 //GET -> recuperacion de datos
+Route::view('/crearevento', 'crearObjetos.evento');
+Route::view('/crearusuario', 'crearObjetos.usuario');
+Route::view('/modificarrevento', 'modificarObjetos.evento');
+Route::view('/modificarusuario', 'modificarObjetos.usuario');
+
+
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
 Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
 Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
