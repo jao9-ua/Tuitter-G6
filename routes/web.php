@@ -41,6 +41,8 @@ Route::get('/usuarios', 'UsuarioController@index')->name('usuarios.index');
 Route::get('/usuarios/{id}', 'UsuarioController@show')->name('usuarios.show');
 Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.edit');
 Route::get('/usuarios/{id}/editar', 'UsuarioController@edit')->name('usuarios.edit');
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
 
 //POST -> envia datos y crea nuevo recurso
 Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
