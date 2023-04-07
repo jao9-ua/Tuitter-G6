@@ -32,7 +32,7 @@ Route::get('/boton4', [BotonesController::class, 'mostrarBoton1'])->name('boton4
 //GET -> recuperacion de datos
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
 Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
-Route::get('/hilos', 'HiloController@index')->name('hilos.index');
+Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
 Route::get('/hilos/{id}', 'HiloController@show')->name('hilos.show');
 Route::get('/categorias', 'CategoriaController@index')->name('categorias.index');
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');

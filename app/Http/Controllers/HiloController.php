@@ -62,17 +62,17 @@ class HiloController extends Controller
 
     public function index()
     {
-        $hilos = Hilo::all();
-
-        return view('listarObjetos.listar', ['hilos' => $hilos]);
+        $hilos = Hilo::with('tuits')->get();
+        return view('hilos.index', compact('hilos'));
     }
 
     public function show($id)
     {
-        $hilo = Hilo::find($id);
+        $hilo = Hilo::with('tuits')->find($id);
 
         return view('hilos.show', ['hilo' => $hilo]);
     }
+
 
     public function destroy($id)
     {
