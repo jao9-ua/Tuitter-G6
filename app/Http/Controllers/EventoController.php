@@ -7,7 +7,7 @@ use App\Models\Evento;
 
 class EventoController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $texto = $request->input('texto');
@@ -16,51 +16,51 @@ class EventoController extends Controller
         $eventos = Evento::query();
 
         if ($texto) {
-            $eventos->where('texto', 'like', '%'.$texto.'%');
+            $eventos->where('texto', 'like', '%' . $texto . '%');
         }
 
         if ($fecha) {
             $eventos->where('fecha_ini', '<=', $fecha)
-                    ->where('fecha_fin', '>=', $fecha);
+                ->where('fecha_fin', '>=', $fecha);
         }
 
         $eventos = $eventos->get();
 
         return view('eventos.index', ['eventos' => $eventos, 'texto' => $texto, 'fecha' => $fecha]);
     }
- 
+
     public function search(Request $request, $texto, $fecha = null)
     {
-        $eventos = Evento::where('texto', 'like', '%'.$texto.'%');
+        $eventos = Evento::where('texto', 'like', '%' . $texto . '%');
 
         if ($fecha) {
             $eventos->where('fecha_inicio', '<', $fecha)
-                    ->where('fecha_fin', '>', $fecha);
+                ->where('fecha_fin', '>', $fecha);
         }
 
         $eventos = $eventos->get();
 
         return view('eventos.busqueda', ['resultados' => $eventos]);
     }
-   
+
     public function store(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'Texto' => 'required|string|max:255',
             ]);
-        
+
             $evento = new Evento;
             $evento->Texto = $request->input('Texto');
             $evento->Imagen = $request->input('Imagen');
             $evento->fecha_ini = $request->input('fecha_ini');
             $evento->fecha_fin = $request->input('fecha_fin');
             $evento->fecha_post = now();
-        
+
             $evento->save();
-        
+
             return response()->json(['message' => 'Evento creado exitosamente', 'evento' => $evento], 201);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
         }
     }
@@ -93,12 +93,12 @@ class EventoController extends Controller
 
     public function edit($id)
     {
-    $evento = Evento::findOrFail($id);
-    return view('editar_evento', compact('evento'));
+        $evento = Evento::findOrFail($id);
+        return view('editar_evento', compact('evento'));
     }
-        public function show(Evento $evento)
+    
+    public function show(Evento $evento)
     {
-        return view('eventos.show', compact('evento'));
+        return view('modificarObjetos.editar_evento', compact('evento'));
     }
-
 }

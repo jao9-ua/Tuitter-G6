@@ -62,7 +62,7 @@ Route::post('/hilos/{id}/tuits', 'TuitController@store')->name('tuit.store');
 Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
 Route::put('/eventos/{id}', 'EventoController@update')->name('eventos.update');
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
-Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
 
 
 //DELETE -> elimina un recurso
@@ -70,9 +70,3 @@ Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('event
 Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
 Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
 Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
-
-
-
-
-
-

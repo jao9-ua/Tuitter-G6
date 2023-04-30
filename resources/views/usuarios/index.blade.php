@@ -31,7 +31,7 @@
                         <td>{{ $usuario->email }}</td>
                         <td>
                             <a href="{{ route('usuarios.filtrar', $usuario->id) }}" class="btn btn-info">Ver</a>
-                            <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning">Editar</a>
+                            <a href="/usuarios/{{$usuario->id}}/editar" class="btn btn-warning">Editar</a>
                             <form action="{{ route('usuario.destroy', $usuario->id) }}" method="POST" style="display: inline-block">
                                 @csrf
                                 @method('DELETE')

@@ -7,7 +7,7 @@ use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
-      public function index()
+    public function index()
     {
         // Obtener todos los usuarios
         $usuarios = Usuario::all();
@@ -20,7 +20,7 @@ class UsuarioController extends Controller
         $nombre = $request->input('nombre');
         $email = $request->input('email');
 
-        $usuarios = User::query();
+        $usuarios = Usuario::query();
 
         if ($nombre) {
             $usuarios->where('nombre', 'like', '%' . $nombre . '%');
@@ -44,13 +44,13 @@ class UsuarioController extends Controller
 
     public function show($id)
     {
-        $usuarios = Usuario::find($id);
-        return view('usuarios.filtrar', ['usuarios' => $usuarios]);
+        $usuario = Usuario::find($id);
+        return view('usuarios.editar', ['usuario' => $usuario]);
     }
 
     public function store(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'Nombre' => 'required',
                 'email' => 'required|email|unique:Usuario',
@@ -68,43 +68,45 @@ class UsuarioController extends Controller
             $usuario->save();
 
             return response()->json(['message' => 'Usuario creado exitosamente'], 201);
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
         }
     }
 
     public function update(Request $request, $id)
     {
-        $usuario = Usuario::find($id);
-        if (!$usuario) {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
-        }
-    
         $request->validate([
             'Nombre' => 'required',
             'email' => 'required|email|unique:Usuario,email',
             'es_Admin' => 'required|boolean'
         ]);
-    
-        $usuario->Nombre = $request->Nombre;
-        $usuario->email = $request->email;
-        $usuario->foto = $request->foto;
-        $usuario->biografia = $request->biografia;
-        if ($request->password) {
-            $usuario->password = bcrypt($request->password);
+
+        $usuario = Usuario::findOrFail($id);
+
+        if (!$usuario) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
-        $usuario->es_Admin = $request->es_Admin;
+
+        $usuario->Nombre = $request->input('nombre');
+        $usuario->email = $request->input('correo');
+        $usuario->foto = $request->input('foto');
+        $usuario->biografia = $request->input('biografia');
+        if ($request->input('password')) {
+            $usuario->password = bcrypt($request->input('password'));
+        }
+        $usuario->es_Admin = true;
         $usuario->save();
-    
+
         return response()->json(['message' => 'Usuario actualizado exitosamente'], 200);
     }
-       
-    
+
+
     public function edit($id)
     {
         $usuario = Usuario::findOrFail($id);
         return view('usuarios.editar', compact('usuario'));
     }
+
     public function destroy($id)
     {
         $usuario = Usuario::find($id);
@@ -117,5 +119,4 @@ class UsuarioController extends Controller
 
         return response()->json(['message' => 'Usuario eliminado exitosamente'], 200);
     }
-
 }
