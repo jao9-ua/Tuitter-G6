@@ -79,31 +79,31 @@ class UsuarioController extends Controller
         if (!$usuario) {
             return response()->json(['message' => 'Usuario no encontrado'], 404);
         }
-
+    
         $request->validate([
-            'nombre' => 'required',
-            'correo' => 'required|email|unique:usuarios,correo,'.$usuario->id,
-            'password' => 'sometimes|min:8',
-            'es_admin' => 'required|boolean'
+            'Nombre' => 'required',
+            'email' => 'required|email|unique:Usuario,email',
+            'es_Admin' => 'required|boolean'
         ]);
-
-        $usuario->nombre = $request->nombre;
-        $usuario->correo = $request->correo;
+    
+        $usuario->Nombre = $request->Nombre;
+        $usuario->email = $request->email;
         $usuario->foto = $request->foto;
         $usuario->biografia = $request->biografia;
         if ($request->password) {
             $usuario->password = bcrypt($request->password);
         }
-        $usuario->es_admin = $request->es_admin;
+        $usuario->es_Admin = $request->es_Admin;
         $usuario->save();
-
+    
         return response()->json(['message' => 'Usuario actualizado exitosamente'], 200);
     }
+       
     
     public function edit($id)
     {
         $usuario = Usuario::findOrFail($id);
-        return view('editar_usuario', compact('usuario'));
+        return view('usuarios.editar', compact('usuario'));
     }
     public function destroy($id)
     {

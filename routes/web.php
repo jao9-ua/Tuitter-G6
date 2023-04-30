@@ -45,11 +45,11 @@ Route::get('/categorias', [CategoriaController::class, 'index'])->name('categori
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
 Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('eventos.show');
 Route::get('/usuarios', 'UsuarioController@index')->name('usuarios.index');
-Route::get('/usuarios/{id}',[UsuarioController::class, 'show'])->name('usuario.show');
 Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.edit');
 Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
+Route::get('/usuarios/{id}',[UsuarioController::class, 'show'])->name('usuarios.show');
 
 //POST -> envia datos y crea nuevo recurso
 Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
@@ -61,11 +61,9 @@ Route::post('/hilos/{id}/tuits', 'TuitController@store')->name('tuit.store');
 //PUT -> envia datos y actualiza un recurso
 Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
 Route::put('/eventos/{id}', 'EventoController@update')->name('eventos.update');
-Route::put('/usuarios/{id}', 'UsuarioController@update')->name('usuario.update');
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
-//Route::put('/hilos/{id}/tuits/{id}', 'TuitController@update')->name('tuit.update');
-Route::put('/eventos/{id}', 'EventoController@update')->name('eventos.update');
-Route::put('/usuarios/{id}', 'UsuarioController@update')->name('usuarios.update');
+Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+
 
 //DELETE -> elimina un recurso
 Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('evento.destroy');
