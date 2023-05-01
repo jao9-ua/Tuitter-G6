@@ -79,7 +79,6 @@ class UsuarioController extends Controller
             $request->validate([
                 'Nombre' => 'required',
                 'email' => 'required|email',
-                'biografia' => 'required',
             ]);
 
             $usuario = Usuario::findOrFail($request->id);
