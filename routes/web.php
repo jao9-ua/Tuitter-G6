@@ -37,36 +37,44 @@ Route::view('/modificarrevento', 'modificarObjetos.evento');
 Route::view('/modificarusuario', 'modificarObjetos.usuario');
 
 
+
+
+//Rutas tuits
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
 Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
+Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
+
+
+//Rutas hilos
 Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
 Route::get('/hilos/{id}', 'HiloController@show')->name('hilos.show');
+Route::post('/hilos', 'HiloController@store')->name('hilo.store');
+Route::post('/hilos/{id}/tuits', 'TuitController@store')->name('tuit.store');
+Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
+Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
+
+
+//Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+Route::post('/categorias', 'CategoriaController@store')->name('categorias.store');
+Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
+
+
+//Rutas eventos
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
 Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('eventos.show');
-Route::get('/usuarios', 'UsuarioController@index')->name('usuarios.index');
 Route::get('/eventos/{id}/editar', 'EventoController@edit')->name('eventos.edit');
+Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
+Route::put('/eventos/{id}', 'EventoController@update')->name('eventos.update');
+Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('evento.destroy');
+
+
+//Rutas usuarios
 Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
 Route::get('/usuarios/{id}',[UsuarioController::class, 'show'])->name('usuarios.show');
-
-//POST -> envia datos y crea nuevo recurso
-Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
-Route::post('/categorias', 'CategoriaController@store')->name('categorias.store');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
-Route::post('/hilos', 'HiloController@store')->name('hilo.store');
-Route::post('/hilos/{id}/tuits', 'TuitController@store')->name('tuit.store');
-
-//PUT -> envia datos y actualiza un recurso
-Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
-Route::put('/eventos/{id}', 'EventoController@update')->name('eventos.update');
-Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
 Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
-
-
-//DELETE -> elimina un recurso
-Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('evento.destroy');
-Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
-Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
 Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
+

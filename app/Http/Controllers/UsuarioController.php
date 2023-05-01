@@ -37,7 +37,7 @@ class UsuarioController extends Controller
 
     public function buscar(Request $request)
     {
-        $nombre = $request->input('nombre');
+        $nombre = $request->input('Nombre');
         $usuarios = Usuario::where('Nombre', 'like', '%' . $nombre . '%')->paginate(10);
         return view('usuarios.lista', compact('usuarios'));
     }
@@ -53,7 +53,7 @@ class UsuarioController extends Controller
         try {
             $request->validate([
                 'Nombre' => 'required',
-                'email' => 'required|email|unique:Usuario',
+                'email' => 'required|email|unique:Usuario,email',
                 'password' => 'required|min:8',
                 'es_Admin' => 'required|boolean'
             ]);
@@ -73,31 +73,39 @@ class UsuarioController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $request->validate([
-            'Nombre' => 'required',
-            'email' => 'required|email|unique:Usuario,email',
-            'es_Admin' => 'required|boolean'
-        ]);
+        try {
+            $request->validate([
+                'Nombre' => 'required',
+                'email' => 'required|email',
+                'biografia' => 'required',
+            ]);
 
-        $usuario = Usuario::findOrFail($id);
+            $usuario = Usuario::findOrFail($request->id);
 
-        if (!$usuario) {
-            return response()->json(['message' => 'Usuario no encontrado'], 404);
+            if (!$usuario) {
+                return response()->json(['message' => 'Usuario no encontrado'], 404);
+            }
+
+            $usuario->Nombre = $request->input('Nombre');
+            $usuario->foto = $request->input('foto');
+            $usuario->biografia = $request->input('biografia');
+            if ($request->input('password')) {
+                $usuario->password = bcrypt($request->input('password'));
+            }
+
+
+            $usuario->email = $request->input('email');
+
+
+            $usuario->es_Admin = true;
+            $usuario->save();
+
+            return redirect('/usuarios');
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Error al cambiar el usuario: ' . $e->getMessage()], 500);
         }
-
-        $usuario->Nombre = $request->input('nombre');
-        $usuario->email = $request->input('correo');
-        $usuario->foto = $request->input('foto');
-        $usuario->biografia = $request->input('biografia');
-        if ($request->input('password')) {
-            $usuario->password = bcrypt($request->input('password'));
-        }
-        $usuario->es_Admin = true;
-        $usuario->save();
-
-        return response()->json(['message' => 'Usuario actualizado exitosamente'], 200);
     }
 
 

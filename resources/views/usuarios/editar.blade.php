@@ -8,18 +8,18 @@
                 <div class="card-header">{{ __('Editar usuario') }}</div>
 
                 <div class="card-body">
-                    <form method="PUT" action="{{ route('usuario.update', ['id'=>$usuario->id]) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('usuario.update', ['id' => $usuario->id]) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="_method" value="PUT">
 
                         <div class="form-group row">
-                            <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                            <label for="Nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" value="{{ old('nombre', $usuario->Nombre) }}" required autocomplete="nombre" autofocus>
+                                <input id="Nombre" type="text" class="form-control @error('Nombre') is-invalid @enderror" name="Nombre" value="{{ old('Nombre', $usuario->Nombre) }}" required autocomplete="Nombre" autofocus>
 
-                                @error('nombre')
+                                @error('Nombre')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -28,12 +28,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="correo" class="col-md-4 col-form-label text-md-right">{{ __('Correo electrónico') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
-                                <input id="correo" type="email" class="form-control @error('correo') is-invalid @enderror" name="correo" value="{{ old('correo', $usuario->email) }}" required autocomplete="correo">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $usuario->email) }}" required autocomplete="email">
 
-                                @error('correo')
+                                @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -103,6 +103,7 @@
         </div>
     </div>
 </div>
+
 
 
 @endsection
