@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\TuitController;
 use App\Http\Controllers;
 
 /*
@@ -33,30 +34,31 @@ Route::get('/boton4', [BotonesController::class, 'mostrarBoton1'])->name('boton4
 //GET -> recuperacion de datos
 Route::view('/crearevento', 'crearObjetos.evento');
 Route::view('/crearusuario', 'crearObjetos.usuario');
+Route::view('/crearcategoria', 'crearObjetos.categoria');
+Route::view('/crearhilo', 'crearObjetos.hilo');
 Route::view('/modificarrevento', 'modificarObjetos.evento');
 Route::view('/modificarusuario', 'modificarObjetos.usuario');
-
-
 
 
 //Rutas tuits
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
 Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
 Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
-
+Route::get('/hilos/{idHilo}/tuits/create', [TuitController::class, 'create'])->name('tuits.create');
+Route::post('/tuits', [TuitController::class, 'store'])->name('tuits.store');
 
 //Rutas hilos
 Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
 Route::get('/hilos/{id}', 'HiloController@show')->name('hilos.show');
-Route::post('/hilos', 'HiloController@store')->name('hilo.store');
-Route::post('/hilos/{id}/tuits', 'TuitController@store')->name('tuit.store');
+Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
+Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.store');
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
 Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
-
+Route::get('/hilo/create', [HiloController::class, 'create'])->name('hilo.create');
 
 //Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
-Route::post('/categorias', 'CategoriaController@store')->name('categorias.store');
+Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
 Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
 
 

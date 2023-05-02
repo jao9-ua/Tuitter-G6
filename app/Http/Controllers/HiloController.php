@@ -4,33 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hilo;
+use App\Models\Categoria;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Facades\Image;
 
 class HiloController extends Controller
 {
+
+    public function create()
+    {
+        $categorias = Categoria::all();
+
+        return view('crearObjetos.hilo', ['categorias' => $categorias]);
+    }
+
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'texto' => 'required|string',
-            'imagen' => 'nullable|image',
+        $request->validate([
+            'texto' => 'required|string|max:255',
+            'categoria_id' => 'nullable|exists:Categoria,id',
+            'imagen' => 'nullable|image'
         ]);
 
         $hilo = new Hilo();
         $hilo->texto = $request->texto;
 
         if ($request->hasFile('imagen')) {
-            $path = $request->file('imagen')->store('public/images');
-            $hilo->imagen = $path;
+            $path = $request->file('imagen')->store('public/imagenes');
+            $hilo->imagen = Storage::url($path);
         }
 
         $hilo->fecha = now();
 
+        if ($request->categoria_id) {
+            $hilo->categoria_id = $request->categoria_id;
+        }
+
         $hilo->save();
 
-        return response()->json([
-            'message' => 'Hilo creado exitosamente',
-            'data' => $hilo
-        ]);
+        return redirect()->route('hilos.index');
     }
 
     public function update(Request $request, $id)

@@ -4,50 +4,47 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tuit;
+use App\Models\Hilo;
 
 class TuitController extends Controller
 {
-    
+
     public function index()
     {
         $tuits = Tuit::all();
-        
+
         return view('tuits.index', ['tuits' => $tuits]);
     }
 
-   
-    public function create(Request $request)
+    public function create(Hilo $hilo)
     {
-    $request->validate([
-        'texto' => 'required|string|max:255',
-        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'orden' => 'required|integer',
-        'hilo_id' => 'required|integer|exists:hilos,id',
-    ]);
-
-    if ($request->hasFile('imagen')) {
-        $image = $request->file('imagen');
-        $filename = time() . '.' . $image->getClientOriginalExtension();
-        $destinationPath = public_path('/images');
-        $image->move($destinationPath, $filename);
-    } else {
-        $filename = null;
+        return view('crearObjetos.tuit', compact('hilo'));
     }
 
-    $tuit = new Tuit;
-    $tuit->texto = $request->texto;
-    $tuit->imagen = $filename;
-    $tuit->orden = $request->orden;
-    $tuit->hilo_id = $request->hilo_id;
-    $tuit->save();
+    public function store(Request $request, Hilo $hilo)
+    {
+        $request->validate([
+            'texto' => 'required|max:280',
+            'imagen' => 'nullable|image|max:2048'
+        ]);
 
-    return response()->json([
-        'message' => 'Tuit creado exitosamente',
-        'data' => $tuit
-    ], 201);
-}
+        $tuit = new Tuit($request->all());
 
-/*public function update(Request $request, $id)
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $nombre_imagen = time() . '_' . $imagen->getClientOriginalName();
+            $tuit->imagen = $imagen->storeAs('public/tuits', $nombre_imagen);
+        }
+
+        $tuit->hilo_id = $hilo->id;
+        $tuit->fecha = now();
+        $tuit->orden = $hilo->tuits->count() + 1;
+        $tuit->save();
+
+        return redirect()->route('hilos.show', $hilo->id);
+    }
+
+    /*public function update(Request $request, $id)
 {
     $tuit = Tuit::findOrFail($id);
 
@@ -79,14 +76,14 @@ class TuitController extends Controller
     ], 200);
 }*/
 
-    
+
     public function show($id)
     {
         $tuit = Tuit::find($id);
 
         return view('tuits.show', ['tuit' => $tuit]);
     }
-    
+
     public function destroy($id)
     {
 
