@@ -7,12 +7,6 @@ use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
-    public function create()
-    {
-        $categorias = Categoria::all();
-
-        return view('crear_hilo', ['categorias' => $categorias]);
-    }
 
     public function index()
     {
