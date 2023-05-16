@@ -47,7 +47,7 @@ class EventoController extends Controller
     {
         try {
             $request->validate([
-                'Texto' => 'required|string|max:255',
+                'texto' => 'required|string|max:255',
             ]);
 
             $evento = new Evento;
@@ -65,17 +65,34 @@ class EventoController extends Controller
         }
     }
 
-    public function update(Request $request, Evento $evento)
+    public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'Texto' => 'required|string',
-            'fecha_ini' => 'required|date',
-            'fecha_fin' => 'required|date|after_or_equal:fecha_ini'
-        ]);
+        try{
+            $request->validate([
+                'texto' => 'required|string',
+                'fecha_ini' => 'nullable|date',
+                'fecha_fin' => [
+                    'nullable',
+                    'date',
+                    function ($attribute, $value, $fail) use ($request) {
+                        $fechaIni = $request->input('fecha_ini');
+                        if ($fechaIni && $value && $value < $fechaIni) {
+                            $fail('La fecha de fin debe ser mayor o igual que la fecha de inicio.');
+                        }
+                    },
+                ],
+            ]);
+            $evento = Evento::findOrFail($request->id);
 
-        $evento->update($validatedData);
+            $evento->texto = $request->input('texto');
+            $evento->fecha_ini = $request->input('fecha_ini');
+            $evento->fecha_fin = $request->input('fecha_fin');
+            $evento->save();
 
-        return redirect()->route('eventos.show', ['evento' => $evento->id]);
+            return redirect('/eventos');
+        }catch(\Exception $e){
+            return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
+        }
     }
 
     public function destroy($id)
@@ -94,7 +111,7 @@ class EventoController extends Controller
     public function edit($id)
     {
         $evento = Evento::findOrFail($id);
-        return view('editar_evento', compact('evento'));
+        return view('eventos.editar', compact('evento'));
     }
     
     public function show(Evento $evento)
