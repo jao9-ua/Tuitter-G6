@@ -17,7 +17,7 @@ class Categoria extends Model
 
     public function hilo()
     {
-        return $this->belongsToMany(Hilo::class);
+        return $this->hasMany(Hilo::class);
     }
 
     public function usuarios()
@@ -27,6 +27,6 @@ class Categoria extends Model
 
     public function evento()
     {
-        return $this->belongsToMany(Evento::class);
+        return $this->hasMany(Evento::class);
     }
 }

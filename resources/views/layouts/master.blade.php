@@ -14,7 +14,7 @@
 </head>
 <style>
     .rectangle-12 {
-        width: 1366px;
+        width: 100%;
         height: 244px;
         padding: 8px 8px 8px 8px;
         background: #72bb53;
@@ -75,7 +75,7 @@
 
     .tuits-2 {
         width: 73px;
-        height: 28px;
+        height: 36px;
         color: #72bb53;
         font-family: "Helvetica";
         font-weight: 400;
@@ -162,47 +162,43 @@
                 admin
             </p>
         </div>
-        <div class="botones">
-            <button class="rectangle-21">
-                <p class="tuits-2"> Tuits</p>
-            </button>
-            <button class="rectangle-22">
-                <p class="profile-2"> Profile</p>
-            </button>
-            <button class="rectangle-23">
-                <p class="eventos-2"> Eventos</p>
-            </button>
-            <button class="rectangle-25">
-                <p class="categorias-4"> categorias</p>
-            </button>
+        <div class="botones d-flex">
+            <!-- boton Tuit -->
+            <form action="{{ route('hilos.index') }}" method="get">
+                <button class="rectangle-21">
+                    <p class="tuits-2"> Tuits</p>
+                </button>
+            </form>
+
+
+            <!-- boton Profile -->
+            <form action="{{ route('usuarios.index') }}" method="get">
+                <button class="rectangle-22">
+                    <p class="profile-2"> Profile</p>
+                </button>
+            </form>
+
+
+            <!-- boton Eventos -->
+            <form action="{{ route('eventos.index') }}" method="get">
+                <button class="rectangle-23">
+                    <p class="eventos-2"> Eventos</p>
+                </button>
+            </form>
+
+
+            <!-- boton Categorias -->
+            <form action="{{ route('categorias.index') }}" method="get">
+                <button class="rectangle-25">
+                    <p class="categorias-4"> categorias</p>
+                </button>
+            </form>
+
         </div>
     </div>
     <div class="vh-100" id="content">
         @yield('content')
     </div>
-
-    <div class="botones">
-        <a href="{{ route('boton1') }}" class="{{ request()->is('boton1') ? 'seleccionado' : '' }}">Botón 1</a>
-        <a href="{{ route('boton2') }}" class="{{ request()->is('boton2') ? 'seleccionado' : '' }}">Botón 2</a>
-        <a href="{{ route('boton3') }}" class="{{ request()->is('boton3') ? 'seleccionado' : '' }}">Botón 3</a>
-        <a href="{{ route('boton4') }}" class="{{ request()->is('boton4') ? 'seleccionado' : '' }}">Botón 4</a>
-    </div>
-
-    @if (request()->is('boton1'))
-    @include('contenido.boton1')
-    @endif
-
-    @if (request()->is('boton2'))
-    @include('contenido.boton2')
-    @endif
-
-    @if (request()->is('boton3'))
-    @include('contenido.boton3')
-    @endif
-
-    @if (request()->is('boton4'))
-    @include('contenido.boton4')
-    @endif
 </body>
 
 </html>
