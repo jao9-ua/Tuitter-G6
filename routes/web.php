@@ -75,7 +75,7 @@ Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('event
 Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
-Route::get('/usuarios/{id}',[UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
 Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
 Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
