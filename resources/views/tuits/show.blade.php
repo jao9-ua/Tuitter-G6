@@ -8,8 +8,6 @@
             <img src="{{ $tuit->imagen }}" alt="Imagen del tuit">
         @endif
         <p>Fecha: {{ $tuit->fecha }}</p>
-        <p>Orden: {{ $tuit->orden }}</p>
-        <p>Hilo: {{ $tuit->hilo->titulo }}</p>
     </div>
 </div>
 

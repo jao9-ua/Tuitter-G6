@@ -25,6 +25,20 @@ Route::get('/', function () {
     return view('layouts.master');
 });
 
+use App\Http\Controllers\AuthController;
+
+// Login
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('auth.authenticate');
+
+// Register
+Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
+Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
+
+// Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+
 
 Route::get('/boton1', [HiloController::class, 'index'])->name('boton1');
 Route::get('/boton2', [BotonesController::class, 'mostrarBoton1'])->name('boton2');
@@ -42,14 +56,14 @@ Route::view('/modificarusuario', 'modificarObjetos.usuario');
 
 //Rutas tuits
 Route::get('/tuits', 'TuitController@index')->name('tuits.index');
-Route::get('/tuits/{id}', 'TuitController@show')->name('tuits.show');
+Route::get('/tuits/{id}/show', [TuitController::class, 'show'])->name('tuits.show');
 Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
 Route::get('/hilos/{idHilo}/tuits/create', [TuitController::class, 'create'])->name('tuits.create');
 Route::post('/tuits', [TuitController::class, 'store'])->name('tuits.store');
 
 //Rutas hilos
 Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
-Route::get('/hilos/{id}', 'HiloController@show')->name('hilos.show');
+Route::get('/hilos/{id}/show', [HiloController::class, 'show'])->name('hilos.show');
 Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
 Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.store');
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
@@ -58,13 +72,14 @@ Route::get('/hilo/create', [HiloController::class, 'create'])->name('hilo.create
 
 //Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
 Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
 Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
 
 
 //Rutas eventos
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
-Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('eventos.show');
+Route::get('/eventos/{id}/show', [EventoController::class, 'show'])->name('eventos.show');
 Route::get('/eventos/{id}/editar', [EventoController::class, 'edit'])->name('eventos.edit');
 Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
 Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('evento.update');

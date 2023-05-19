@@ -71,4 +71,11 @@ class CategoriaController extends Controller
             'categoria' => $categoria
         ], 200);
     }
+
+
+    public function show($id)
+    {
+        $categoria = Categoria::find($id);
+        return view('categorias.show', ['categoria' => $categoria]);
+    }
 }

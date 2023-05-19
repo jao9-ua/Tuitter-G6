@@ -114,8 +114,9 @@ class EventoController extends Controller
         return view('eventos.editar', compact('evento'));
     }
     
-    public function show(Evento $evento)
+    public function show($id)
     {
-        return view('modificarObjetos.editar_evento', compact('evento'));
+        $evento = Evento::find($id);
+        return view('eventos.show', ['evento' => $evento]);
     }
 }
