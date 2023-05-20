@@ -17,7 +17,7 @@
 
         <div class="mt-4">
             <a href="{{ route('usuarios.ordenar', 'nombre') }}" class="btn btn-secondary">Ordenar por Nombre</a>
-            <a href="{{ route('usuarios.ordenar', 'email') }}" class="btn btn-secondary">Ordenar por Email</a>
+            <a href="{{ route('usuarios.ordenar', 'email' ) }}" class="btn btn-secondary">Ordenar por Email</a>
         </div>
 
         <table class="table mt-4">

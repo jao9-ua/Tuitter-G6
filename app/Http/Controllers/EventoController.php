@@ -28,6 +28,20 @@ class EventoController extends Controller
 
         return view('eventos.index', ['eventos' => $eventos, 'texto' => $texto, 'fecha' => $fecha]);
     }
+    public function ordenar(Request $request, $sort)
+    {
+        // Validar que el parámetro de ordenación sea válido
+        $columnasValidas = ['fecha_ini', 'fecha_fin'];
+        if (!in_array($sort, $columnasValidas)) {
+            abort(400, 'Ordenación no válida');
+        }
+
+        // Obtener todos los eventos ordenados según la columna especificada
+        $eventos = Evento::orderBy($sort)->get();
+
+        return view('eventos.index', compact('eventos'));
+    }
+
 
     public function search(Request $request, $texto, $fecha = null)
     {
@@ -51,7 +65,7 @@ class EventoController extends Controller
             ]);
 
             $evento = new Evento;
-            $evento->Texto = $request->input('Texto');
+            $evento->texto = $request->input('texto');
             $evento->Imagen = $request->input('Imagen');
             $evento->fecha_ini = $request->input('fecha_ini');
             $evento->fecha_fin = $request->input('fecha_fin');
@@ -69,7 +83,7 @@ class EventoController extends Controller
     {
         try{
             $request->validate([
-                'texto' => 'required|string',
+                'texto' => 'required|string|max:255',
                 'fecha_ini' => 'nullable|date',
                 'fecha_fin' => [
                     'nullable',
@@ -114,9 +128,8 @@ class EventoController extends Controller
         return view('eventos.editar', compact('evento'));
     }
     
-    public function show($id)
+    public function show(Evento $evento)
     {
-        $evento = Evento::find($id);
-        return view('eventos.show', ['evento' => $evento]);
+        return view('modificarObjetos.editar_evento', compact('evento'));
     }
 }

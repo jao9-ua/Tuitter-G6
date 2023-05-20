@@ -79,6 +79,7 @@ Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.u
 
 //Rutas eventos
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+Route::get('/eventos/ordenar/{sort}', [EventoController::class, 'ordenar'])->name('eventos.ordenar');
 Route::get('/eventos/{id}/show', [EventoController::class, 'show'])->name('eventos.show');
 Route::get('/eventos/{id}/editar', [EventoController::class, 'edit'])->name('eventos.edit');
 Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
