@@ -45,11 +45,11 @@ Route::get('/boton2', [BotonesController::class, 'mostrarBoton1'])->name('boton2
 Route::get('/boton3', [BotonesController::class, 'mostrarBoton1'])->name('boton3');
 Route::get('/boton4', [BotonesController::class, 'mostrarBoton1'])->name('boton4');
 
-//GET -> recuperacion de datos
+//crearObjetos, conforme se añadan botones ir borrando estas rutas
 Route::view('/crearevento', 'crearObjetos.evento');
-Route::view('/crearusuario', 'crearObjetos.usuario');
-Route::view('/crearcategoria', 'crearObjetos.categoria');
-Route::view('/crearhilo', 'crearObjetos.hilo');
+Route::view('/crearusuario', 'usuarios.crear');
+Route::view('/crearcategoria', 'categorias.crear');
+Route::view('/crearhilo', 'hilos.crear');
 Route::view('/modificarrevento', 'modificarObjetos.evento');
 Route::view('/modificarusuario', 'modificarObjetos.usuario');
 
@@ -68,7 +68,7 @@ Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
 Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.store');
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
 Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
-Route::get('/hilo/create', [HiloController::class, 'create'])->name('hilo.create');
+Route::get('/hilo/crear', [HiloController::class, 'crear'])->name('hilo.crear');
 
 //Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');

@@ -26,7 +26,7 @@
                         <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
                         <div class="col-md-6">
                             @if($usuario->foto)
-                            <img src="{{ asset('storage/'.$usuario->foto) }}" alt="Foto de perfil">
+                            <img src="{{ asset('storage/profile_photos/' . $usuario->foto) }}" alt="Foto de perfil">
                             @else
                             <p>No hay foto de perfil</p>
                             @endif

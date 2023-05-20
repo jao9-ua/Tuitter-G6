@@ -15,15 +15,6 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="views">Views:</label>
-                <input type="number" name="views" class="form-control @error('views') is-invalid @enderror" value="{{ old('views') }}" required>
-                @error('views')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
-            <div class="form-group">
                 <label for="imagen">Imagen:</label>
                 <input type="file" name="imagen" class="form-control-file @error('imagen') is-invalid @enderror">
                 @error('imagen')

@@ -13,11 +13,11 @@ use Intervention\Image\Facades\Image;
 class HiloController extends Controller
 {
 
-    public function create()
+    public function crear()
     {
         $categorias = Categoria::all();
 
-        return view('crearObjetos.hilo', ['categorias' => $categorias]);
+        return view('hilos.crear', ['categorias' => $categorias]);
     }
 
     public function store(Request $request)
@@ -32,8 +32,10 @@ class HiloController extends Controller
         $hilo->texto = $request->texto;
 
         if ($request->hasFile('imagen')) {
-            $path = $request->file('imagen')->store('public/imagenes');
-            $hilo->imagen = Storage::url($path);
+            $imagen = $request->file('imagen');
+            $photoName = 'hilo_' . $hilo->id . '.' . $imagen->getClientOriginalExtension();
+            $imagen->storeAs('hilos_photos', $photoName, 'public');
+            $hilo->imagen = $photoName;
         }
 
         $hilo->fecha = now();
