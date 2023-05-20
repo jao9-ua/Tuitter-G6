@@ -89,6 +89,7 @@ Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('event
 //Rutas usuarios
 Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
 Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');

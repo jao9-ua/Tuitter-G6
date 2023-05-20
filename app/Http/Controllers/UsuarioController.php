@@ -14,6 +14,14 @@ class UsuarioController extends Controller
 
         return view('usuarios.index', compact('usuarios'));
     }
+    
+    public function ordenar(Request $request, $sort)
+    {
+        // Obtener todos los usuarios y aplicar la ordenación
+        $usuarios = Usuario::orderBy($sort)->get();
+    
+        return view('usuarios.index', compact('usuarios'));
+    }
 
     public function filtrar(Request $request)
     {
