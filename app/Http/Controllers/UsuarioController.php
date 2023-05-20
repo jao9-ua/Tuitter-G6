@@ -139,6 +139,6 @@ class UsuarioController extends Controller
 
         $usuario->delete();
 
-        return response()->json(['message' => 'Usuario eliminado exitosamente'], 200);
+        return $this->index();
     }
 }
