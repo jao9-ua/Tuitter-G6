@@ -9,6 +9,11 @@
         <button type="submit" class="btn btn-primary">Filtrar</button>
     </form>
 
+    <div class="mt-4">
+        <a href="{{ route('eventos.ordenar', 'fecha_fin') }}" class="btn btn-secondary">Ordenar por Fecha de Fin</a>
+        <a href="{{ route('eventos.ordenar', 'fecha_ini') }}" class="btn btn-secondary">Ordenar por Fecha de Inicio</a>
+    </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -41,6 +46,4 @@
             @endforeach
         </tbody>
     </table>
-
 @endsection
-

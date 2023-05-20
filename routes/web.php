@@ -79,6 +79,7 @@ Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.u
 
 //Rutas eventos
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+Route::get('/eventos/ordenar/{sort}', [EventoController::class, 'ordenar'])->name('eventos.ordenar');
 Route::get('/eventos/{id}/show', [EventoController::class, 'show'])->name('eventos.show');
 Route::get('/eventos/{id}/editar', [EventoController::class, 'edit'])->name('eventos.edit');
 Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
@@ -89,6 +90,7 @@ Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('event
 //Rutas usuarios
 Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
 Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
