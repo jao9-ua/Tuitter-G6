@@ -60,6 +60,7 @@ Route::get('/tuits/{id}/show', [TuitController::class, 'show'])->name('tuits.sho
 Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
 Route::get('/hilos/{idHilo}/tuits/create', [TuitController::class, 'create'])->name('tuits.create');
 Route::post('/tuits', [TuitController::class, 'store'])->name('tuits.store');
+Route::get('/tuits/crear/{hilo}', [TuitController::class, 'crear'])->name('tuits.crear');
 
 //Rutas hilos
 Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
@@ -75,6 +76,7 @@ Route::get('/categorias', [CategoriaController::class, 'index'])->name('categori
 Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
 Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
 Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
+Route::get('/categorias/crear', [CategoriaController::class, 'crear'])->name('categorias.crear');
 
 
 //Rutas eventos
@@ -85,6 +87,7 @@ Route::get('/eventos/{id}/editar', [EventoController::class, 'edit'])->name('eve
 Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
 Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('evento.update');
 Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('evento.destroy');
+Route::get('/eventos/crear', [EventoController::class, 'crear'])->name('eventos.crear');
 
 
 //Rutas usuarios

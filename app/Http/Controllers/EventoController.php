@@ -8,6 +8,12 @@ use App\Models\Evento;
 class EventoController extends Controller
 {
 
+    public function crear()
+    {
+
+        return view('eventos.crear');
+    }
+
     public function index(Request $request)
     {
         $texto = $request->input('texto');
@@ -62,6 +68,12 @@ class EventoController extends Controller
         try {
             $request->validate([
                 'texto' => 'required|string|max:255',
+                'fecha_ini' => ['nullable', 'date', function ($attribute, $value, $fail) {
+                    if (!empty($value) && strtotime($value) < time()) {
+                        $fail('La fecha de inicio debe ser igual o posterior a la fecha actual.');
+                    }
+                }],
+                'fecha_fin' => ['nullable', 'date', 'after_or_equal:fecha_ini'],
             ]);
 
             $evento = new Evento;
@@ -73,7 +85,7 @@ class EventoController extends Controller
 
             $evento->save();
 
-            return response()->json(['message' => 'Evento creado exitosamente', 'evento' => $evento], 201);
+            return redirect()->route('eventos.index');
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
         }
@@ -81,7 +93,7 @@ class EventoController extends Controller
 
     public function update(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'texto' => 'required|string|max:255',
                 'fecha_ini' => 'nullable|date',
@@ -104,7 +116,7 @@ class EventoController extends Controller
             $evento->save();
 
             return redirect('/eventos');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
         }
     }
@@ -119,7 +131,7 @@ class EventoController extends Controller
 
         $evento->delete();
 
-        return response()->json(['message' => 'El evento ha sido eliminado correctamente'], 200);
+        return redirect()->route('eventos.index');
     }
 
     public function edit($id)
@@ -127,7 +139,7 @@ class EventoController extends Controller
         $evento = Evento::findOrFail($id);
         return view('eventos.editar', compact('evento'));
     }
-    
+
     public function show(Evento $evento)
     {
         return view('modificarObjetos.editar_evento', compact('evento'));

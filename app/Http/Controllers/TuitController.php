@@ -8,6 +8,10 @@ use App\Models\Hilo;
 
 class TuitController extends Controller
 {
+    public function crear(Hilo $hilo)
+    {
+        return view('tuits.crear', compact('hilo'));
+    }
 
     public function index()
     {
@@ -25,8 +29,11 @@ class TuitController extends Controller
     {
         $request->validate([
             'texto' => 'required|max:280',
-            'imagen' => 'nullable|image|max:2048'
+            'imagen' => 'nullable|image|max:2048',
+            'hilo_id' => 'required|exists:Hilo,id'
         ]);
+
+        $hilo = Hilo::findOrFail($request->input('hilo_id'));
 
         $tuit = new Tuit($request->all());
 
@@ -41,7 +48,7 @@ class TuitController extends Controller
         $tuit->orden = $hilo->tuits->count() + 1;
         $tuit->save();
 
-        return redirect()->route('hilos.show', $hilo->id);
+        return redirect()->route('hilos.index', $hilo->id);
     }
 
     /*public function update(Request $request, $id)

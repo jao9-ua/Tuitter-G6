@@ -22,6 +22,7 @@
                 <td>{{ $hilo->id }}</td>
                 <td>{{ $hilo->nombre }}</td>
                 <td>{{ $hilo->texto }}</td>
+                <td><a href="{{ route('tuits.crear', ['hilo' => $hilo]) }}" class="btn btn-primary">Contestar hilo</a></td>
             </tr>
             <tr>
                 <td colspan="3">

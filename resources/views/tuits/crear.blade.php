@@ -21,6 +21,8 @@
                         <form action="{{ route('tuits.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
+                            <input type="hidden" name="hilo_id" value="{{ $hilo->id }}">
+                            
                             <div class="form-group">
                                 <label for="texto">Texto</label>
                                 <textarea id="texto" name="texto" class="form-control">{{ old('texto') }}</textarea>

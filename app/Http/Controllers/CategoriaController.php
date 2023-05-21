@@ -8,6 +8,11 @@ use App\Models\Categoria;
 class CategoriaController extends Controller
 {
 
+    public function crear()
+    {
+        return view('categorias.crear');
+    }
+
     public function index()
     {
         $categorias = Categoria::all();
@@ -36,7 +41,7 @@ class CategoriaController extends Controller
 
             $categoria->save();
 
-            return response()->json(['message' => 'Categoria creado exitosamente', 'categoria' => $categoria], 201);
+            return $this->index();
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
         }
