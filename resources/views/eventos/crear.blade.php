@@ -31,6 +31,25 @@
                             <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="{{ old('fecha_fin') }}">
                         </div>
 
+                        <div class="form-group row">
+                                <label for="categoria_id">Categoría</label>
+
+                                <div class="col-md-6">
+                                    <select id="categoria_id" class="form-control{{ $errors->has('categoria_id') ? ' is-invalid' : '' }}" name="categoria_id" value="{{ old('categoria_id') }}">
+                                        <option value="">Seleccionar categoría</option>
+                                        @foreach($categorias as $categoria)
+                                            <option value="{{ $categoria->id }}">{{ $categoria->hashtag }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('categoria_id'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('categoria_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
                         <button type="submit" class="btn btn-primary">Crear</button>
                     </form>
                 </div>

@@ -24,7 +24,7 @@
             <td>{{ $categoria->views }}</td>
             <td>
                 @if ($categoria->imagen)
-                <img src="{{ asset('images/' . $categoria->imagen) }}" alt="{{ $categoria->hashtag }}" class="img-fluid">
+                <img src="{{ asset('storage/categoria_photos/' . $categoria->imagen) }}" alt="foto categoria">
                 @else
                 Sin imagen
                 @endif

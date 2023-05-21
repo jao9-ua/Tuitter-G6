@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evento;
+use App\Models\Categoria;
 
 class EventoController extends Controller
 {
 
     public function crear()
     {
+        $categorias = Categoria::all();
 
-        return view('eventos.crear');
+        return view('eventos.crear', ['categorias' => $categorias]);
     }
 
     public function index(Request $request)
@@ -81,6 +83,7 @@ class EventoController extends Controller
             $evento->Imagen = $request->input('Imagen');
             $evento->fecha_ini = $request->input('fecha_ini');
             $evento->fecha_fin = $request->input('fecha_fin');
+            $evento->categoria_id = $request->input('categoria_id');
             $evento->fecha_post = now();
 
             $evento->save();

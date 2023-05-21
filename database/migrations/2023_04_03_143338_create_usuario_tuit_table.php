@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-
+        //like
         Schema::create('usuario_tuit', function (Blueprint $table) {
             $table->id();
             $table->date('Fecha')->default(now());

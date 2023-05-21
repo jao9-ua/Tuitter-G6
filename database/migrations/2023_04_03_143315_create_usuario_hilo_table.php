@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        //like
         if (!Schema::hasTable('usuario_hilo')) {
             Schema::create('usuario_hilo', function (Blueprint $table) {
                 $table->id();

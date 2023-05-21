@@ -8,7 +8,7 @@
         <img src="{{ asset('storage/categoria_photos/' . $categoria->imagen) }}" alt="Foto de perfil">
         <ul>
             @foreach ($categoria->evento as $evento)
-                <li>{{ $evento->titulo }}</li>
+                <li>{{ $evento->texto }}</li>
             @endforeach
         </ul>
     </div>
