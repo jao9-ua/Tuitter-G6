@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        //like
         if (!Schema::hasTable('usuario_hilo')) {
             Schema::create('usuario_hilo', function (Blueprint $table) {
                 $table->id();
@@ -20,8 +21,8 @@ return new class extends Migration
                 $table->unsignedBigInteger('usuario_id');
                 $table->unsignedBigInteger('hilo_id');
 
-                $table->foreign('usuario_id')->references('id')->on('Usuario');
-                $table->foreign('hilo_id')->references('id')->on('Hilo');
+                $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
+                $table->foreign('hilo_id')->references('id')->on('Hilo')->onDelete('cascade');
                 $table->timestamps();
             });
         }

@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-
+        //like
         Schema::create('usuario_tuit', function (Blueprint $table) {
             $table->id();
             $table->date('Fecha')->default(now());
             $table->unsignedBigInteger('usuario_id');
             $table->unsignedBigInteger('tuit_id');
 
-            $table->foreign('usuario_id')->references('id')->on('Usuario');
-            $table->foreign('tuit_id')->references('id')->on('Tuit');
+            $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
+            $table->foreign('tuit_id')->references('id')->on('Tuit')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evento;
+use App\Models\Categoria;
 
 class EventoController extends Controller
 {
+
+    public function crear()
+    {
+        $categorias = Categoria::all();
+
+        return view('eventos.crear', ['categorias' => $categorias]);
+    }
 
     public function index(Request $request)
     {
@@ -28,6 +36,20 @@ class EventoController extends Controller
 
         return view('eventos.index', ['eventos' => $eventos, 'texto' => $texto, 'fecha' => $fecha]);
     }
+    public function ordenar(Request $request, $sort)
+    {
+        // Validar que el parámetro de ordenación sea válido
+        $columnasValidas = ['fecha_ini', 'fecha_fin'];
+        if (!in_array($sort, $columnasValidas)) {
+            abort(400, 'Ordenación no válida');
+        }
+
+        // Obtener todos los eventos ordenados según la columna especificada
+        $eventos = Evento::orderBy($sort)->get();
+
+        return view('eventos.index', compact('eventos'));
+    }
+
 
     public function search(Request $request, $texto, $fecha = null)
     {
@@ -48,18 +70,25 @@ class EventoController extends Controller
         try {
             $request->validate([
                 'texto' => 'required|string|max:255',
+                'fecha_ini' => ['nullable', 'date', function ($attribute, $value, $fail) {
+                    if (!empty($value) && strtotime($value) < time()) {
+                        $fail('La fecha de inicio debe ser igual o posterior a la fecha actual.');
+                    }
+                }],
+                'fecha_fin' => ['nullable', 'date', 'after_or_equal:fecha_ini'],
             ]);
 
             $evento = new Evento;
-            $evento->Texto = $request->input('Texto');
+            $evento->texto = $request->input('texto');
             $evento->Imagen = $request->input('Imagen');
             $evento->fecha_ini = $request->input('fecha_ini');
             $evento->fecha_fin = $request->input('fecha_fin');
+            $evento->categoria_id = $request->input('categoria_id');
             $evento->fecha_post = now();
 
             $evento->save();
 
-            return response()->json(['message' => 'Evento creado exitosamente', 'evento' => $evento], 201);
+            return redirect()->route('eventos.index');
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
         }
@@ -67,9 +96,9 @@ class EventoController extends Controller
 
     public function update(Request $request)
     {
-        try{
+        try {
             $request->validate([
-                'texto' => 'required|string',
+                'texto' => 'required|string|max:255',
                 'fecha_ini' => 'nullable|date',
                 'fecha_fin' => [
                     'nullable',
@@ -90,7 +119,7 @@ class EventoController extends Controller
             $evento->save();
 
             return redirect('/eventos');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
         }
     }
@@ -105,7 +134,7 @@ class EventoController extends Controller
 
         $evento->delete();
 
-        return response()->json(['message' => 'El evento ha sido eliminado correctamente'], 200);
+        return redirect()->route('eventos.index');
     }
 
     public function edit($id)
@@ -113,10 +142,9 @@ class EventoController extends Controller
         $evento = Evento::findOrFail($id);
         return view('eventos.editar', compact('evento'));
     }
-    
-    public function show($id)
+
+    public function show(Evento $evento)
     {
-        $evento = Evento::find($id);
-        return view('eventos.show', ['evento' => $evento]);
+        return view('modificarObjetos.editar_evento', compact('evento'));
     }
 }

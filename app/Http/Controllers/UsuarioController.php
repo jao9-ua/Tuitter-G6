@@ -14,6 +14,14 @@ class UsuarioController extends Controller
 
         return view('usuarios.index', compact('usuarios'));
     }
+    
+    public function ordenar(Request $request, $sort)
+    {
+        // Obtener todos los usuarios y aplicar la ordenación
+        $usuarios = Usuario::orderBy($sort)->get();
+    
+        return view('usuarios.index', compact('usuarios'));
+    }
 
     public function filtrar(Request $request)
     {
@@ -55,16 +63,23 @@ class UsuarioController extends Controller
                 'Nombre' => 'required',
                 'email' => 'required|email|unique:Usuario,email',
                 'password' => 'required|min:8',
-                'es_Admin' => 'required|boolean'
+                'es_Admin' => 'nullable|boolean',
+                'foto' => 'nullable|image|max:2048',
             ]);
 
             $usuario = new Usuario;
             $usuario->Nombre = $request->Nombre;
             $usuario->email = $request->email;
-            $usuario->foto = $request->foto;
+
+            if ($request->hasFile('foto')) {
+                $foto = $request->file('foto');
+                $photoName = 'profile_' . $usuario->id . '.' . $foto->getClientOriginalExtension();
+                $foto->storeAs('profile_photos', $photoName, 'public');
+                $usuario->foto = $photoName;
+            }
             $usuario->biografia = $request->biografia;
             $usuario->password = bcrypt($request->password);
-            $usuario->es_Admin = $request->es_Admin;
+            $usuario->es_Admin = false;
             $usuario->save();
 
             return response()->json(['message' => 'Usuario creado exitosamente'], 201);
@@ -124,6 +139,6 @@ class UsuarioController extends Controller
 
         $usuario->delete();
 
-        return response()->json(['message' => 'Usuario eliminado exitosamente'], 200);
+        return $this->index();
     }
 }

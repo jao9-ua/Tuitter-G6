@@ -8,36 +8,40 @@ use App\Models\Categoria;
 class CategoriaController extends Controller
 {
 
+    public function crear()
+    {
+        return view('categorias.crear');
+    }
+
     public function index()
     {
         $categorias = Categoria::all();
 
         return view('categorias.index', ['categorias' => $categorias]);
     }
-    
+
     public function store(Request $request)
     {
         try {
             $validatedData = $request->validate([
                 'hashtag' => 'required|max:255',
-                'views' => 'required|integer',
                 'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
             ]);
 
             $categoria = new Categoria();
             $categoria->hashtag = $validatedData['hashtag'];
-            $categoria->views = $validatedData['views'];
+            $categoria->views = 0;
 
             if ($request->hasFile('imagen')) {
                 $imagen = $request->file('imagen');
-                $rutaImagen = 'images/' . time() . '_' . $imagen->getClientOriginalName();
-                $imagen->move(public_path('images'), $rutaImagen);
-                $categoria->imagen = $rutaImagen;
+                $photoName = 'categoria_' . $categoria->id . '.' . $imagen->getClientOriginalExtension();
+                $imagen->storeAs('categoria_photos', $photoName, 'public');
+                $categoria->imagen = $photoName;
             }
 
             $categoria->save();
 
-            return response()->json(['message' => 'Categoria creado exitosamente', 'categoria' => $categoria], 201);
+            return $this->index();
         } catch (\Exception $e) {
             return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
         }
@@ -75,7 +79,8 @@ class CategoriaController extends Controller
 
     public function show($id)
     {
-        $categoria = Categoria::find($id);
+        $categoria = Categoria::findOrFail($id);
+        $categoria->increment('views');
         return view('categorias.show', ['categoria' => $categoria]);
     }
 }

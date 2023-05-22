@@ -11,15 +11,44 @@
                     <form method="POST" action="{{ route('evento.store') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="form-group{{ $errors->has('Texto') ? ' has-error' : '' }}">
-                            <label for="Texto">Texto:</label>
-                            <textarea id="Texto" name="Texto" class="form-control">{{ old('Texto') }}</textarea>
+                        <div class="form-group{{ $errors->has('texto') ? ' has-error' : '' }}">
+                            <label for="texto">Texto:</label>
+                            <textarea id="texto" name="texto" class="form-control">{{ old('Texto') }}</textarea>
                         </div>
 
                         <div class="form-group{{ $errors->has('Imagen') ? ' has-error' : '' }}">
                             <label for="Imagen">Imagen:</label>
                             <input type="file" id="Imagen" name="Imagen">
                         </div>
+
+                        <div class="form-group{{ $errors->has('fecha_ini') ? ' has-error' : '' }}">
+                            <label for="fecha_ini">Fecha de inicio:</label>
+                            <input type="date" id="fecha_ini" name="fecha_ini" class="form-control" value="{{ old('fecha_ini') }}">
+                        </div>
+
+                        <div class="form-group{{ $errors->has('fecha_fin') ? ' has-error' : '' }}">
+                            <label for="fecha_fin">Fecha de finalización:</label>
+                            <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="{{ old('fecha_fin') }}">
+                        </div>
+
+                        <div class="form-group row">
+                                <label for="categoria_id">Categoría</label>
+
+                                <div class="col-md-6">
+                                    <select id="categoria_id" class="form-control{{ $errors->has('categoria_id') ? ' is-invalid' : '' }}" name="categoria_id" value="{{ old('categoria_id') }}">
+                                        <option value="">Seleccionar categoría</option>
+                                        @foreach($categorias as $categoria)
+                                            <option value="{{ $categoria->id }}">{{ $categoria->hashtag }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('categoria_id'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('categoria_id') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
 
                         <button type="submit" class="btn btn-primary">Crear</button>
                     </form>
