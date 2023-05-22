@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between align-items-center">
     <h1>Listado de categorías</h1>
-    <a href="{{ route('categorias.crear') }}" class="btn btn-primary">Crear Categoria</a>
+    <a href="{{ route('categorias.crear') }}" class="btn btn-primary">Crear Categoría</a>
 </div>
 
 <table class="table">
@@ -14,6 +14,7 @@
             <th>Hashtag</th>
             <th>Views</th>
             <th>Imagen</th>
+            <th>Acciones</th> 
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,9 @@
                 @else
                 Sin imagen
                 @endif
+            </td>
+            <td> 
+                <a href="{{ route('categorias.show', $categoria->id) }}" class="btn btn-info">Ver</a>
             </td>
         </tr>
         @endforeach
