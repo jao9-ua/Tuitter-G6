@@ -145,6 +145,6 @@ class EventoController extends Controller
 
     public function show(Evento $evento)
     {
-        return view('modificarObjetos.editar_evento', compact('evento'));
+        return view('eventos.show', compact('evento'));
     }
 }
