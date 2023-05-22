@@ -17,7 +17,7 @@
 
         <div class="mt-4">
             <a href="{{ route('usuarios.ordenar', 'nombre') }}" class="btn btn-secondary">Ordenar por Nombre</a>
-            <a href="{{ route('usuarios.ordenar', 'email' ) }}" class="btn btn-secondary">Ordenar por Email</a>
+            <a href="{{ route('usuarios.ordenar', 'email') }}" class="btn btn-secondary">Ordenar por Email</a>
         </div>
 
         <table class="table mt-4">
@@ -36,7 +36,7 @@
                         <td>{{ $usuario->Nombre }}</td>
                         <td>{{ $usuario->email }}</td>
                         <td>
-                            <a href="{{ route('usuarios.filtrar', $usuario->id) }}" class="btn btn-info">Ver</a>
+                            <a href="{{ route('usuarios.show', ['id' => $usuario->id]) }}" class="btn btn-info">Ver</a>
                             <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning">Editar</a>
                             <form action="{{ route('usuario.destroy', $usuario->id) }}" method="POST" style="display: inline-block">
                                 @csrf
