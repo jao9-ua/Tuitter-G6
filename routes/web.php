@@ -61,6 +61,7 @@ Route::get('/hilo/crear', [HiloController::class, 'crear'])->name('hilo.crear');
 
 //Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+Route::get('/categoria/{id}', [CategoriaController::class, 'mostrar'])->name('categoria.mostrar');
 Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
 Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
 Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');

@@ -27,6 +27,6 @@ class Hilo extends Model
 
     public function usuario()
     {
-        return $this->belongsToMany(usuario::class,'usuario_hilo');
+        return $this->belongsToMany(Usuario::class,'usuario_hilo');
     }
 }

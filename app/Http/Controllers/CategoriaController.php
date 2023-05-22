@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Usuario;
+use App\Models\Evento;
+use App\Models\Hilo;
 
 class CategoriaController extends Controller
 {
@@ -77,13 +79,29 @@ class CategoriaController extends Controller
         ], 200);
     }
 
-
     public function show($id)
     {
         $categoria = Categoria::findOrFail($id);
         $categoria->increment('views');
         return view('categorias.show', ['categoria' => $categoria]);
     }
+
+    public function mostrar($id)
+    {
+        $categoria = Categoria::findOrFail($id);
+        $categoria->increment('views');
+        
+        $eventos = Evento::where('categoria_id', $id)
+                    ->orderBy('fecha_ini', 'desc')
+                    ->get();
+                    
+        $hilos = Hilo::where('categoria_id', $id)
+                    ->orderBy('fecha', 'desc')
+                    ->paginate(10);
+
+        return view('categorias.mostrar', compact('categoria', 'eventos', 'hilos'));
+    }
+
 
 
     public function categoriasUsuario($usuarioId)
