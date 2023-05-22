@@ -147,4 +147,13 @@ class EventoController extends Controller
     {
         return view('eventos.show', compact('evento'));
     }
+
+    public function eventosUsuario($usuarioId)
+    {
+    $eventos = Evento::where('usuario_id', $usuarioId)->get();
+
+    return view('eventos.eventosUsuario', compact('eventos'));
+    }
+
+
 }
