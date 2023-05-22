@@ -38,10 +38,12 @@
                         <td>
                             <a href="{{ route('usuarios.show', ['id' => $usuario->id]) }}" class="btn btn-info">Ver</a>
                             <!--<a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning">Editar</a>-->
-                            <form action="{{ route('usuario.destroy', $usuario->id) }}" method="POST" style="display: inline-block">
+                            <form action="{{ route('usuario.destroy', ['id' => $usuario->id]) }}" method="POST" style="display: inline-block">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar la cuenta?')">
+                                    {{ __('Eliminar cuenta') }}
+                                </button>
                             </form>
                         </td>
                     </tr>
