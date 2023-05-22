@@ -47,7 +47,7 @@
                     <div class="form-group row">
                         <label for="biografia" class="col-md-4 col-form-label text-md-right">{{ __('Categorias') }}</label>
                         <div class="col-md-6"> 
-                            <a href="{{ route('categorias.show', ['id' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar categorías') }}</a>
+                            <a href="{{ route('categorias.categoriasUsuario', ['usuarioID' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar categorías') }}</a>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Usuario;
 
 class CategoriaController extends Controller
 {
@@ -83,4 +84,16 @@ class CategoriaController extends Controller
         $categoria->increment('views');
         return view('categorias.show', ['categoria' => $categoria]);
     }
+
+
+    public function categoriasUsuario($usuarioId)
+    {   
+        $usuario = Usuario::findOrFail($usuarioId);
+        
+        $categorias = $usuario->categorias;
+        
+        return view('categorias.categoriasUsuario', compact('categorias'));
+    }
+
+
 }

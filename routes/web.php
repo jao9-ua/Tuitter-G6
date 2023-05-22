@@ -65,6 +65,7 @@ Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name(
 Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
 Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
 Route::get('/categorias/crear', [CategoriaController::class, 'crear'])->name('categorias.crear');
+Route::get('/categorias/usuario/{usuarioID}', [CategoriaController::class, 'categoriasUsuario'])->name('categorias.categoriasUsuario');
 
 
 //Rutas eventos
