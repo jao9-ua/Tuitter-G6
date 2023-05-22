@@ -25,18 +25,6 @@ Route::get('/', function () {
     return view('layouts.master');
 });
 
-use App\Http\Controllers\AuthController;
-
-// Login
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'authenticate'])->name('auth.authenticate');
-
-// Register
-Route::get('/register', [AuthController::class, 'register'])->name('auth.register');
-Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
-
-// Logout
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 
 
@@ -90,7 +78,7 @@ Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('event
 Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
-Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show')->middleware('auth.basic');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
 Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
 Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');

@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Usuario extends Authenticatable
 {
+    use HasFactory;
+    use AuthenticatableTrait;
     use HasFactory;
 
     public $timestamps = false;
@@ -39,4 +44,21 @@ class Usuario extends Model
     {
         return $this->belongsToMany(Tuit::class,'usuario_hilo');
     }
+    
+    /*public function findForPassport($username)
+    {
+        return $this->where('Nombre', $username)->orWhere('email', $username)->first();
+    }
+
+    public function getAuthIdentifierName()
+    {
+    return 'Nombre';
+    }
+    
+    
+    public function getAuthPassword()
+    {
+    return $this->password;
+    }*/
+
 }
