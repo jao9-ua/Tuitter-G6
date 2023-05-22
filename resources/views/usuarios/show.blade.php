@@ -52,6 +52,17 @@
                             <!-- <a href="{{ route('usuarios.show', ['id' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar información') }}</a> -->
                         </div>
                     </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <form action="{{ route('usuario.destroy', ['id' => $usuario->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar la cuenta?')">
+                                    {{ __('Eliminar cuenta') }}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
