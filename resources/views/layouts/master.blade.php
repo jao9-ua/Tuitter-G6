@@ -102,7 +102,7 @@
 </head>
 
 <body>
-<header class="header">
+    <header class="header">
         <div class="header-overlay"></div>
         <div class="header-content">
             <h1 class="header-title">
@@ -114,17 +114,26 @@
 
     <nav class="navigation">
         <ul class="navigation-links">
+            @auth
             <li class="navigation-link"><a href="{{ route('hilos.index') }}">Tuits</a></li>
             <li class="navigation-link"><a href="{{ route('usuarios.index') }}">Profile</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.index') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.index') }}">Categorías</a></li>
             <!-- HAY QUE CONTROLAR LA SESION SI NO ESTA INICIADA QUE NO SE MUESTRE Y SI ESTA INICIADA QUE SE COMPRUEBE QUE SEA ADMIN-->
-            @if (true)
-            <li class="navigation-link"><a href="{{ route('categorias.index') }}">ADMIN</a></li>
+            @if (auth()->user()->es_Admin)
+                <li class="navigation-link"><a href="{{ route('categorias.index') }}">ADMIN</a></li>
             @endif
+
+            @endauth
+
+            @guest
+            <!-- Mostrar estos enlaces solo si el usuario no está autenticado -->
+            <li class="navigation-link"><a href="{{ route('login') }}">Login</a></li>
+            <li class="navigation-link"><a href="{{ route('register') }}">Register</a></li>
+            @endguest
         </ul>
     </nav>
-     <div class="vh-100" id="content">
+    <div class="vh-100" id="content">
         @yield('content')
     </div>
     <!-- Bootstrap JS -->

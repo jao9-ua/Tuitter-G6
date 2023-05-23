@@ -17,7 +17,7 @@ class Usuario extends Model implements Authenticatable
 
     protected $table = 'Usuario';
 
-    protected $fillable = ['Nombre', 'email', 'foto', 'biografia', 'password', 'es_Admin?'];
+    protected $fillable = ['Nombre', 'email', 'foto', 'biografia', 'password', 'es_Admin'];
 
     public function categoria()
     {
