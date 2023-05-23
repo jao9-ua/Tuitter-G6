@@ -21,6 +21,8 @@ return new class extends Migration
             
             $table->foreign('evento_id')->references('id')->on('Evento')->onDelete('cascade');
             $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
+            // Agregar restricción de clave única
+            $table->unique(['usuario_id', 'evento_id']);
         });
     }
 

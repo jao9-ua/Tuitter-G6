@@ -24,6 +24,8 @@ return new class extends Migration
                 $table->foreign('hilo_id')->references('id')->on('Hilo')->onDelete('cascade');
                 $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
                 $table->timestamps();
+                // Agregar restricción de clave única
+                $table->unique(['usuario_id', 'hilo_id']);
             });
         }
     }

@@ -21,9 +21,9 @@ class UsuarioHiloSeeder extends Seeder
         $usuarioHilos = [];
 
         // Generar registros aleatorios
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < count($hiloIds); $i++) {
             $usuarioId = $usuarioIds->random();
-            $hiloId = $hiloIds->random();
+            $hiloId = $hiloIds->shift();
             $fecha = $this->generateRandomDate($fechaInicial, $fechaFinal);
 
             $usuarioHilos[] = [

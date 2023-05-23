@@ -24,7 +24,7 @@ class UsuarioTuitSeeder extends Seeder
         // Generar registros aleatorios
         for ($i = 0; $i < 10; $i++) {
             $usuarioId = $usuarioIds->random();
-            $tuitId = $tuitIds->random();
+            $tuitId = $tuitIds->shift();
             $fecha = $this->generateRandomDate($fechaInicial, $fechaFinal);
 
             $usuarioTuits[] = [

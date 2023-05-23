@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreign('tuit_id')->references('id')->on('Tuit')->onDelete('cascade');
             $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
             $table->timestamps();
+            // Agregar restricción de clave única
+            $table->unique(['usuario_id', 'tuit_id']);
         });
     }
 
