@@ -37,9 +37,11 @@ class EventoSeeder extends Seeder
                 $evento->fecha_fin = $faker->date('Y-m-d');
                 $evento->categoria()->associate($categoria);
 
-                // Obtener un usuario aleatorio
-                $usuario = Usuario::inRandomOrder()->first();
-                $evento->usuario()->associate($usuario);
+                // Obtener una colección de IDs de usuarios relacionados con el evento
+                $usuarioIds = Usuario::inRandomOrder()->limit(3)->pluck('id');
+
+                // Asociar los usuarios al evento utilizando el método attach()
+                $evento->usuarios()->attach($usuarioIds);
 
                 $evento->save();
             }
