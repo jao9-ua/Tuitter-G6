@@ -98,7 +98,7 @@ Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('us
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
-Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/usuarios/show',[UsuarioController::class, 'show'])->name('usuarios.show');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
 Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
 Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
