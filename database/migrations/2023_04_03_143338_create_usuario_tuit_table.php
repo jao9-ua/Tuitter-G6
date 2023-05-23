@@ -20,8 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('usuario_id');
             $table->unsignedBigInteger('tuit_id');
 
-            $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
+
             $table->foreign('tuit_id')->references('id')->on('Tuit')->onDelete('cascade');
+            $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
             $table->timestamps();
         });
     }

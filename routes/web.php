@@ -74,10 +74,12 @@ Route::get('/hilo/crear', [HiloController::class, 'crear'])->name('hilo.crear');
 
 //Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+Route::get('/categoria/{id}', [CategoriaController::class, 'mostrar'])->name('categoria.mostrar');
 Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
 Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
 Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
 Route::get('/categorias/crear', [CategoriaController::class, 'crear'])->name('categorias.crear');
+Route::get('/categorias/usuario/{usuarioID}', [CategoriaController::class, 'categoriasUsuario'])->name('categorias.categoriasUsuario');
 
 
 //Rutas eventos
@@ -89,14 +91,14 @@ Route::post('/evento', [EventoController::class, 'store'])->name('evento.store')
 Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('evento.update');
 Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('evento.destroy');
 Route::get('/eventos/crear', [EventoController::class, 'crear'])->name('eventos.crear');
-
+Route::get('/eventos/usuario/{usuarioID}', [EventoController::class, 'eventosUsuario'])->name('eventos.eventosUsuario');
 
 //Rutas usuarios
 Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
-Route::get('/usuarios/show',[UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
 Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
 Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');

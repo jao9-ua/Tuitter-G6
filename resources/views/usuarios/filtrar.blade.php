@@ -25,7 +25,7 @@
                     <td>{{ $usuario->Nombre }}</td>
                     <td>{{ $usuario->email }}</td>
                 <td>
-                    <a href="{{ route('usuarios.filtrar', $usuario->id) }}" class="btn btn-info">Ver</a>
+                <a href="{{ route('usuarios.show', ['id' => $usuario->id]) }}" class="btn btn-info">Ver</a>
                 </td>
                 @endif
             </tr>

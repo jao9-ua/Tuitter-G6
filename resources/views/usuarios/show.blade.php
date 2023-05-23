@@ -32,21 +32,36 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="biografia" class="col-md-4 col-form-label text-md-right">{{ __('Biografía') }}</label>
                         <div class="col-md-6">
                             <p>{{ $usuario->biografia }}</p>
                         </div>
                     </div>
-
-                    <!--<div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                    <div class="form-group row">
+                        <label for="biografia" class="col-md-4 col-form-label text-md-right">{{ __('Eventos') }}</label>
                         <div class="col-md-6">
-                            <p>*******</p>
+                            <a href="{{ route('eventos.eventosUsuario', ['usuarioID' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar eventos') }}</a>
                         </div>
-                    </div> -->
-
+                    </div>
+                    <div class="form-group row">
+                        <label for="biografia" class="col-md-4 col-form-label text-md-right">{{ __('Categorias') }}</label>
+                        <div class="col-md-6"> 
+                            <a href="{{ route('categorias.categoriasUsuario', ['usuarioID' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar categorías') }}</a>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="biografia" class="col-md-4 col-form-label text-md-right">{{ __('Hilos') }}</label>
+                        <div class="col-md-6">
+                            <a href="{{ route('hilos.show', ['id' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar hilos') }}</a>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="biografia" class="col-md-4 col-form-label text-md-right">{{ __('Tuits') }}</label>
+                        <div class="col-md-6">
+                            <a href="{{ route('tuits.show', ['id' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar tuits') }}</a>
+                        </div>
+                    </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <h1>log out</h1>
                         <a href="{{ route('logout') }}" class="btn btn-primary">Cerrar sesion</a>
@@ -54,7 +69,13 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <!-- <a href="{{ route('usuarios.show', ['id' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar información') }}</a> -->
+                            <form action="{{ route('usuario.destroy', ['id' => $usuario->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar la cuenta?')">
+                                    {{ __('Eliminar cuenta') }}
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
