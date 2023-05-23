@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\TuitController;
 use App\Http\Controllers;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,7 @@ Route::get('/', function () {
     return view('layouts.master');
 });
 
-use App\Http\Controllers\AuthController;
+
 
 // Login
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -36,7 +38,9 @@ Route::get('/register', [AuthController::class, 'register'])->name('auth.registe
 Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
 // Logout
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+//Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+Route::get('/logout',[UsuarioController::class,'logout'])->name('logout')->middleware('auth');
 
 
 
@@ -46,10 +50,7 @@ Route::get('/boton3', [BotonesController::class, 'mostrarBoton1'])->name('boton3
 Route::get('/boton4', [BotonesController::class, 'mostrarBoton1'])->name('boton4');
 
 //crearObjetos, conforme se añadan botones ir borrando estas rutas
-Route::view('/crearevento', 'crearObjetos.evento');
 Route::view('/crearusuario', 'usuarios.crear');
-Route::view('/crearcategoria', 'categorias.crear');
-Route::view('/crearhilo', 'hilos.crear');
 Route::view('/modificarrevento', 'modificarObjetos.evento');
 Route::view('/modificarusuario', 'modificarObjetos.usuario');
 
@@ -95,8 +96,12 @@ Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('us
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
 Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
 Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
-Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/usuarios/show',[UsuarioController::class, 'show'])->name('usuarios.show');
 Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
 Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
 Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

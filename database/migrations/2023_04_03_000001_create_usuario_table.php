@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->string('biografia')->nullable();
             $table->string('password');
-            $table->boolean('es_Admin');
+            $table->boolean('es_Admin')->default(false);
             $table->timestamps();
         });
     }

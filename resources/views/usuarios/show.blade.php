@@ -47,6 +47,11 @@
                         </div>
                     </div> -->
 
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1>log out</h1>
+                        <a href="{{ route('logout') }}" class="btn btn-primary">Cerrar sesion</a>
+                    </div>
+
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <!-- <a href="{{ route('usuarios.show', ['id' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar información') }}</a> -->

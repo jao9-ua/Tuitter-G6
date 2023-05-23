@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -50,9 +51,9 @@ class UsuarioController extends Controller
         return view('usuarios.lista', compact('usuarios'));
     }
 
-    public function show($id)
+    public function show()
     {
-        $usuario = Usuario::find($id);
+        $usuario = Auth::user();
         return view('usuarios.show', ['usuario' => $usuario]);
     }
 
@@ -140,5 +141,10 @@ class UsuarioController extends Controller
         $usuario->delete();
 
         return $this->index();
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect('/login');
     }
 }
