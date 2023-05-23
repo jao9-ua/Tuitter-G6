@@ -40,8 +40,9 @@ class EventoSeeder extends Seeder
                 // Obtener una colección de IDs de usuarios relacionados con el evento
                 $usuarioIds = Usuario::inRandomOrder()->limit(3)->pluck('id');
 
-                // Asociar los usuarios al evento utilizando el método attach()
-                $evento->usuarios()->attach($usuarioIds);
+                // Obtener un usuario aleatorio
+                $usuario = Usuario::inRandomOrder()->first();
+                $evento->usuario()->associate($usuario);
 
                 $evento->save();
             }

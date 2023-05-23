@@ -22,6 +22,6 @@ class Evento extends Model
 
     public function usuario()
     {
-        return $this->belongsToMany(Usuario::class);
+        return $this->belongsTo(Usuario::class);
     }
 }
