@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tuit;
 use App\Models\Hilo;
+use App\Models\Usuario;
 
 class TuitController extends Controller
 {
@@ -99,4 +100,13 @@ class TuitController extends Controller
 
         return redirect()->route('tuits.index');
     }
+
+    public function tuitsUsuario($usuarioId)
+    {
+        $usuario = Usuario::findOrFail($usuarioId);
+        $tuis = Tuit::where('usuario_id', $usuarioId)->get();
+
+        return view('tuits.tuitsUsuario', compact('tuits'));
+    }
+
 }

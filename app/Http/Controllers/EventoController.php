@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Categoria;
+use App\Models\Hilo;
+use App\Models\Tuit;
 
 class EventoController extends Controller
 {
@@ -150,10 +152,9 @@ class EventoController extends Controller
 
     public function eventosUsuario($usuarioId)
     {
-    $eventos = Evento::where('usuario_id', $usuarioId)->get();
+        $eventos = Evento::where('usuario_id', $usuarioId)->get();
 
-    return view('eventos.eventosUsuario', compact('eventos'));
+        return view('eventos.eventosUsuario', compact('eventos'));
     }
-
 
 }

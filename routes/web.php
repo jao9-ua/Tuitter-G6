@@ -62,6 +62,7 @@ Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
 Route::get('/hilos/{idHilo}/tuits/create', [TuitController::class, 'create'])->name('tuits.create');
 Route::post('/tuits', [TuitController::class, 'store'])->name('tuits.store');
 Route::get('/tuits/crear/{hilo}', [TuitController::class, 'crear'])->name('tuits.crear');
+Route::get('/tuits/usuario/{usuarioID}', [TuitController::class, 'index'])->name('tuits.tuitsUsuario');
 
 //Rutas hilos
 Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
@@ -71,6 +72,7 @@ Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.s
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
 Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
 Route::get('/hilo/crear', [HiloController::class, 'crear'])->name('hilo.crear');
+Route::get('/hilos/usuario/{usuarioID}', [HiloController::class, 'index'])->name('hilos.hilosUsuario');
 
 //Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');

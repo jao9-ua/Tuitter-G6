@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hilo;
 use App\Models\Categoria;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
@@ -103,5 +104,14 @@ class HiloController extends Controller
     {
         $hilo = Hilo::paginate(10);
         return view('/layouts/master', ['hilo' => $hilo]);
+    }
+
+
+    public function hilosUsuario($usuarioId)
+    {
+        $usuario = Usuario::findOrFail($usuarioId);
+        $hilos = Hilo::where('usuario_id', $usuarioId)->get();
+
+        return view('hilos.hilosUsuario', compact('hilos'));
     }
 }
