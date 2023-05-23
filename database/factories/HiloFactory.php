@@ -16,9 +16,7 @@ class HiloFactory extends Factory
             'texto' => $this->faker->text(),
             'imagen' => $this->faker->imageUrl(),
             'fecha' => $this->faker->dateTime(),
-            'categoria_id' => function () {
-                return Categoria::factory()->create()->id;
-            },
+            'categoria_id' => Categoria::factory(),
         ];
     }
 }

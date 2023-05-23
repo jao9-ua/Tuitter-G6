@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,24 +14,46 @@ class UsuarioTuitSeeder extends Seeder
      */
     public function run()
     {
-        $usuarioTuits = [
-            [
-                'Fecha' => '2023-05-20',
-                'usuario_id' => 1,
-                'tuit_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'Fecha' => '2023-06-10',
-                'usuario_id' => 2,
-                'tuit_id' => 2,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            // Agrega más registros si lo deseas
-        ];
+        $usuarioIds = DB::table('Usuario')->pluck('id');
+        $tuitIds = DB::table('Tuit')->pluck('id');
+        $fechaInicial = '2023-01-01';
+        $fechaFinal = '2023-12-31';
 
+        $usuarioTuits = [];
+
+        // Generar registros aleatorios
+        for ($i = 0; $i < 10; $i++) {
+            $usuarioId = $usuarioIds->random();
+            $tuitId = $tuitIds->random();
+            $fecha = $this->generateRandomDate($fechaInicial, $fechaFinal);
+
+            $usuarioTuits[] = [
+                'Fecha' => $fecha,
+                'usuario_id' => $usuarioId,
+                'tuit_id' => $tuitId,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        // Insertar registros en la tabla 'usuario_tuit'
         DB::table('usuario_tuit')->insert($usuarioTuits);
+    }
+
+    /**
+     * Generate a random date between two given dates.
+     *
+     * @param string $startDate Start date (Y-m-d)
+     * @param string $endDate   End date (Y-m-d)
+     * @return string Random date (Y-m-d)
+     */
+    private function generateRandomDate($startDate, $endDate)
+    {
+        $startTimestamp = strtotime($startDate);
+        $endTimestamp = strtotime($endDate);
+
+        $randomTimestamp = mt_rand($startTimestamp, $endTimestamp);
+
+        return date('Y-m-d', $randomTimestamp);
     }
 }

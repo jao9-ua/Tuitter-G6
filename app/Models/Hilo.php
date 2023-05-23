@@ -29,4 +29,8 @@ class Hilo extends Model
     {
         return $this->belongsToMany(Usuario::class,'usuario_hilo');
     }
+    public static function factory()
+    {
+        return new HiloFactory();
+    }    
 }
