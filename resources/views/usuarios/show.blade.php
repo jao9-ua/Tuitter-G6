@@ -14,14 +14,14 @@
                             <p>{{ $usuario->Nombre }}</p>
                         </div>
                     </div>
-
+                    @if (auth()->user()->id == $usuario->id)
                     <div class="form-group row">
                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
                         <div class="col-md-6">
                             <p>{{ $usuario->email }}</p>
                         </div>
                     </div>
-
+                    @endif
                     <div class="form-group row">
                         <label for="foto" class="col-md-4 col-form-label text-md-right">{{ __('Foto') }}</label>
                         <div class="col-md-6">
@@ -44,12 +44,14 @@
                             <a href="{{ route('eventos.eventosUsuario', ['usuarioID' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar eventos') }}</a>
                         </div>
                     </div>
+                    @if (auth()->user()->id == $usuario->id)
                     <div class="form-group row">
                         <label for="categorias" class="col-md-4 col-form-label text-md-right">{{ __('Categorias') }}</label>
                         <div class="col-md-6"> 
                             <a href="{{ route('categorias.categoriasUsuario', ['usuarioID' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar categorías') }}</a>
                         </div>
                     </div>
+                    @endif
                     <div class="form-group row">
                         <label for="hilos" class="col-md-4 col-form-label text-md-right">{{ __('Hilos') }}</label>
                         <div class="col-md-6">
@@ -62,24 +64,26 @@
                             <a href="{{ route('tuits.tuitsUsuario', ['usuarioID' => $usuario->id]) }}" class="btn btn-primary">{{ __('Mostrar tuits') }}</a>
                         </div>
                     </div>
+                    @if (auth()->user()->id == $usuario->id)
                     <div class="form-group row">
                         <label for="logout" class="col-md-4 col-form-label text-md-right">{{ __('Logout') }}</label>
                         <div class="col-md-6">
                             <a href="{{ route('logout') }}" class="btn btn-primary">Cerrar sesión</a>                        </div>
                     </div>
+                    @endif
+                    @if (auth()->user()->es_Admin || auth()->user()->id == $usuario->id)
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            @if (auth()->user()->es_Admin || auth()->user()->id == $usuario->id)
                             <form action="{{ route('usuario.destroy', ['id' => $usuario->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar la cuenta?')">
                                     {{ __('Eliminar cuenta') }}
                                 </button>
-                            </form>
-                            @endif
+                            </form>  
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
