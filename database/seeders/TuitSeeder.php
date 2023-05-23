@@ -1,35 +1,25 @@
 <?php
 
 namespace Database\Seeders;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Seeder;
 use App\Models\Tuit;
-use App\Models\Hilo;
-
+use Database\Factories\HiloFactory;
 
 class TuitSeeder extends Seeder
 {
     public function run()
     {
-        $hilo1 = new Hilo();
-        $hilo1->texto = 'hola';
-        $hilo1->fecha = '2023-04-03';
-        $hilo1->save();
+        $hilosCount = 10;
 
-        $tuit1 = new Tuit();
-        $tuit1->texto = 'hola';
-        $tuit1->fecha = '2023-04-03';
-        $tuit1->orden = '1';
-        $tuit1->hilo()->associate($hilo1);
-        $tuit1->save();
+        for ($i = 0; $i < $hilosCount; $i++) {
+            $hilo = HiloFactory::new()->create();            
 
-        $tuit2 = new Tuit();
-        $tuit2->texto = 'hola';
-        $tuit2->fecha = '2023-04-03';
-        $tuit2->orden = '2';
-        $tuit2->hilo()->associate($hilo1);
-        $tuit2->save();
+            $tuitsCount = random_int(1, 5);
 
-        $hilo1->tuits()->saveMany([$tuit1, $tuit2]);
+            for ($j = 0; $j < $tuitsCount; $j++) {
+                Tuit::factory()->create(['hilo_id' => $hilo->id]);            }
+        }
     }
 }
