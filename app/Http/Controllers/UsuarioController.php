@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use App\Models\Evento;
 use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
@@ -15,6 +16,16 @@ class UsuarioController extends Controller
 
         return view('usuarios.index', compact('usuarios'));
     }
+
+    // public function suscribirEvento( $eventoId)
+    // {
+    //     $usuario = Auth::user();
+    //     $evento = Evento::find($eventoId);
+
+    //     $usuario->eventos()->attach($evento);
+
+    //     // Puedes agregar aquí la lógica adicional, como redirigir a una página de éxito o mostrar un mensaje de confirmación.
+    // }
     
     public function ordenar(Request $request, $sort)
     {
@@ -51,9 +62,9 @@ class UsuarioController extends Controller
         return view('usuarios.lista', compact('usuarios'));
     }
 
-    public function show()
+    public function show($id)
     {
-        $usuario = Auth::user();
+        $usuario = Usuario::find($id);
         return view('usuarios.show', ['usuario' => $usuario]);
     }
 

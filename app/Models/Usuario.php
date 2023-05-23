@@ -24,9 +24,9 @@ class Usuario extends Model implements Authenticatable
         return $this->belongsToMany(Categoria::class);
     }
 
-    public function evento()
+    public function eventos()
     {
-        return $this->hasMany(Evento::class);
+        return $this->belongsToMany(Evento::class);
     }
 
     public function hilo()
