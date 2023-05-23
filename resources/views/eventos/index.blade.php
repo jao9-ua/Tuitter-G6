@@ -37,11 +37,13 @@
                     <td>
                         <a href="{{ route('eventos.show', $evento->id) }}" class="btn btn-primary btn-sm">Ver</a>
                         <a href="{{ route('eventos.edit', $evento->id) }}" class="btn btn-secondary btn-sm">Editar</a>
+                        @if (auth()->user()->es_Admin)
                         <form action="{{ route('evento.destroy', $evento->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach

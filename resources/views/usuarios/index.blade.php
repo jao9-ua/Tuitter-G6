@@ -38,6 +38,7 @@
                         <td>
                             <a href="{{ route('usuarios.show', ['id' => $usuario->id]) }}" class="btn btn-info">Ver</a>
                             <!--<a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning">Editar</a>-->
+                            @if (auth()->user()->es_Admin || auth()->user()->id == $usuario->id)
                             <form action="{{ route('usuario.destroy', ['id' => $usuario->id]) }}" method="POST" style="display: inline-block">
                                 @csrf
                                 @method('DELETE')
@@ -45,6 +46,7 @@
                                     {{ __('Eliminar cuenta') }}
                                 </button>
                             </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
