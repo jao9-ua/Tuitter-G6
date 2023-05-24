@@ -36,7 +36,9 @@
                     <td>{{ $evento->fecha_fin }}</td>
                     <td>
                         <a href="{{ route('eventos.show', $evento->id) }}" class="btn btn-primary btn-sm">Ver</a>
+                        @if (auth()->user()->id === $evento->usuario_id)
                         <a href="{{ route('eventos.edit', $evento->id) }}" class="btn btn-secondary btn-sm">Editar</a>
+                        @endif
                         @if (auth()->user()->es_Admin)
                         <form action="{{ route('evento.destroy', $evento->id) }}" method="POST" class="d-inline">
                             @csrf
