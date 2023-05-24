@@ -115,8 +115,13 @@
     <nav class="navigation">
         <ul class="navigation-links">
             @auth
+            @php
+                $userID = auth() -> user() -> id
+            @endphp
+
+            <li class="navigation-link"><a href="{{ route('usuarios.show', ['id' => $userID]) }}">Perfil</a></li>
             <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
-            <li class="navigation-link"><a href="{{ route('usuarios.index') }}">Profile</a></li>
+            <li class="navigation-link"><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.index') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.index') }}">Categorías</a></li>
             <!-- HAY QUE CONTROLAR LA SESION SI NO ESTA INICIADA QUE NO SE MUESTRE Y SI ESTA INICIADA QUE SE COMPRUEBE QUE SEA ADMIN-->
