@@ -99,7 +99,7 @@
                         </div>
                         @if (auth()->user()->id == $usuario->id)
                         <div class="form-group row mt-2">
-                            <div class="col-md-6">
+                            <div class="col-md-6 offset-md-4">
                                 <a href="{{ route('logout') }}" class="btn btn-primary">Cerrar sesión</a>                        
                             </div>
                         </div>
