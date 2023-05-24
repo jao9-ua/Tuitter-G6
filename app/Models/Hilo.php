@@ -27,6 +27,10 @@ class Hilo extends Model
 
     public function usuario()
     {
+        return $this->belongsTo(Usuario::class);
+    }
+    public function usuarios()
+    {
         return $this->belongsToMany(Usuario::class,'usuario_hilo');
     }
     public static function factory()

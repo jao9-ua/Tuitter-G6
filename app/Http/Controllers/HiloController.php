@@ -114,4 +114,17 @@ class HiloController extends Controller
 
         return view('hilos.hilosUsuario', compact('hilos'));
     }
+    public function listarHilos($orden)
+    {
+        if ($orden === 'fecha') {
+            $hilos = Hilo::orderBy('fecha', 'desc')->get();
+        } elseif ($orden === 'likes') {
+            $hilos = Hilo::withCount('usuarios')->orderBy('usuarios_count', 'desc')->get();
+        } else {
+            $hilos = Hilo::all();
+        }
+    
+        return view('hilos.hilosUsuario', compact('hilos'));
+    }
+    
 }

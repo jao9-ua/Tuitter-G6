@@ -115,7 +115,7 @@
     <nav class="navigation">
         <ul class="navigation-links">
             @auth
-            <li class="navigation-link"><a href="{{ route('hilos.index') }}">Tuits</a></li>
+            <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
             <li class="navigation-link"><a href="{{ route('usuarios.index') }}">Profile</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.index') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.index') }}">Categorías</a></li>

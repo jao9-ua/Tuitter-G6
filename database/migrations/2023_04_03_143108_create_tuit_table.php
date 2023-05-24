@@ -23,6 +23,8 @@ return new class extends Migration
                 $table->string('imagen')->nullable();
                 $table->date('fecha');
                 $table->integer('orden');
+                $table->unsignedBigInteger('usuario_id')->nullable();
+                $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
                 $table->timestamps();
             });
         }
