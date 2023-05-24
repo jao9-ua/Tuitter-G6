@@ -22,11 +22,13 @@
                                         </p>
                                     @endif
                                     @if ($evento->usuario)
-                                        <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center mb-2">
                                             <img src="{{ asset('images/' . $evento->usuario->foto) }}" alt="Imagen del usuario" class="rounded-circle profile-picture mr-2" style="width: 40px; height: 40px;">
                                             <p class="mb-0"><strong>Usuario:</strong> {{ $evento->usuario->Nombre }}</p>
                                         </div>
                                     @endif
+                                    <p class="card-text"><strong>Fecha de inicio:</strong> {{ $evento->fecha_ini}}</p>
+                                    <p class="card-text"><strong>Fecha de fin:</strong> {{ $evento->fecha_fin }}</p>
                                 </div>
                             </div>
                         </div>
