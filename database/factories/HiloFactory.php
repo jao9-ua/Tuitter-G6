@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Categoria;
 use App\Models\Hilo;
+use App\Models\Usuario;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class HiloFactory extends Factory
@@ -17,6 +19,9 @@ class HiloFactory extends Factory
             'imagen' => $this->faker->imageUrl(),
             'fecha' => $this->faker->dateTime(),
             'categoria_id' => Categoria::factory(),
+            'usuario_id' => function () {
+                return Usuario::factory()->create()->id;
+            },
         ];
     }
 }

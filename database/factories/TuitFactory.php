@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Hilo;
 use App\Models\Tuit;
+use App\Models\Usuario;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TuitFactory extends Factory
@@ -20,6 +22,10 @@ class TuitFactory extends Factory
             'hilo_id' => function () {
                 return Hilo::factory()->create()->id;
             },
+            'usuario_id' => function () {
+                return Usuario::factory()->create()->id;
+            },
+
         ];
     }
 }
