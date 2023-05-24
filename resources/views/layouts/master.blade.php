@@ -4,6 +4,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -127,7 +129,7 @@
             <li class="navigation-link"><a href="{{ route('usuarios.edit', ['id' => $userID]) }}">Perfil</a></li>
             <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.listar') }}">Eventos</a></li>
-            <li class="navigation-link"><a href="{{ route('categorias.index') }}">Categorías</a></li>
+            <li class="navigation-link"><a href="{{ route('categorias.buscar') }}">Categorías</a></li>
             <!-- HAY QUE CONTROLAR LA SESION SI NO ESTA INICIADA QUE NO SE MUESTRE Y SI ESTA INICIADA QUE SE COMPRUEBE QUE SEA ADMIN-->
             @if (auth()->user()->es_Admin)
             <li class="navigation-link dropdown">
@@ -157,6 +159,9 @@
     </div>
    <!-- Incluir archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
 
 </body>
 

@@ -13,79 +13,11 @@
             background-repeat: no-repeat;
         }
         
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pagination .pagination-link {
-  margin: 0 5px;
-  font-size: 14px; /* Ajusta el tamaño de la fuente de los números de página */
-}
-
-.pagination .pagination-link,
-.pagination .disabled {
-  color: #ff2929;
-  text-decoration: none;
-}
-
-.pagination .pagination-link:hover {
-  text-decoration: underline;
-}
-
-.pagination .disabled {
-  cursor: default;
-}
-
-.pagination .pagination-link.active {
-  font-weight: bold;
-}
-
-.pagination .pagination-arrow {
-  font-size: 14px; /* Ajusta el tamaño de la fuente de las flechas */
-  color: #333;
-  text-decoration: none;
-}
-
-.pagination .pagination-arrow:hover {
-  text-decoration: none;
-}
-
-.pagination .pagination-arrow.disabled {
-  color: #ccc;
-  cursor: default;
-}
-
-.pagination .pagination-info {
-  margin: 0 10px;
-  font-size: 14px; /* Ajusta el tamaño de la fuente del texto de información */
-  color: #555;
-}
-.pagination .pagination-link.previous,
-.pagination .pagination-link.next {
-  display: none;
-}
-
-.pagination .pagination-info {
-  display: none;
-}
-.flex .justify-between {
-  display: none;
-}
-.relative .w-5 .h-5 {
-  size: 6px; /* Ajusta el tamaño de la fuente de las flechas */
-
-}
-.pagination .icon .text-sm .text-gray-700 .leading-5{
-  display: none;
-}
-.icon {
-  width: 30px; /* Ajusta el ancho del ícono */
-  height: 20px; /* Ajusta la altura del ícono */
-}
-
-
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
   </style>
 <!-- Mostrar eventos en forma de tarjetas con carrusel -->
 <div id="eventosCarousel" class="carousel slide" data-ride="carousel">

@@ -101,6 +101,19 @@ class CategoriaController extends Controller
 
         return view('categorias.mostrar', compact('categoria', 'eventos', 'hilos'));
     }
+    public function buscar(Request $request)
+    {
+        $categorias = Categoria::query();
+        // Verificar si se ha enviado un término de búsqueda
+        if ($request->has('search')) {
+            $searchTerm = '%' . $request->input('search') . '%';
+            $categorias->where('hashtag', 'like', $searchTerm);
+        }
+
+        $categorias = $categorias->paginate(10);
+
+        return view('categorias.categoriasUsuario', compact('categorias'));
+    }
 
 
 

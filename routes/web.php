@@ -92,6 +92,7 @@ Route::middleware('auth')->group(function() {
 Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
 Route::middleware('auth')->group(function() {
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+    Route::get('/categorias/buscar', [CategoriaController::class, 'buscar'])->name('categorias.buscar');
     Route::get('/categoria/{id}', [CategoriaController::class, 'mostrar'])->name('categoria.mostrar');
     Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
     Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
