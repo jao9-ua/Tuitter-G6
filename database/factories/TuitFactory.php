@@ -18,7 +18,7 @@ class TuitFactory extends Factory
             'texto' => $this->faker->text(),
             'imagen' => $this->faker->imageUrl(),
             'fecha' => $this->faker->dateTime(),
-            'orden' => $this->faker->numberBetween(1, 100),
+            'orden' => $this->faker->numberBetween(1, 20),
             'hilo_id' => function () {
                 return Hilo::factory()->create()->id;
             },

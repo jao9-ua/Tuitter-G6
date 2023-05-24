@@ -50,12 +50,12 @@
     @foreach($hilos as $hilo)
       <div class="row">
         <div class="col-md-2">
-          @foreach($hilo->usuario as $usuario)
-            <a href="{{ route('usuarios.show', $usuario->id) }}">
-              <div class="card-img-container" style="background-image: url('{{ asset('images/'.$usuario->imagen)}}')" alt = "Imagen usuario"></div>
-              <p>{{ $usuario->Nombre }}</p>
+          @if($hilo->usuario)
+            <a href="{{ route('usuarios.show', $hilo->usuario->id) }}">
+              <div class="card-img-container" style="background-image: url('{{ asset('images/'.$hilo->usuario->foto)}}')" alt = "Imagen usuario"></div>
+              <p>{{ $hilo->usuario->Nombre }}</p>
             </a>
-          @endforeach
+          @endif
         </div>
         <div class="col-md-10">
           <div class="card">

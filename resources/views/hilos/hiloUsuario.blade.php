@@ -164,7 +164,7 @@
 
         <h4 class="text-xl font-bold mb-4">Respuestas</h4>
         <div>
-            @foreach($hilo->tuits->sortBy('orden') as $tuit)
+        @foreach($hilo->tuits->sortByDesc('fecha')->sortBy('orden') as $tuit)  
                 <div class="bg-white rounded-lg shadow p-4 mb-4">
                     <div class="flex items-center mb-2">
                         <img src="{{ asset('images/' . $tuit->usuario->foto) }}" alt="Foto de perfil" class="profile-picture">
@@ -179,6 +179,10 @@
                             Me gusta
                         </button>
                         <button class="btn btn-blue mt-4">Responder</button>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-600">
+                        <span>Fecha: {{ $tuit->fecha }}</span>
+                        <span>Likes: {{ $tuit->usuarios->count() }}</span>
                     </div>
                 </div>
             @endforeach

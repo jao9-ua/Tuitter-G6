@@ -141,7 +141,6 @@
                     <li><a class="dropdown-item" href="{{ route('eventos.index') }}">Eventos</a></li>
                 </ul>
                 </li>
-
             @endif
 
             @endauth
