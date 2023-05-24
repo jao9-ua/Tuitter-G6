@@ -67,6 +67,7 @@ Route::get('/tuits/usuario/{usuarioID}', [TuitController::class, 'index'])->name
 //Rutas hilos
 Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
 Route::get('/hilos/{orden}', [HiloController::class, 'listarHilos'])->name('hilos.listar');
+Route::post('/hilos/like/{hilo}', [HiloController::class, 'like'])->name('hilo.like');
 Route::get('/hilos/{id}/show', [HiloController::class, 'show'])->name('hilos.show');
 Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
 Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.store');

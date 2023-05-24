@@ -101,7 +101,11 @@
 </head>
 
 <body>
-    
+        <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+        
     <header class="header">
         <div class="header-overlay"></div>
         <div class="header-content">
@@ -154,9 +158,7 @@
     </div>
    <!-- Incluir archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
-    <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
