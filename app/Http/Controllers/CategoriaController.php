@@ -110,7 +110,7 @@ class CategoriaController extends Controller
             $categorias->where('hashtag', 'like', $searchTerm);
         }
 
-        $categorias = $categorias->paginate(10);
+        $categorias = $categorias->paginate(9);
 
         return view('categorias.categoriasUsuario', compact('categorias'));
     }

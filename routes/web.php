@@ -63,8 +63,8 @@ Route::view('/modificarusuario', 'modificarObjetos.usuario');
 
 
 //Rutas tuits
-Route::get('/tuits/{id}/show', [TuitController::class, 'show'])->name('tuits.show');
-Route::middleware('auth')->group(function() {
+    Route::get('/tuits/{id}/show', [TuitController::class, 'show'])->name('tuits.show');
+    Route::middleware('auth')->group(function() {
     Route::get('/tuits', 'TuitController@index')->name('tuits.index');
     Route::get('/hilos/{idHilo}/tuits/create', [TuitController::class, 'create'])->name('tuits.create');
     Route::post('/tuits', [TuitController::class, 'store'])->name('tuits.store');
@@ -75,8 +75,8 @@ Route::middleware('auth')->group(function() {
 
 
 //Rutas hilos
-Route::get('/hilos/{id}/show', [HiloController::class, 'show'])->name('hilos.show');
-Route::middleware('auth')->group(function() {
+    Route::get('/hilos/{id}/show', [HiloController::class, 'show'])->name('hilos.show');
+    Route::middleware('auth')->group(function() {
     Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
     Route::get('/hilos/{orden}', [HiloController::class, 'listarHilos'])->name('hilos.listar');
     Route::post('/hilos/like/{hilo}', [HiloController::class, 'like'])->name('hilo.like');Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
@@ -89,8 +89,8 @@ Route::middleware('auth')->group(function() {
 });
 
 //Rutas categorias
-Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
-Route::middleware('auth')->group(function() {
+    Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
+    Route::middleware('auth')->group(function() {
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
     Route::get('/categorias/buscar', [CategoriaController::class, 'buscar'])->name('categorias.buscar');
     Route::get('/categoria/{id}', [CategoriaController::class, 'mostrar'])->name('categoria.mostrar');
@@ -102,8 +102,8 @@ Route::middleware('auth')->group(function() {
 });
 
 //Rutas eventos
-Route::get('/eventos/{id}/show', [EventoController::class, 'show'])->name('eventos.show');
-Route::middleware('auth')->group(function() {
+    Route::get('/eventos/{id}/show', [EventoController::class, 'show'])->name('eventos.show');
+    Route::middleware('auth')->group(function() {
     Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
     Route::get('/eventos/usuario', [EventoController::class, 'listar'])->name('eventos.listar');
     Route::get('/eventos/ordenar/{sort}', [EventoController::class, 'ordenar'])->name('eventos.ordenar');
@@ -116,7 +116,7 @@ Route::middleware('auth')->group(function() {
     
 });
 //Rutas usuarios
-Route::middleware('auth')->group(function() {
+    Route::middleware('auth')->group(function() {
     Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
     Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
     Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
