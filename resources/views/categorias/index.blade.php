@@ -32,6 +32,13 @@
             </td>
             <td> 
                 <a href="{{ route('categorias.show', $categoria->id) }}" class="btn btn-info">Ver</a>
+                @if (auth()->user()->es_Admin)
+                <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            @endif
             </td>
         </tr>
         @endforeach

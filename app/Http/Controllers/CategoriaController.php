@@ -113,5 +113,18 @@ class CategoriaController extends Controller
         return view('categorias.categoriasUsuario', compact('categorias'));
     }
 
+    public function destroy($id)
+{
+    $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json(['message' => 'La categoria no existe'], 404);
+        }
+
+        $categoria->delete();
+
+        return redirect()->route('categorias.index');
+}
+
 
 }
