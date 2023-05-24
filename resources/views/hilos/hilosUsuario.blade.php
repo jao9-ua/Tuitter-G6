@@ -58,7 +58,31 @@
                 font-size: 14px;
                 font-weight: bold;
             }
+            .like-button {
+                display: flex;
+                align-items: center;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #ccc;
+                transition: color 0.3s ease;
+            }
+
+            .like-button:hover {
+                color: #ff5e63;
+            }
+
+            .like-button i {
+                margin-right: 5px;
+            }
+
+            .like-count {
+                font-weight: bold;
+                font-size: 14px;
+            }
         </style>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <h1>Hilos</h1>
 
         <div class="navigation-link mb-4">
@@ -70,24 +94,24 @@
             @foreach($hilos as $hilo)
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                            <div class="card-header">
-                                @if($hilo->usuario)
-                                <div class="profile-picture">
-                                    <a href="{{ route('usuarios.show', $hilo->usuario->id) }}" class="card-link">
-                                        @if($hilo->usuario->foto)
-                                            <img src="{{ asset('images/' . $hilo->usuario->foto) }}" alt="Foto de perfil" class="img-fluid">
-                                        @else
-                                            <p class="no-profile-picture">No hay foto de perfil</p>
-                                        @endif
-                                    </a>
-                                </div>
-                                @endif
-                                <h5 class="card-title">
+                        <div class="card-header">
+                            @if($hilo->usuario)
+                            <div class="profile-picture">
+                                <a href="{{ route('usuarios.show', $hilo->usuario->id) }}" class="card-link">
+                                    @if($hilo->usuario->foto)
+                                        <img src="{{ asset('images/' . $hilo->usuario->foto) }}" alt="Foto de perfil" class="img-fluid">
+                                    @else
+                                        <p class="no-profile-picture">No hay foto de perfil</p>
+                                    @endif
+                                </a>
+                            </div>
+                            @endif
+                            <h5 class="card-title">
                                 @if($hilo->usuario)
                                     <a href="{{ route('usuarios.show', $hilo->usuario->id) }}" class="card-link">{{ $hilo->usuario->Nombre }}</a>
                                 @endif
-                                </h5>
-                            </div>
+                            </h5>
+                        </div>
                         <div class="card-body">
                             <a href="{{ route('hilos.show', $hilo->id) }}" class="card-link">
                                 <p class="card-text">{{ $hilo->texto }}</p>
@@ -96,21 +120,19 @@
                         <div class="card-footer">
                             <div class="card-footer-item">
                                 <i class="far fa-calendar-alt"></i>
-                                <span>{{ $hilo->fecha}}</span>
+                                <span>{{ $hilo->fecha }}</span>
                             </div>
-                            <div class="card-footer-item">
-                                <i class="fas fa-thumbs-up"></i>
-                                @if($hilo->usuarios)
-                                <span>{{ $hilo->usuarios->count() }}</span>
-                                @else
-                                <span>0</span>
-                                @endif
-
+                            <div class="like-section">
+                                <div class="like-button" data-hilo-id="{{ $hilo->id }}">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">{{ $hilo->usuarios->count() }}</span>
+        </div>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-    </div>
+
+    </div>    
 @endsection

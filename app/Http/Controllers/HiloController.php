@@ -87,7 +87,7 @@ class HiloController extends Controller
     {
         $hilo = Hilo::with('tuits')->find($id);
 
-        return view('hilos.show', ['hilo' => $hilo]);
+        return view('hilos.hiloUsuario', compact('hilo'));
     }
 
 
@@ -126,5 +126,13 @@ class HiloController extends Controller
     
         return view('hilos.hilosUsuario', compact('hilos'));
     }
+    public function like(Hilo $hilo)
+    {
+        $usuarioId = auth()->user()->id;
+        $hilo->usuarios()->attach($usuarioId);
+    
+        return response()->json(['success' => true]);
+    }
+
     
 }
