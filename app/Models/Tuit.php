@@ -20,8 +20,12 @@ class Tuit extends Model
         return $this->belongsTo(Hilo::class);
     }
 
-    public function usuario()
+    public function usuarios()
     {
         return $this->belongsToMany(Usuario::class,'usuario_tuit');
+    }
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class);
     }
 }

@@ -115,13 +115,23 @@
     <nav class="navigation">
         <ul class="navigation-links">
             @auth
-            <li class="navigation-link"><a href="{{ route('hilos.index') }}">Tuits</a></li>
+            <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
             <li class="navigation-link"><a href="{{ route('usuarios.index') }}">Profile</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.index') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.index') }}">Categorías</a></li>
             <!-- HAY QUE CONTROLAR LA SESION SI NO ESTA INICIADA QUE NO SE MUESTRE Y SI ESTA INICIADA QUE SE COMPRUEBE QUE SEA ADMIN-->
             @if (auth()->Usuario()->es_Admin)
-                <li class="navigation-link"><a href="{{ route('admin.index') }}">ADMIN</a></li>
+            <li class="navigation-link dropdown">
+                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ADMIN <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="{{ route('usuarios.index') }}">Usuarios</a></li>
+                    <li><a class="dropdown-item" href="{{ route('categorias.index') }}">Categorías</a></li>
+                    <li><a class="dropdown-item" href="{{ route('hilos.index') }}">Hilos y Tuits</a></li>
+                    <li><a class="dropdown-item" href="{{ route('eventos.index') }}">Eventos</a></li>
+                </ul>
+                </li>
             @endif
 
             @endauth
@@ -136,8 +146,13 @@
     <div class="vh-100" id="content">
         @yield('content')
     </div>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Incluir archivos CSS de Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+
+    <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

@@ -22,6 +22,8 @@ return new class extends Migration
                 $table->date('fecha')->default(now());
                 $table->unsignedBigInteger('categoria_id')->nullable();
                 $table->foreign('categoria_id')->references('id')->on('Categoria')->onDelete('set null');
+                $table->unsignedBigInteger('usuario_id')->nullable();
+                $table->foreign('usuario_id')->references('id')->on('Usuario')->onDelete('cascade');
             });
         }
     }

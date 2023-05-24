@@ -65,17 +65,19 @@ Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
 Route::get('/hilos/{idHilo}/tuits/create', [TuitController::class, 'create'])->name('tuits.create');
 Route::post('/tuits', [TuitController::class, 'store'])->name('tuits.store');
 Route::get('/tuits/crear/{hilo}', [TuitController::class, 'crear'])->name('tuits.crear');
-Route::get('/tuits/usuario/{usuarioID}', [TuitController::class, 'index'])->name('tuits.tuitsUsuario');
+Route::get('/tuits/usuario/{usuarioID}', [TuitController::class, 'index'])->name('tuits.tuitsUsuario'); //modificar 'index' a 'tuitsUsuario'
 
 //Rutas hilos
 Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
+Route::get('/hilos/{orden}', [HiloController::class, 'listarHilos'])->name('hilos.listar');
+Route::post('/hilos/like/{hilo}', [HiloController::class, 'like'])->name('hilo.like');
 Route::get('/hilos/{id}/show', [HiloController::class, 'show'])->name('hilos.show');
 Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
 Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.store');
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
 Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
 Route::get('/hilo/crear', [HiloController::class, 'crear'])->name('hilo.crear');
-Route::get('/hilos/usuario/{usuarioID}', [HiloController::class, 'index'])->name('hilos.hilosUsuario');
+Route::get('/hilos/usuario/{usuarioID}', [HiloController::class, 'index'])->name('hilos.hilosUsuario'); //modificar 'index' a 'hilosUsuario'
 
 //Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');

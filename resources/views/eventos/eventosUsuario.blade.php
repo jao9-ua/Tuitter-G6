@@ -1,7 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-    <h1>Listado de eventos</h1>
+
+    @php
+        $url = request()->url();
+        $userId = substr($url, strrpos($url, '/') + 1);
+        $user = App\Models\Usuario::find($userId);
+        $userName = $user ? $user->Nombre : 'Usuario Desconocido';
+    @endphp
+    <h1>Listado de eventos de {{ $userName }}</h1>
 
     <form action="{{ route('eventos.index') }}" method="GET" class="form-inline mb-4">
         <input type="text" name="q" value="{{ request('q') }}" placeholder="Buscar" class="form-control mr-sm-2">
@@ -36,8 +43,10 @@
                     <td>{{ $evento->fecha_fin }}</td>
                     <td>
                         <a href="{{ route('eventos.show', $evento->id) }}" class="btn btn-primary btn-sm">Ver</a>
+                        @if (auth()->user()->id === $evento->usuario_id)
                         <a href="{{ route('eventos.edit', $evento->id) }}" class="btn btn-secondary btn-sm">Editar</a>
-                        @if (auth()->user()->es_Admin)
+                        @endif
+                        @if (auth()->user()->es_Admin || auth()->user()->id === $evento->usuario_id)
                         <form action="{{ route('evento.destroy', $evento->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')

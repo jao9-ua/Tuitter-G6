@@ -3,7 +3,16 @@
 @section('content')
 <!-- Mostrar nombre de la categoría -->
 <h1>#{{ $categoria->hashtag }}</h1>
-
+<!-- Agrega tu código CSS personalizado aquí -->
+<style>
+        .card-img-container {
+            width: 100%;
+            height: 200px; /* Tamaño máximo de la imagen */
+            background-size: cover; /* Hace que la imagen se encoja proporcionalmente y cubra todo el contenedor */
+            background-position: center; /* Centra la imagen dentro del contenedor */
+            background-repeat: no-repeat;
+        }
+  </style>
 <!-- Mostrar eventos en forma de tarjetas con carrusel -->
 <div id="eventosCarousel" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
@@ -13,7 +22,7 @@
         @foreach($chunk as $evento)
         <div class="col-md-4">
           <div class="card">
-            <img src="{{ asset('ruta/a/la/carpeta/de/imagenes/'.$evento->Imagen) }}" class="card-img-top" alt="Imagen del evento">
+            <div class="card-img-container" style="background-image: url('{{ asset('images/'.$evento->imagen) }}')" alt="Imagen no disponible"></div>
             <div class="card-body">
               <h5 class="card-title">{{ $evento->fecha_ini }}</h5>
               <p class="card-text">{{ $evento->texto }}</p>
@@ -43,7 +52,7 @@
         <div class="col-md-2">
           @foreach($hilo->usuario as $usuario)
             <a href="{{ route('usuarios.show', $usuario->id) }}">
-              <img src="{{ asset('ruta/a/la/carpeta/de/imagenes/'.$usuario->foto) }}" class="img-thumbnail" alt="Foto del usuario">
+              <div class="card-img-container" style="background-image: url('{{ asset('images/'.$usuario->imagen)}}')" alt = "Imagen usuario"></div>
               <p>{{ $usuario->Nombre }}</p>
             </a>
           @endforeach
