@@ -79,7 +79,7 @@ Route::get('/hilos/{id}/show', [HiloController::class, 'show'])->name('hilos.sho
 Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
 Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.store');
 Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
-Route::delete('/hilos/{id}', 'HiloController@destroy')->name('hilos.destroy');
+Route::delete('/hilos/{id}', [HiloController::class, 'destroy'])->name('hilos.destroy');
 Route::get('/hilo/crear', [HiloController::class, 'crear'])->name('hilo.crear');
 Route::get('/hilos/usuario/{usuarioID}', [HiloController::class, 'index'])->name('hilos.hilosUsuario'); //modificar 'index' a 'hilosUsuario'
 

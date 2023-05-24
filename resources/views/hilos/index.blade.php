@@ -23,6 +23,15 @@
                 <td>{{ $hilo->nombre }}</td>
                 <td>{{ $hilo->texto }}</td>
                 <td><a href="{{ route('tuits.crear', ['hilo' => $hilo]) }}" class="btn btn-primary">Contestar hilo</a></td>
+                <td>
+                    @if (auth()->user()->es_Admin)
+                    <form action="{{ route('hilos.destroy', $hilo->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar hilo</button>
+                    </form>
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td colspan="3">

@@ -39,6 +39,7 @@ return array(
     'App\\Models\\Hilo' => $baseDir . '/app/Models/Hilo.php',
     'App\\Models\\Tuit' => $baseDir . '/app/Models/Tuit.php',
     'App\\Models\\Usuario' => $baseDir . '/app/Models/Usuario.php',
+    'App\\Notifications\\EventoFinalizandoNotificacion' => $baseDir . '/app/Notifications/EventoFinalizandoNotificacion.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
