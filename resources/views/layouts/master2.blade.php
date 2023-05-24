@@ -116,7 +116,7 @@
         <ul class="navigation-links">
             @auth
             <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
-            <li class="navigation-link"><a href="{{ route('usuarios.index') }}">Profile</a></li>
+            <li class="navigation-link"><a href="{{ route('usuarios.index') }}">Perfil</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.index') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.index') }}">Categorías</a></li>
             <!-- HAY QUE CONTROLAR LA SESION SI NO ESTA INICIADA QUE NO SE MUESTRE Y SI ESTA INICIADA QUE SE COMPRUEBE QUE SEA ADMIN-->

@@ -31,7 +31,7 @@ class EventoSeeder extends Seeder
             for ($i = 0; $i < $eventoCount; $i++) {
                 $evento = new Evento();
                 $evento->texto = 'Evento ' . ($i + 1);
-                $evento->imagen = 'Logo_tuit.jpeg';
+                $evento->imagen = 'evento.jpeg';
                 $evento->fecha_ini = $faker->date('Y-m-d');
                 $evento->fecha_post = now();
                 $evento->fecha_fin = $faker->date('Y-m-d');

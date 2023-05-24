@@ -60,7 +60,7 @@
         <div class="col-md-10">
           <div class="card">
             @if ($hilo->imagen)
-              <img src="{{ asset('ruta/a/la/carpeta/de/imagenes/'.$hilo->imagen) }}" class="card-img-top" alt="Imagen del hilo">
+              <img src="{{ asset('images/'.$hilo->imagen) }}" class="card-img-top" alt="Imagen del hilo">
             @endif
             <div class="card-body">
               <h5 class="card-title">{{ $hilo->texto }}</h5>

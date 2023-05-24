@@ -38,6 +38,26 @@ class EventoController extends Controller
 
         return view('eventos.index', ['eventos' => $eventos, 'texto' => $texto, 'fecha' => $fecha]);
     }
+    public function listar(Request $request)
+    {
+        $texto = $request->input('texto');
+        $fecha = $request->input('fecha');
+
+        $eventos = Evento::query();
+
+        if ($texto) {
+            $eventos->where('texto', 'like', '%' . $texto . '%');
+        }
+
+        if ($fecha) {
+            $eventos->where('fecha_ini', '<=', $fecha)
+                ->where('fecha_fin', '>=', $fecha);
+        }
+
+        $eventos = $eventos->get();
+
+        return view('eventos.eventos', ['eventos' => $eventos, 'texto' => $texto, 'fecha' => $fecha]);
+    }
     public function ordenar(Request $request, $sort)
     {
         // Validar que el parámetro de ordenación sea válido

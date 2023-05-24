@@ -109,8 +109,8 @@
     <header class="header">
         <div class="header-overlay"></div>
         <div class="header-content">
-            <h1 class="header-title">
-                <a href="{{ route('hilos.index') }}">Tuit</a>
+            <h1 class="navigation-link header-title">
+                <a href="{{ route('/Acerca') }}">Tuit</a>
             </h1>
             <p class="header-description">La red social de microblogging</p>
         </div>
@@ -125,7 +125,6 @@
 
             <li class="navigation-link"><a href="{{ route('usuarios.edit', ['id' => $userID]) }}">Perfil</a></li>
             <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
-            <li class="navigation-link"><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.index') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.index') }}">Categorías</a></li>
             <!-- HAY QUE CONTROLAR LA SESION SI NO ESTA INICIADA QUE NO SE MUESTRE Y SI ESTA INICIADA QUE SE COMPRUEBE QUE SEA ADMIN-->

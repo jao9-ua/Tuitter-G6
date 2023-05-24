@@ -45,6 +45,10 @@ Route::post('/register', [AuthController::class, 'store'])->name('auth.store');
 
 Route::get('/logout',[UsuarioController::class,'logout'])->name('logout')->middleware('auth');
 
+//SOBRENOSOTROS
+Route::get('/Acerca', function () {
+    return view('Acerca');
+})->name('/Acerca');
 
 
 Route::get('/boton1', [HiloController::class, 'index'])->name('boton1');
@@ -91,6 +95,7 @@ Route::get('/categorias/usuario/{usuarioID}', [CategoriaController::class, 'cate
 
 //Rutas eventos
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+Route::get('/eventos/usuario', [EventoController::class, 'listar'])->name('eventos.listar');
 Route::get('/eventos/ordenar/{sort}', [EventoController::class, 'ordenar'])->name('eventos.ordenar');
 Route::get('/eventos/{id}/show', [EventoController::class, 'show'])->name('eventos.show');
 Route::get('/eventos/{id}/editar', [EventoController::class, 'edit'])->name('eventos.edit');
