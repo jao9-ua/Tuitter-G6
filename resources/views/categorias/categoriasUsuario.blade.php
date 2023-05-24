@@ -54,5 +54,3 @@
         {{ $categorias->links() }}
     </div>
 @endsection
-
-@endsection

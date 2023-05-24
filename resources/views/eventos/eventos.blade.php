@@ -80,12 +80,12 @@
                                 @endif
                                 @if ($evento->usuario)
                                     <div class="d-flex align-items-center mb-2">
-                                    <img src="{{ asset('images/' . $evento->usuario->foto) }}" alt="Imagen del usuario" class="rounded-circle profile-picture mr-2" style="width: 40px; height: 40px;">
+                                    <img src="{{ asset('$evento->usuario->foto) }}" alt="Imagen del usuario" class="rounded-circle profile-picture mr-2" style="width: 40px; height: 40px;">
                                     <p class="mb-0"><strong>Usuario:</strong> {{ $evento->usuario->Nombre }}</p>
                                     </div>
                                 @endif
                                 @if ($evento->imagen)
-                                    <img src="{{ asset('images/' . $evento->imagen) }}" alt="Imagen del evento" class="img-fluid">
+                                    <img src="{{ asset($evento->imagen) }}" alt="Imagen del evento" class="img-fluid">
                                 @endif
                                 <p class="card-text"><strong>Inicio:</strong> {{ $evento->fecha_ini }}</p>
                                 <p class="card-text"><strong>Fin:</strong> {{ $evento->fecha_fin }}</p>

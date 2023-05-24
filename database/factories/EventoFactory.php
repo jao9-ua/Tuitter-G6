@@ -9,7 +9,7 @@ use App\Models\Categoria;
 $factory->define(Evento::class, function (Faker $faker) {
     return [
         'texto' => $faker->sentence,
-        'imagen' => 'Logo_tuit.jpeg',
+        'imagen' => 'images/evento.jpeg',
         'fecha_ini' => $faker->date('Y-m-d'),
         'fecha_post' => now(),
         'fecha_fin' => $faker->dateTimeBetween($fecha_actual, '+1 year')->format('Y-m-d'),

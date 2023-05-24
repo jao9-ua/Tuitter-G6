@@ -139,7 +139,7 @@
     <div class="container">
         <div class="card">
             <div class="flex items-center mb-4">
-                <img src="{{ asset('images/' . $hilo->usuario->foto) }}" alt="Foto de perfil" class="profile-picture">
+                <img src="{{ asset($hilo->usuario->foto) }}" alt="Foto de perfil" class="profile-picture">
                 <div>
                     <h2 class="text-2xl font-bold mb-1">{{ $hilo->usuario->Nombre }}</h2>
                     <p class="text-gray-600">{{ $hilo->usuario->Email }}</p>
@@ -147,7 +147,7 @@
             </div>
             <p class="text-gray-800 mb-4">{{ $hilo->texto }}</p>
             @if($hilo->imagen)
-                <img src="{{ asset('images/' . $hilo->imagen) }}" alt="Imagen del hilo" class="card-img">
+                <img src="{{ asset($hilo->imagen) }}" alt="Imagen del hilo" class="card-img">
             @endif
             <div class="flex items-center justify-between text-sm text-gray-600">
                 <span>Fecha: {{ $hilo->fecha }}</span>
@@ -167,7 +167,7 @@
         @foreach($hilo->tuits->sortByDesc('fecha')->sortBy('orden') as $tuit)  
                 <div class="bg-white rounded-lg shadow p-4 mb-4">
                     <div class="flex items-center mb-2">
-                        <img src="{{ asset('images/' . $tuit->usuario->foto) }}" alt="Foto de perfil" class="profile-picture">
+                        <img src="{{ asset($tuit->usuario->foto) }}" alt="Foto de perfil" class="profile-picture">
                         <div>
                             <h6 class="font-bold">{{ $tuit->usuario->Nombre }}</h6>
                         </div>

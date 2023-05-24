@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <img src="{{ asset('storage/hilos_photos/' . $hilo->imagen) }}" alt="{{ $hilo->texto }}" class="img-fluid">
+            <img src="{{ asset($hilo->imagen) }}" alt="{{ $hilo->texto }}" class="img-fluid">
             <h1>{{ $hilo->texto }}</h1>
             @if ($hilo->imagen)
 
@@ -19,7 +19,7 @@
                 <li>
                     <h4>{{ $tuit->texto }}</h4>
                     @if ($tuit->imagen)
-                    <img src="{{ asset('storage/' . $tuit->imagen) }}" alt="{{ $tuit->texto }}" class="img-fluid">
+                    <img src="{{ asset($tuit->imagen) }}" alt="{{ $tuit->texto }}" class="img-fluid">
                     @endif
                 </li>
                 @endforeach

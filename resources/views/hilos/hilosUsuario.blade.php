@@ -99,7 +99,7 @@
                             <div class="profile-picture">
                                 <a href="{{ route('usuarios.show', $hilo->usuario->id) }}" class="card-link">
                                     @if($hilo->usuario->foto)
-                                        <img src="{{ asset('images/' . $hilo->usuario->foto) }}" alt="Foto de perfil" class="img-fluid">
+                                        <img src="{{ asset($hilo->usuario->foto) }}" alt="Foto de perfil" class="img-fluid">
                                     @else
                                         <p class="no-profile-picture">No hay foto de perfil</p>
                                     @endif
