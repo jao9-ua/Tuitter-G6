@@ -63,59 +63,68 @@ Route::view('/modificarusuario', 'modificarObjetos.usuario');
 
 
 //Rutas tuits
-Route::get('/tuits', 'TuitController@index')->name('tuits.index');
 Route::get('/tuits/{id}/show', [TuitController::class, 'show'])->name('tuits.show');
-Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
-Route::get('/hilos/{idHilo}/tuits/create', [TuitController::class, 'create'])->name('tuits.create');
-Route::post('/tuits', [TuitController::class, 'store'])->name('tuits.store');
-Route::get('/tuits/crear/{hilo}', [TuitController::class, 'crear'])->name('tuits.crear');
-Route::get('/tuits/usuario/{usuarioID}', [TuitController::class, 'index'])->name('tuits.tuitsUsuario'); //modificar 'index' a 'tuitsUsuario'
+Route::middleware('auth')->group(function() {
+    Route::get('/tuits', 'TuitController@index')->name('tuits.index');
+    Route::get('/hilos/{idHilo}/tuits/create', [TuitController::class, 'create'])->name('tuits.create');
+    Route::post('/tuits', [TuitController::class, 'store'])->name('tuits.store');
+    Route::get('/tuits/crear/{hilo}', [TuitController::class, 'crear'])->name('tuits.crear');
+    Route::get('/tuits/usuario/{usuarioID}', [TuitController::class, 'index'])->name('tuits.tuitsUsuario'); //modificar 'index' a 'tuitsUsuario'
+    Route::delete('/tuits/{id}', 'TuitController@destroy')->name('tuits.destroy');
+});
+
 
 //Rutas hilos
-Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
-Route::get('/hilos/{orden}', [HiloController::class, 'listarHilos'])->name('hilos.listar');
-Route::post('/hilos/like/{hilo}', [HiloController::class, 'like'])->name('hilo.like');
 Route::get('/hilos/{id}/show', [HiloController::class, 'show'])->name('hilos.show');
-Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
-Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.store');
-Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
-Route::delete('/hilos/{id}', [HiloController::class, 'destroy'])->name('hilos.destroy');
-Route::get('/hilo/crear', [HiloController::class, 'crear'])->name('hilo.crear');
-Route::get('/hilos/usuario/{usuarioID}', [HiloController::class, 'index'])->name('hilos.hilosUsuario'); //modificar 'index' a 'hilosUsuario'
+Route::middleware('auth')->group(function() {
+    Route::get('/hilos', [HiloController::class, 'index'])->name('hilos.index');
+    Route::get('/hilos/{orden}', [HiloController::class, 'listarHilos'])->name('hilos.listar');
+    Route::post('/hilos/like/{hilo}', [HiloController::class, 'like'])->name('hilo.like');Route::post('/hilos', [HiloController::class, 'store'])->name('hilo.store');
+    Route::post('/hilos/{id}/tuits', [HiloController::class, 'store'])->name('tuit.store');
+    Route::put('/hilos/{id}', 'HiloController@update')->name('hilo.update');
+    Route::delete('/hilos/{id}', [HiloController::class, 'destroy'])->name('hilos.destroy');
+    Route::get('/hilo/crear', [HiloController::class, 'crear'])->name('hilo.crear');
+    Route::get('/hilos/usuario/{usuarioID}', [HiloController::class, 'index'])->name('hilos.hilosUsuario'); //modificar 'index' a 'hilosUsuario'
+    
+});
 
 //Rutas categorias
-Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
-Route::get('/categoria/{id}', [CategoriaController::class, 'mostrar'])->name('categoria.mostrar');
 Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
-Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
-Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
-Route::get('/categorias/crear', [CategoriaController::class, 'crear'])->name('categorias.crear');
-Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
-Route::get('/categorias/usuario/{usuarioID}', [CategoriaController::class, 'categoriasUsuario'])->name('categorias.categoriasUsuario');
-
+Route::middleware('auth')->group(function() {
+    Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+    Route::get('/categoria/{id}', [CategoriaController::class, 'mostrar'])->name('categoria.mostrar');
+    Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
+    Route::put('/categorias/{id}', 'CategoriaController@update')->name('categorias.update');
+    Route::get('/categorias/crear', [CategoriaController::class, 'crear'])->name('categorias.crear');
+    Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
+    Route::get('/categorias/usuario/{usuarioID}', [CategoriaController::class, 'categoriasUsuario'])->name('categorias.categoriasUsuario');
+});
 
 //Rutas eventos
-Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
-Route::get('/eventos/usuario', [EventoController::class, 'listar'])->name('eventos.listar');
-Route::get('/eventos/ordenar/{sort}', [EventoController::class, 'ordenar'])->name('eventos.ordenar');
 Route::get('/eventos/{id}/show', [EventoController::class, 'show'])->name('eventos.show');
-Route::get('/eventos/{id}/editar', [EventoController::class, 'edit'])->name('eventos.edit');
-Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
-Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('evento.update');
-Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('evento.destroy');
-Route::get('/eventos/crear', [EventoController::class, 'crear'])->name('eventos.crear');
-Route::get('/eventos/usuario/{usuarioID}', [EventoController::class, 'eventosUsuario'])->name('eventos.eventosUsuario');
-
+Route::middleware('auth')->group(function() {
+    Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+    Route::get('/eventos/usuario', [EventoController::class, 'listar'])->name('eventos.listar');
+    Route::get('/eventos/ordenar/{sort}', [EventoController::class, 'ordenar'])->name('eventos.ordenar');
+    Route::get('/eventos/{id}/editar', [EventoController::class, 'edit'])->name('eventos.edit');
+    Route::post('/evento', [EventoController::class, 'store'])->name('evento.store');
+    Route::put('/eventos/{id}', [EventoController::class, 'update'])->name('evento.update');
+    Route::delete('/eventos/{id}',[EventoController::class, 'destroy'])->name('evento.destroy');
+    Route::get('/eventos/crear', [EventoController::class, 'crear'])->name('eventos.crear');
+    Route::get('/eventos/usuario/{usuarioID}', [EventoController::class, 'eventosUsuario'])->name('eventos.eventosUsuario');
+    
+});
 //Rutas usuarios
-Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
-Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
-Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
-Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
-Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
-Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
-Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
-
+Route::middleware('auth')->group(function() {
+    Route::get('/usuarios/{id}/editar',[UsuarioController::class, 'edit'])->name('usuarios.edit');
+    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+    Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
+    Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
+    Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
+    Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
+    Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
+    Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');
+});
 
 Auth::routes();
 
