@@ -91,12 +91,30 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0 mt-2">
                             <div class="col-md-6 offset-md-4">
 
                                 <button type="submit" class="btn btn-primary">{{ __('Actualizar') }}</button>
                             </div>
                         </div>
+                        @if (auth()->user()->id == $usuario->id)
+                        <div class="form-group row mt-2">
+                            <div class="col-md-6">
+                                <a href="{{ route('logout') }}" class="btn btn-primary">Cerrar sesión</a>                        
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0 mt-2">
+                            <div class="col-md-6 offset-md-4">
+                            <form action="{{ route('usuario.destroy', ['id' => $usuario->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de que desea eliminar la cuenta?')">
+                                    {{ __('Eliminar cuenta') }}
+                                </button>
+                            </form>  
+                            </div>
+                        </div>
+                        @endif
                     </form>
                 </div>
             </div>
