@@ -6,6 +6,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\TuitController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('layouts.master');
 });
+
+//Route::get('/', [NotificationController::class, 'index'])->name('inicio');
 
 
 

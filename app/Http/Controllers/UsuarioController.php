@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\Evento;
+use App\Notifications\EventoFinalizandoNotificacion;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class UsuarioController extends Controller
 {
@@ -26,6 +28,27 @@ class UsuarioController extends Controller
 
     //     // Puedes agregar aquí la lógica adicional, como redirigir a una página de éxito o mostrar un mensaje de confirmación.
     // }
+
+    public function enviarNotificaciones()
+    {
+        // Obtener eventos que están a punto de finalizar
+        $eventos = Evento::where('fecha_fin', '>=', now())
+            ->where('fecha_fin', '<=', now()->addDays(7))
+            ->get();
+
+        foreach ($eventos as $evento) {
+            // Obtener la categoría asociada al evento
+            $categoria = $evento->categoria;
+
+            // Obtener los usuarios que siguen la categoría
+            $usuarios = $categoria->usuarios;
+
+            foreach ($usuarios as $usuario) {
+                // Enviar la notificación al usuario
+                $usuario->notify(new EventoFinalizandoNotificacion($evento));
+            }
+        }
+    }
     
     public function ordenar(Request $request, $sort)
     {
