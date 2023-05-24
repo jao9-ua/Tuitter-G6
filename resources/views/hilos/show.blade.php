@@ -4,7 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            @if($hilo->imagen)
             <img src="{{ asset($hilo->imagen) }}" alt="{{ $hilo->texto }}" class="img-fluid">
+            @endif
             <h1>{{ $hilo->texto }}</h1>
             @if ($hilo->imagen)
 

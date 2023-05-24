@@ -139,11 +139,13 @@
     <div class="container">
         <div class="card">
             <div class="flex items-center mb-4">
+                @if($hilo->usuario)
                 <img src="{{ asset($hilo->usuario->foto) }}" alt="Foto de perfil" class="profile-picture">
                 <div>
                     <h2 class="text-2xl font-bold mb-1">{{ $hilo->usuario->Nombre }}</h2>
                     <p class="text-gray-600">{{ $hilo->usuario->Email }}</p>
                 </div>
+                @endif
             </div>
             <p class="text-gray-800 mb-4">{{ $hilo->texto }}</p>
             @if($hilo->imagen)
@@ -165,27 +167,34 @@
         <h4 class="text-xl font-bold mb-4">Respuestas</h4>
         <div>
         @foreach($hilo->tuits->sortByDesc('fecha')->sortBy('orden') as $tuit)  
-                <div class="bg-white rounded-lg shadow p-4 mb-4">
-                    <div class="flex items-center mb-2">
-                        <img src="{{ asset($tuit->usuario->foto) }}" alt="Foto de perfil" class="profile-picture">
+            <div class="bg-white rounded-lg shadow p-4 mb-4">
+                <div class="flex items-center mb-2">
+                    @if($tuit->usuario)
+                        <img src="{{ asset($tuit->usuario->foto) }}" alt="Foto de perfil" class="profile-picture rounded-lg w-16 h-auto">
                         <div>
                             <h6 class="font-bold">{{ $tuit->usuario->Nombre }}</h6>
                         </div>
-                    </div>
-                    <p class="text-gray-800">{{ $tuit->texto }}</p>
-                    <div>
-                        <button class="btn btn-red mt-4">
-                            <span class="heart-icon"></span>
-                            Me gusta
-                        </button>
-                        <button class="btn btn-blue mt-4">Responder</button>
-                    </div>
-                    <div class="flex items-center justify-between text-sm text-gray-600">
-                        <span>Fecha: {{ $tuit->fecha }}</span>
-                        <span>Likes: {{ $tuit->usuarios->count() }}</span>
-                    </div>
+                    @endif
                 </div>
-            @endforeach
+                <p class="text-gray-800">{{ $tuit->texto }}</p>
+                @if($tuit->imagen)
+                    <div>
+                        <img src="{{ asset($tuit->imagen) }}" alt="Imagen del tuit" class="mt-2 rounded-lg w-16 h-auto">
+                    </div>
+                @endif
+                <div>
+                    <button class="btn btn-red mt-4">
+                        <span class="heart-icon"></span>
+                        Me gusta
+                    </button>
+                    <button class="btn btn-blue mt-4">Responder</button>
+                </div>
+                <div class="flex items-center justify-between text-sm text-gray-600">
+                    <span>Fecha: {{ $tuit->fecha }}</span>
+                    <span>Likes: {{ $tuit->usuarios->count() }}</span>
+                </div>
+            </div>
+        @endforeach
         </div>
     </div>
 
