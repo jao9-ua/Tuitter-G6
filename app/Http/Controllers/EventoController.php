@@ -7,6 +7,7 @@ use App\Models\Evento;
 use App\Models\Categoria;
 use App\Models\Hilo;
 use App\Models\Tuit;
+use Carbon\Carbon;
 
 class EventoController extends Controller
 {
@@ -38,7 +39,24 @@ class EventoController extends Controller
 
         return view('eventos.index', ['eventos' => $eventos, 'texto' => $texto, 'fecha' => $fecha]);
     }
-    public function listar(Request $request)
+
+public function listar(Request $request)
+{
+    $activo = $request->has('activo') && $request->activo === 'true';
+    $ordenarPorFecha = $request->has('ordenarPorFecha') && $request->ordenarPorFecha === 'true';
+
+    // Obtener todos los eventos
+    $eventos = Evento::all();
+
+    // Ordenar los eventos por fecha de inicio si se activó la opción
+    if ($ordenarPorFecha) {
+        $eventos = $eventos->sortBy('fecha_ini');
+    }
+
+    return view('eventos.eventos', compact('eventos', 'activo', 'ordenarPorFecha'));
+}
+
+ /*   public function listar(Request $request)
     {
         $texto = $request->input('texto');
         $fecha = $request->input('fecha');
@@ -57,7 +75,8 @@ class EventoController extends Controller
         $eventos = $eventos->get();
 
         return view('eventos.eventos', ['eventos' => $eventos, 'texto' => $texto, 'fecha' => $fecha]);
-    }
+    }*/
+
     public function ordenar(Request $request, $sort)
     {
         // Validar que el parámetro de ordenación sea válido

@@ -101,10 +101,6 @@
 </head>
 
 <body>
-        <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
         
     <header class="header">
         <div class="header-overlay"></div>
@@ -115,7 +111,12 @@
             <p class="header-description">La red social de microblogging</p>
         </div>
     </header>
+        <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
+        
     <nav class="navigation">
         <ul class="navigation-links">
             @auth
@@ -125,7 +126,7 @@
 
             <li class="navigation-link"><a href="{{ route('usuarios.edit', ['id' => $userID]) }}">Perfil</a></li>
             <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
-            <li class="navigation-link"><a href="{{ route('eventos.index') }}">Eventos</a></li>
+            <li class="navigation-link"><a href="{{ route('eventos.listar') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.index') }}">Categorías</a></li>
             <!-- HAY QUE CONTROLAR LA SESION SI NO ESTA INICIADA QUE NO SE MUESTRE Y SI ESTA INICIADA QUE SE COMPRUEBE QUE SEA ADMIN-->
             @if (auth()->user()->es_Admin)

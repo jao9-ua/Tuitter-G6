@@ -26,15 +26,16 @@ class EventoSeeder extends Seeder
         
         // Crear eventos aleatorios para cada categoría
         foreach ($categorias as $categoria) {
-            $eventoCount = random_int(0, 5);
+            $eventoCount = random_int(5, 9);
 
             for ($i = 0; $i < $eventoCount; $i++) {
+                $fecha = $faker->dateTimeBetween(20-01-01, '+3 year')->format('Y-m-d');
                 $evento = new Evento();
                 $evento->texto = 'Evento ' . ($i + 1);
                 $evento->imagen = 'evento.jpeg';
-                $evento->fecha_ini = $faker->date('Y-m-d');
+                $evento->fecha_ini = $fecha;
                 $evento->fecha_post = now();
-                $evento->fecha_fin = $faker->date('Y-m-d');
+                $evento->fecha_fin = $faker->dateTimeBetween($fecha, '+3 year')->format('Y-m-d');
                 $evento->categoria()->associate($categoria);
 
                 // Obtener una colección de IDs de usuarios relacionados con el evento

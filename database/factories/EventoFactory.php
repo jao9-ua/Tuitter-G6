@@ -12,7 +12,7 @@ $factory->define(Evento::class, function (Faker $faker) {
         'imagen' => 'Logo_tuit.jpeg',
         'fecha_ini' => $faker->date('Y-m-d'),
         'fecha_post' => now(),
-        'fecha_fin' => $faker->date('Y-m-d'),
+        'fecha_fin' => $faker->dateTimeBetween($fecha_actual, '+1 year')->format('Y-m-d'),
         'usuario_id' => function () {
             return Usuario::inRandomOrder()->first()->id;
         },

@@ -11,7 +11,7 @@ class TuitSeeder extends Seeder
 {
     public function run()
     {
-        $hilosCount = 10;
+        $hilosCount = 20;
 
         for ($i = 0; $i < $hilosCount; $i++) {
             $hilo = HiloFactory::new()->create();            
