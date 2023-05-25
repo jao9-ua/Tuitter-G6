@@ -21,19 +21,19 @@ class Usuario extends Model implements Authenticatable
 
     protected $fillable = ['Nombre', 'email', 'foto', 'biografia', 'password', 'es_Admin'];
 
-    public function categoria()
+    public function categorias()
     {
         return $this->belongsToMany(Categoria::class);
     }
 
     public function eventos()
     {
-        return $this->belongsToMany(Evento::class);
+        return $this->hasMany(Evento::class);
     }
 
-    public function hilo()
+    public function hilos()
     {
-        return $this->belongsToMany(Hilo::class);
+        return $this->hasMany(Hilo::class);
     }
 
     public function like_t()

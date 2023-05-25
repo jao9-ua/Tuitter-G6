@@ -32,7 +32,7 @@ class EventoSeeder extends Seeder
                 $fecha = $faker->dateTimeBetween(20-01-01, '+3 year')->format('Y-m-d');
                 $evento = new Evento();
                 $evento->texto = 'Evento ' . ($i + 1);
-                $evento->imagen = '<images>evento.jpeg';
+                $evento->imagen = 'images/evento.jpeg';
                 $evento->fecha_ini = $fecha;
                 $evento->fecha_post = now();
                 $evento->fecha_fin = $faker->dateTimeBetween($fecha, '+3 year')->format('Y-m-d');

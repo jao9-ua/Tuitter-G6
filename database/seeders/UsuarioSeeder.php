@@ -29,6 +29,7 @@ class UsuarioSeeder extends Seeder
                 'email' => $email,
                 'password' => $password,
                 'es_Admin' => $esAdmin,
+                'foto' => 'images/usuario.jpeg',
             ];
         }
 
