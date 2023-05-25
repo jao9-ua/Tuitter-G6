@@ -160,7 +160,7 @@
                     <span class="heart-icon"></span>
                     Me gusta
                 </button>
-                <button class="btn btn-blue mt-4">Responder</button>
+                <a href="{{ route('tuits.crear', ['hilo' => $hilo]) }}" class="btn btn-blue mt-4">Responder</a>
             </div>
         </div>
 
@@ -187,7 +187,8 @@
                         <span class="heart-icon"></span>
                         Me gusta
                     </button>
-                    <button class="btn btn-blue mt-4">Responder</button>
+                    <a href="{{ route('tuits.crear', ['hilo' => $hilo]) }}" class="btn btn-blue mt-4">Responder</a>
+
                 </div>
                 <div class="flex items-center justify-between text-sm text-gray-600">
                     <span>Fecha: {{ $tuit->fecha }}</span>
