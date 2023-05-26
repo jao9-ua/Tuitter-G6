@@ -61,6 +61,11 @@ Route::get('/Acerca', function () {
 })->name('/Acerca');
 
 
+Route::get('/Contacto', function () {
+    return view('Contacto');
+})->name('/Contacto');
+
+
 //crearObjetos, conforme se añadan botones ir borrando estas rutas
 Route::view('/crearusuario', 'usuarios.crear');
 Route::view('/modificarrevento', 'modificarObjetos.evento');
