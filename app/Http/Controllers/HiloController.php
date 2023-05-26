@@ -21,6 +21,22 @@ class HiloController extends Controller
         return view('hilos.crear', ['categorias' => $categorias]);
     }
 
+    public function likeHilo(Request $request, $id)
+    {
+        $hilo = Hilo::findOrFail($id);
+        $user = auth()->user();
+
+        // Agregar o eliminar la relación de "Me gusta"
+        $user->like_h->toggle($hilo);
+
+        // Obtener el estado actual de "Me gusta" para el usuario y el hilo
+        $isLiked = $user->like_h->where('hilo_id', $hilo->id)->exists();
+
+        return response()->json([
+            'isLiked' => $isLiked,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -47,7 +63,7 @@ class HiloController extends Controller
 
         $hilo->save();
 
-        return redirect()->route('hilos.index');
+        return redirect()->route('hilos.listar', ['orden' => 'fecha']);
     }
 
     public function update(Request $request, $id)
@@ -123,16 +139,14 @@ class HiloController extends Controller
         } else {
             $hilos = Hilo::all();
         }
-    
+
         return view('hilos.hilosUsuario', compact('hilos'));
     }
     public function like(Hilo $hilo)
     {
         $usuarioId = auth()->user()->id;
         $hilo->usuarios()->attach($usuarioId);
-    
+
         return response()->json(['success' => true]);
     }
-
-    
 }

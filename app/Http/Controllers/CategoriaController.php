@@ -25,7 +25,7 @@ class CategoriaController extends Controller
 
     public function store(Request $request)
     {
-        try {
+
             $validatedData = $request->validate([
                 'hashtag' => 'required|max:255',
                 'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
@@ -44,10 +44,8 @@ class CategoriaController extends Controller
 
             $categoria->save();
 
-            return $this->index();
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
-        }
+            return redirect()->route('categorias.buscar', ['orden' => 'fecha']);
+       
     }
 
     public function update(Request $request, $id)

@@ -108,7 +108,6 @@ public function listar(Request $request)
 
     public function store(Request $request)
     {
-        try {
             $request->validate([
                 'texto' => 'required|string|max:255',
                 'fecha_ini' => ['nullable', 'date', function ($attribute, $value, $fail) {
@@ -129,10 +128,7 @@ public function listar(Request $request)
 
             $evento->save();
 
-            return redirect()->route('eventos.index');
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Error al crear el usuario: ' . $e->getMessage()], 500);
-        }
+            return redirect()->route('eventos.listar');
     }
 
     public function update(Request $request)

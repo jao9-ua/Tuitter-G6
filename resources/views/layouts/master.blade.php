@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -112,13 +115,19 @@
         <div class="header-overlay"></div>
         <div class="header-content">
             <h1 class="navigation-link header-title">
-                <a href="{{route('home')}}">Tuit</a>
+                <a href="#">Tuit</a>
             </h1>
             <a href="{{ route('/Acerca') }}" class="card-link" style="text-decoration: none; color: #FFFFFF;">
             <p class="header-description">La red social de microblogging</p>
             </a>
         </div>
     </header>
+    <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+
     <nav class="navigation">
         <ul class="navigation-links">
             @auth
@@ -180,7 +189,6 @@
             <!-- Mostrar estos enlaces solo si el usuario no está autenticado -->
             <li class="navigation-link"><a href="{{ route('login') }}">Login</a></li>
             <li class="navigation-link"><a href="{{ route('register') }}">Register</a></li>
-            <li class="navigation-link"><a href="{{ route('home') }}">Contactar</a></li>
             @endguest
         </ul>
     </nav>

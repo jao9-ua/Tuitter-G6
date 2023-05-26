@@ -37,8 +37,12 @@ class NotificarEventosFin extends Command
             ->get();
 
         foreach ($eventos as $evento) {
-            $usuarios = $evento->categoria->usuarios;
-            Notification::send($usuarios, new EventoNotification($evento));
+            if ($evento->categoria) {
+                $usuarios = $evento->categoria->usuarios;
+                if ($usuarios) {
+                    Notification::send($usuarios, new EventoNotification($evento));
+                }
+            }
         }
 
         $this->info('Notificaciones enviadas para eventos próximos a finalizar.');

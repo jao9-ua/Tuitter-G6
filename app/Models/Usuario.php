@@ -42,7 +42,7 @@ class Usuario extends Authenticatable
 
     public function like_h()
     {
-        return $this->belongsToMany(Tuit::class, 'usuario_hilo');
+        return $this->belongsToMany(Hilo::class, 'usuario_hilo');
     }
 
     public function getAuthIdentifierName()
