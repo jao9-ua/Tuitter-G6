@@ -89,6 +89,17 @@
             @endforelse
         </div>
     </div>
+    <!-- Botón de Cerrar Sesión -->
+    @auth
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+            </form>
+        </div>
+    </div>
+    @endauth
 </div>
 
 <script>

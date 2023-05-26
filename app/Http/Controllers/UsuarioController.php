@@ -24,20 +24,6 @@ class UsuarioController extends Controller
 
     public function inicio()
     {
-        $usuario = Usuario::find(Auth::id());
-
-        $categoriaSuscritas = $usuario->categoria;
-
-        $hoy = Carbon::now();
-
-        foreach ($categoriaSuscritas as $categoria) {
-            $eventosCategoria = $categoria->evento();
-
-            foreach ($eventosCategoria as $evento) {
-
-                Notification::send($usuario, new EventoNotification($evento));
-            }
-        }
         return view('layouts/master2');
     }
 
