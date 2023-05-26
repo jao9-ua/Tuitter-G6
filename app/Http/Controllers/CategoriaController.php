@@ -114,8 +114,14 @@ class CategoriaController extends Controller
 
         return view('categorias.categoriasUsuario', compact('categorias'));
     }
-
-
+    public function search(Request $request)
+    {
+        $searchTerm = $request->get('term');
+    
+        $categorias = Categoria::where('hashtag', 'LIKE', '%' . $searchTerm . '%')->get();
+    
+        return response()->json($categorias);
+    }
 
     public function categoriasUsuario($usuarioId)
     {   

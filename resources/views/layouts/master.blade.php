@@ -115,9 +115,11 @@
         <div class="header-overlay"></div>
         <div class="header-content">
             <h1 class="navigation-link header-title">
-                <a href="{{ route('/Acerca') }}">Tuit</a>
+                <a href="#">Tuit</a>
             </h1>
+            <a href="{{ route('/Acerca') }}" class="card-link" style="text-decoration: none; color: #FFFFFF;">
             <p class="header-description">La red social de microblogging</p>
+            </a>
         </div>
     </header>
     <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
@@ -133,7 +135,7 @@
             $userID = auth() -> user() -> id
             @endphp
 
-            <li class="navigation-link"><a href="{{ route('usuario.perfil') }}">Perfil</a></li>
+            <li class="navigation-link"><a href="{{ route('usuario.perfil', ['id' => auth()->user()->id]) }}">Perfil</a></li>
             <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.listar') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.buscar') }}">Categorías</a></li>

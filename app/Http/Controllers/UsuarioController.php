@@ -98,9 +98,9 @@ class UsuarioController extends Controller
         $usuario = Usuario::find($id);
         return view('usuarios.show', ['usuario' => $usuario]);
     }
-    public function perfil()
+    public function perfil($id)
     {
-        $usuario = Auth()->user();
+        $usuario = Usuario::find($id);
         return view('usuarios.perfil', ['usuario' => $usuario]);
     }
 

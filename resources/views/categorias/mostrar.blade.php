@@ -63,23 +63,28 @@
     @if(isset($hilos))
     @foreach($hilos as $hilo)
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2">s
             @if($hilo->usuario)
-            <a href="{{ route('usuarios.show', $hilo->usuario->id) }}">
+            <a href="{{ route('usuario.perfil', $hilo->usuario->id) }}" style="text-decoration: none; color: #000;">
                 <div class="card-img-container" style="background-image: url('{{ asset($hilo->usuario->foto) }}')" alt="Imagen usuario"></div>
                 <p>{{ $hilo->usuario->Nombre }}</p>
             </a>
             @endif
         </div>
         <div class="col-md-10">
-            <div class="card">
-                @if ($hilo->imagen)
-                <img src="{{ asset($hilo->imagen) }}" class="card-img-top" alt="Imagen del hilo" style="object-fit: cover; width: 100%; height: 200px;">
-                @endif
-                <div class="card-body">
-                    <h5 class="card-title">{{ $hilo->texto }}</h5>
+
+                <div class="card">
+                    @if ($hilo->imagen)
+                    <img src="{{ asset($hilo->imagen) }}" class="card-img-top" alt="Imagen del hilo" style="object-fit: cover; width: 100%; height: 200px;">
+                    @endif
+                    <a href="{{ route('hilos.show', $hilo->id) }}" style="text-decoration: none; color: #000;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $hilo->texto }}</h5>
+                        </div>
+                    </a>
+
+
                 </div>
-            </div>
         </div>
     </div>
     @endforeach

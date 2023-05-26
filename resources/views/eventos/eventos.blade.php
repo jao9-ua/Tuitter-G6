@@ -79,10 +79,12 @@
                                     </p>
                                 @endif
                                 @if ($evento->usuario)
+                                <a href="{{ route('usuario.perfil', ['id' => $evento->usuario->id]) }}" style="text-decoration: none; color: #000;">
                                     <div class="d-flex align-items-center mb-2">
                                     <img src="{{ asset($evento->usuario->foto) }}" alt="Imagen del usuario" class="rounded-circle profile-picture mr-2" style="width: 40px; height: 40px;">
                                     <p class="mb-0"><strong>Usuario:</strong> {{ $evento->usuario->Nombre }}</p>
                                     </div>
+                                </a>
                                 @endif
                                 @if ($evento->imagen)
                                     <img src="{{ asset($evento->imagen) }}" alt="Imagen del evento" class="img-fluid">
