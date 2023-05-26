@@ -55,11 +55,6 @@ Route::get('/Acerca', function () {
 })->name('/Acerca');
 
 
-Route::get('/boton1', [HiloController::class, 'index'])->name('boton1');
-Route::get('/boton2', [BotonesController::class, 'mostrarBoton1'])->name('boton2');
-Route::get('/boton3', [BotonesController::class, 'mostrarBoton1'])->name('boton3');
-Route::get('/boton4', [BotonesController::class, 'mostrarBoton1'])->name('boton4');
-
 //crearObjetos, conforme se añadan botones ir borrando estas rutas
 Route::view('/crearusuario', 'usuarios.crear');
 Route::view('/modificarrevento', 'modificarObjetos.evento');
