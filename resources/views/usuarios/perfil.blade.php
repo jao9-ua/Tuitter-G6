@@ -81,6 +81,40 @@
     .btn-primary.custom:focus {
         box-shadow: none;
     }
+
+.user-profile {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.user-profile:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 300px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.user-bio {
+    padding: 20px;
+}
+
+.user-bio-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
     </style>
 <div class="container">
     @if (auth()->user()->id != $usuario->id)
@@ -91,11 +125,22 @@
     <!-- Información del usuario -->
     <div class="row">
         <div class="col-md-4">
-            <img src="{{ asset($usuario->foto)}}" alt="Foto de perfil" class="img-fluid">
-            <h3>{{ $usuario->Nombre }}</h3>
-            <p>{{ $usuario->biografia }}</p>
+            <div class="card user-profile">
+                <img src="{{ asset($usuario->foto) }}" alt="Foto de perfil" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $usuario->Nombre }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="user-bio">
+                <h3 class="user-bio-title">{{ $usuario->biografia }}</h3>
+            </div>
         </div>
     </div>
+
+
+
 
     <!-- Botones de navegación -->
     <div class="row mt-4">
@@ -204,12 +249,14 @@
     <!-- Botón de Cerrar Sesión -->
     @auth
     <div class="row mt-4">
+    @if (auth()->user()->id == $usuario->id)
         <div class="col-md-12 text-center">
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
             </form>
         </div>
+    @endif
     </div>
     @endauth
 </div>
