@@ -59,12 +59,17 @@ Route::get('/logout',[UsuarioController::class,'logout'])->name('logout')->middl
 Route::get('/Acerca', function () {
     return view('Acerca');
 })->name('/Acerca');
+Route::get('/', [HiloController::class, 'listarHilos'])->name('home')->defaults('orden', 'fecha');
 
 
 Route::get('/Contacto', function () {
     return view('Contacto');
 })->name('/Contacto');
 
+
+Route::get('/boton2', [BotonesController::class, 'mostrarBoton1'])->name('boton2');
+Route::get('/boton3', [BotonesController::class, 'mostrarBoton1'])->name('boton3');
+Route::get('/boton4', [BotonesController::class, 'mostrarBoton1'])->name('boton4');
 
 //crearObjetos, conforme se añadan botones ir borrando estas rutas
 Route::view('/crearusuario', 'usuarios.crear');
@@ -141,4 +146,4 @@ Route::view('/modificarusuario', 'modificarObjetos.usuario');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

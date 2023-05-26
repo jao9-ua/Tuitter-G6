@@ -115,7 +115,7 @@
         <div class="header-overlay"></div>
         <div class="header-content">
             <h1 class="navigation-link header-title">
-                <a href="#">Tuit</a>
+                <a href="{{route('home')}}">Tuit</a>
             </h1>
             <a href="{{ route('/Acerca') }}" class="card-link" style="text-decoration: none; color: #FFFFFF;">
             <p class="header-description">La red social de microblogging</p>
@@ -189,6 +189,7 @@
             <!-- Mostrar estos enlaces solo si el usuario no está autenticado -->
             <li class="navigation-link"><a href="{{ route('login') }}">Login</a></li>
             <li class="navigation-link"><a href="{{ route('register') }}">Register</a></li>
+            <li class="navigation-link"><a href="{{ route('home') }}">Contactar</a></li>
             @endguest
         </ul>
     </nav>
