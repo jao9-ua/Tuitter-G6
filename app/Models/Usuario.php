@@ -2,22 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Database\Factories\UsuarioFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-
-class Usuario extends Model implements Authenticatable
+class Usuario extends Authenticatable
 {
-    use HasFactory;
-    use AuthenticatableTrait;
-    use HasFactory;
+    use Notifiable;
+    use HasApiTokens, HasFactory;
 
     public $timestamps = false;
 
-    protected $table = 'Usuario';
+    public $table = 'Usuario';
 
     protected $fillable = ['Nombre', 'email', 'foto', 'biografia', 'password', 'es_Admin'];
 
@@ -38,12 +37,12 @@ class Usuario extends Model implements Authenticatable
 
     public function like_t()
     {
-        return $this->belongsToMany(Tuit::class,'usuario_tuit');
+        return $this->belongsToMany(Tuit::class, 'usuario_tuit');
     }
 
     public function like_h()
     {
-        return $this->belongsToMany(Tuit::class,'usuario_hilo');
+        return $this->belongsToMany(Tuit::class, 'usuario_hilo');
     }
 
     public function getAuthIdentifierName()
@@ -75,13 +74,9 @@ class Usuario extends Model implements Authenticatable
     {
         return 'remember_token';
     }
-    
+
     public function findForPassport($username)
     {
         return $this->where('Nombre', $username)->orWhere('email', $username)->first();
     }
-    public static function factory()
-    {
-        return new UsuarioFactory();
-    }    
 }

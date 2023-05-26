@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\NotificarEventosFin' => $baseDir . '/app/Console/Commands/NotificarEventosFin.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -39,7 +40,7 @@ return array(
     'App\\Models\\Hilo' => $baseDir . '/app/Models/Hilo.php',
     'App\\Models\\Tuit' => $baseDir . '/app/Models/Tuit.php',
     'App\\Models\\Usuario' => $baseDir . '/app/Models/Usuario.php',
-    'App\\Notifications\\EventoFinalizandoNotificacion' => $baseDir . '/app/Notifications/EventoFinalizandoNotificacion.php',
+    'App\\Notifications\\EventoNotification' => $baseDir . '/app/Notifications/EventoNotification.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

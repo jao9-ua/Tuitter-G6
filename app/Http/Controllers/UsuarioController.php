@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use App\Models\Evento;
-use App\Notifications\EventoFinalizandoNotificacion;
+use App\Notifications\EventoNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Carbon\Carbon;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
@@ -17,6 +20,25 @@ class UsuarioController extends Controller
         $usuarios = Usuario::all();
 
         return view('usuarios.index', compact('usuarios'));
+    }
+
+    public function inicio()
+    {
+        $usuario = Usuario::find(Auth::id());
+
+        $categoriaSuscritas = $usuario->categoria;
+
+        $hoy = Carbon::now();
+
+        foreach ($categoriaSuscritas as $categoria) {
+            $eventosCategoria = $categoria->evento();
+
+            foreach ($eventosCategoria as $evento) {
+
+                Notification::send($usuario, new EventoNotification($evento));
+            }
+        }
+        return view('layouts/master2');
     }
 
     // public function suscribirEvento( $eventoId)
@@ -29,32 +51,32 @@ class UsuarioController extends Controller
     //     // Puedes agregar aquí la lógica adicional, como redirigir a una página de éxito o mostrar un mensaje de confirmación.
     // }
 
-    public function enviarNotificaciones()
-    {
-        // Obtener eventos que están a punto de finalizar
-        $eventos = Evento::where('fecha_fin', '>=', now())
-            ->where('fecha_fin', '<=', now()->addDays(7))
-            ->get();
+    // public function enviarNotificaciones()
+    // {
+    //     // Obtener eventos que están a punto de finalizar
+    //     $eventos = Evento::where('fecha_fin', '>=', now())
+    //         ->where('fecha_fin', '<=', now()->addDays(7))
+    //         ->get();
 
-        foreach ($eventos as $evento) {
-            // Obtener la categoría asociada al evento
-            $categoria = $evento->categoria;
+    //     foreach ($eventos as $evento) {
+    //         // Obtener la categoría asociada al evento
+    //         $categoria = $evento->categoria;
 
-            // Obtener los usuarios que siguen la categoría
-            $usuarios = $categoria->usuarios;
+    //         // Obtener los usuarios que siguen la categoría
+    //         $usuarios = $categoria->usuarios;
 
-            foreach ($usuarios as $usuario) {
-                // Enviar la notificación al usuario
-                $usuario->notify(new EventoFinalizandoNotificacion($evento));
-            }
-        }
-    }
-    
+    //         foreach ($usuarios as $usuario) {
+    //             // Enviar la notificación al usuario
+    //             $usuario->notify(new EventoFinalizandoNotificacion($evento));
+    //         }
+    //     }
+    // }
+
     public function ordenar(Request $request, $sort)
     {
         // Obtener todos los usuarios y aplicar la ordenación
         $usuarios = Usuario::orderBy($sort)->get();
-    
+
         return view('usuarios.index', compact('usuarios'));
     }
 
@@ -177,7 +199,8 @@ class UsuarioController extends Controller
         return $this->index();
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/login');
     }

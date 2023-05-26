@@ -22,15 +22,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+//Solo para cuando inicie sesión
+Route::get('/cosas', [UsuarioController::class, 'inicio'])->name('inicio');
 
 //Route::get('/', 'HiloController@getHilos')->name('hilos.index');
-Route::get('/', function () {
-    return view('layouts.master');
+Route::get('/', function () { return view('layouts.master');
 });
 
 //Route::get('/', [NotificationController::class, 'index'])->name('inicio');
 
-
+Route::get('markAsRead', function(){
+    auth()->user()->unreadNotifications->markAsRead();
+    return redirect()->back();
+})->name('markAsRead');
 
 // Login
 Route::get('/login', [AuthController::class, 'login'])->name('login');

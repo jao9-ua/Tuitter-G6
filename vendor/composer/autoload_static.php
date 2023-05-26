@@ -519,6 +519,7 @@ class ComposerStaticInit0f9bae93d13623d2d0145caf1a4a0bbb
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\NotificarEventosFin' => __DIR__ . '/../..' . '/app/Console/Commands/NotificarEventosFin.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -552,7 +553,7 @@ class ComposerStaticInit0f9bae93d13623d2d0145caf1a4a0bbb
         'App\\Models\\Hilo' => __DIR__ . '/../..' . '/app/Models/Hilo.php',
         'App\\Models\\Tuit' => __DIR__ . '/../..' . '/app/Models/Tuit.php',
         'App\\Models\\Usuario' => __DIR__ . '/../..' . '/app/Models/Usuario.php',
-        'App\\Notifications\\EventoFinalizandoNotificacion' => __DIR__ . '/../..' . '/app/Notifications/EventoFinalizandoNotificacion.php',
+        'App\\Notifications\\EventoNotification' => __DIR__ . '/../..' . '/app/Notifications/EventoNotification.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

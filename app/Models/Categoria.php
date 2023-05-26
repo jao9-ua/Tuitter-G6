@@ -2,14 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Database\Factories\CategoriaFactory;
-
 
 class Categoria extends Model
 {
-    use HasFactory;
 
     public $timestamps =false;
 
@@ -30,10 +26,5 @@ class Categoria extends Model
     public function evento()
     {
         return $this->hasMany(Evento::class);
-    }
-    public static function factory()
-    {
-        return new CategoriaFactory();
-    }    
-
+    }   
 }

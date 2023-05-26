@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -100,11 +101,17 @@
     </style>
 
     <title>Tuit</title>
+    @if (auth()->check() && !session('notificacion_ejecutada'))
+    <?php
+    \Illuminate\Support\Facades\Artisan::call('notificar:eventos-proximos');
+    session(['notificacion_ejecutada' => true]);
+    ?>
+    @endif
 </head>
 
-<body>
-        
-    <header class="header">
+<body class="hold-transition sidebar-mini">
+
+    <header class="header wraper">
         <div class="header-overlay"></div>
         <div class="header-content">
             <h1 class="navigation-link header-title">
@@ -113,17 +120,17 @@
             <p class="header-description">La red social de microblogging</p>
         </div>
     </header>
-        <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Incluir archivos JS de Bootstrap (jQuery es requerido) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 
-        
+
     <nav class="navigation">
         <ul class="navigation-links">
             @auth
             @php
-                $userID = auth() -> user() -> id
+            $userID = auth() -> user() -> id
             @endphp
 
             <li class="navigation-link"><a href="{{ route('usuarios.edit', ['id' => $userID]) }}">Perfil</a></li>
@@ -142,8 +149,37 @@
                     <li><a class="dropdown-item" href="{{ route('hilos.index') }}">Hilos y Tuits</a></li>
                     <li><a class="dropdown-item" href="{{ route('eventos.index') }}">Eventos</a></li>
                 </ul>
-                </li>
+            </li>
             @endif
+
+            <!-- Notifications Dropdown Menu -->
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell"></i>
+                    @if (count(auth()->user()->unreadNotifications))
+                    <span class="badge badge-warning">{{ count(auth()->user()->unreadNotifications) }}</span>
+                    @endif
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" aria-labelledby="notificationDropdown">
+                    <span class="dropdown-header">Unread Notifications</span>
+                    @forelse (auth()->user()->unreadNotifications as $notification)
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> {{ $notification->data['texto'] }}
+                        <span class="ml-3 pull-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                    </a>
+                    @empty
+                    <span class="dropdown-item ml-3 pull-right text-muted text-sm">Sin notificaciones por leer</span>
+                    @endforelse
+
+                    <div class="dropdown-divider">
+
+                    </div>
+                    <a href="{{ route('markAsRead') }}" class="dropdown-item">Mark all as read</a>
+
+                </div>
+            </li>
+
 
             @endauth
 
@@ -157,7 +193,7 @@
     <div class="vh-100" id="content">
         @yield('content')
     </div>
-   <!-- Incluir archivos CSS de Bootstrap -->
+    <!-- Incluir archivos CSS de Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
