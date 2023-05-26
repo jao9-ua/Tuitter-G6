@@ -100,21 +100,38 @@
     <!-- Botones de navegación -->
     <div class="row mt-4">
         <div class="col-md-4">
-            <button class="btn btn-primary btn-block "                 
-            style="background-color: transparent; border-color: transparent; color: #333;"
-            onclick="showHilos()">Ver Hilos</button>
+            <button class="btn btn-primary btn-block"
+                    style="background-color: transparent; border-color: transparent; color: #333;"
+                    onclick="showHilos()">Ver Hilos
+            </button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-primary btn-block"                 
-            style="background-color: transparent; border-color: transparent; color: #333;"
-            onclick="showCategorias()">Ver Categorías</button>
+            <button class="btn btn-primary btn-block"
+                    style="background-color: transparent; border-color: transparent; color: #333;"
+                    onclick="showCategorias()">Ver Categorías
+            </button>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-primary btn-block" 
-            style="background-color: transparent; border-color: transparent; color: #333;"
-            onclick="showEventos()">Ver Eventos</button>
+            <button class="btn btn-primary btn-block"
+                    style="background-color: transparent; border-color: transparent; color: #333;"
+                    onclick="showEventos()">Ver Eventos
+            </button>
         </div>
     </div>
+    <!-- Botones de creación -->
+    @if (auth()->user()->id == $usuario->id)
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <a href="{{ route('hilo.crear') }}" class="btn btn-primary btn-block">Crear Hilo</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ route('categorias.crear') }}" class="btn btn-primary btn-block">Crear Categoría</a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{ route('eventos.crear') }}" class="btn btn-primary btn-block">Crear Evento</a>
+            </div>
+        </div>
+    @endif
 
     <!-- Sección de Hilos -->
     <div id="hilos" style="display: none;">

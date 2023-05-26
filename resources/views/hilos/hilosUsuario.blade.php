@@ -97,7 +97,7 @@
                         <div class="card-header">
                             @if($hilo->usuario)
                             <div class="profile-picture">
-                                <a href="{{ route('usuarios.show', $hilo->usuario->id) }}" class="card-link">
+                                <a href="{{ route('usuario.perfil', $hilo->usuario->id) }}" class="card-link">
                                     @if($hilo->usuario->foto)
                                         <img src="{{ asset($hilo->usuario->foto) }}" alt="Foto de perfil" class="img-fluid">
                                     @else
@@ -108,12 +108,12 @@
                             @endif
                             <h5 class="card-title">
                                 @if($hilo->usuario)
-                                    <a href="{{ route('usuarios.show', $hilo->usuario->id) }}" class="card-link">{{ $hilo->usuario->Nombre }}</a>
+                                    <a href="{{ route('usuario.perfil', $hilo->usuario->id) }}" class="card-link" style="text-decoration: none; color: #000;">{{ $hilo->usuario->Nombre }}</a>
                                 @endif
                             </h5>
                         </div>
                         <div class="card-body">
-                            <a href="{{ route('hilos.show', $hilo->id) }}" class="card-link">
+                            <a href="{{ route('hilos.show', $hilo->id) }}" class="card-link" style="text-decoration: none; color: #000;">
                                 <p class="card-text">{{ $hilo->texto }}</p>
                             </a>
                         </div>

@@ -8,8 +8,10 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\TuitController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,10 @@ Route::get('/', function () { return view('layouts.master');
 });
 
 //Route::get('/', [NotificationController::class, 'index'])->name('inicio');
+//MAIL
+Route::get('/contacto', function () {
+    return view('email');
+})->name('contacto'); //Esta ruta la ponemos en la raiz para que nada mas ejecutar nuestra aplicación aparezca nuestro formulario
 
 Route::get('markAsRead', function(){
     auth()->user()->unreadNotifications->markAsRead();
@@ -95,6 +101,7 @@ Route::view('/modificarusuario', 'modificarObjetos.usuario');
 //Rutas categorias
     Route::get('/categorias/{id}/show', [CategoriaController::class, 'show'])->name('categorias.show');
     Route::middleware('auth')->group(function() {
+    Route::get('/categoria/search', [CategoriaController::class, 'search'])->name('categoria.search');
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
     Route::get('/categorias/buscar', [CategoriaController::class, 'buscar'])->name('categorias.buscar');
     Route::get('/categoria/{id}', [CategoriaController::class, 'mostrar'])->name('categoria.mostrar');
@@ -126,7 +133,7 @@ Route::view('/modificarusuario', 'modificarObjetos.usuario');
     Route::get('/usuarios/ordenar/{sort}', [UsuarioController::class, 'ordenar'])->name('usuarios.ordenar');
     Route::get('/usuarios/filtrar', [UsuarioController::class, 'filtrar'])->name('usuarios.filtrar');
     Route::get('/usuarios/{id}/show',[UsuarioController::class, 'show'])->name('usuarios.show');
-    Route::get('/usuario/perfil',[UsuarioController::class, 'perfil'])->name('usuario.perfil');
+    Route::get('/usuario/{id}/perfil',[UsuarioController::class, 'perfil'])->name('usuario.perfil');
     Route::post('/usuarios',[UsuarioController::class, 'store'])->name('usuario.store');
     Route::put('/usuarios', [UsuarioController::class, 'update'])->name('usuario.update');
     Route::delete('/usuarios/{id}',[UsuarioController::class, 'destroy'])->name('usuario.destroy');

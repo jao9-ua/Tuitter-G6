@@ -140,11 +140,14 @@
         <div class="card">
             <div class="flex items-center mb-4">
                 @if($hilo->usuario)
+                <a href="{{ route('usuario.perfil', ['id' => auth()->user()->id]) }}" style="text-decoration: none; color: #000;">
+
                 <img src="{{ asset($hilo->usuario->foto) }}" alt="Foto de perfil" class="profile-picture">
                 <div>
                     <h2 class="text-2xl font-bold mb-1">{{ $hilo->usuario->Nombre }}</h2>
                     <p class="text-gray-600">{{ $hilo->usuario->Email }}</p>
                 </div>
+                </a>
                 @endif
             </div>
             <p class="text-gray-800 mb-4">{{ $hilo->texto }}</p>
@@ -170,10 +173,13 @@
             <div class="bg-white rounded-lg shadow p-4 mb-4">
                 <div class="flex items-center mb-2">
                     @if($tuit->usuario)
+                    <a href="{{ route('usuario.perfil', ['id' => auth()->user()->id]) }}" style="text-decoration: none; color: #000;">
+
                         <img src="{{ asset($tuit->usuario->foto) }}" alt="Foto de perfil" class="profile-picture rounded-lg w-16 h-auto">
                         <div>
                             <h6 class="font-bold">{{ $tuit->usuario->Nombre }}</h6>
                         </div>
+                    </a>
                     @endif
                 </div>
                 <p class="text-gray-800">{{ $tuit->texto }}</p>
