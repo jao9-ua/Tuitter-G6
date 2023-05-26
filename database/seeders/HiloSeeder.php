@@ -11,7 +11,7 @@ class HiloSeeder extends Seeder
 {
     public function run()
     {
-        $hilosCount = 50;
+        $hilosCount = 20;
 
         for ($i = 0; $i < $hilosCount; $i++) {
             $hilo = HiloFactory::new()->create();            

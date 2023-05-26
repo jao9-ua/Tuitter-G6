@@ -133,7 +133,7 @@
             $userID = auth() -> user() -> id
             @endphp
 
-            <li class="navigation-link"><a href="{{ route('usuarios.edit', ['id' => $userID]) }}">Perfil</a></li>
+            <li class="navigation-link"><a href="{{ route('usuario.perfil') }}">Perfil</a></li>
             <li class="navigation-link"><a href="{{ route('hilos.listar', ['orden' => 'fecha']) }}">Tuits</a></li>
             <li class="navigation-link"><a href="{{ route('eventos.listar') }}">Eventos</a></li>
             <li class="navigation-link"><a href="{{ route('categorias.buscar') }}">Categorías</a></li>

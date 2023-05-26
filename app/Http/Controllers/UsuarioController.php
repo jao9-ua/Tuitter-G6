@@ -112,6 +112,11 @@ class UsuarioController extends Controller
         $usuario = Usuario::find($id);
         return view('usuarios.show', ['usuario' => $usuario]);
     }
+    public function perfil()
+    {
+        $usuario = Auth()->user();
+        return view('usuarios.perfil', ['usuario' => $usuario]);
+    }
 
     public function store(Request $request)
     {

@@ -7,6 +7,7 @@ use App\Models\Hilo;
 use App\Models\Tuit;
 use App\Models\Categoria;
 use App\Models\Evento;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -21,11 +22,16 @@ class UsuarioFactory extends Factory
      */
     public function definition()
     {
+
+        $password = Hash::make('password'); // Contraseña fija para todos los usuarios generados
+        $esAdmin = mt_rand(0, 1); // Valor aleatorio para 'es_Admin' (0 o 1)
+
         return [
             'Nombre' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'foto' => 'images/usuario.jpeg',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => $password, // password
+            'es_Admin' => $esAdmin,
         ];
     }
 
