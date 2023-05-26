@@ -67,9 +67,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 php artisan migrate
-//seeders
+--seeders
 composer dump-autoload
 php artisan db:seed
-//Que funcione log in
+--Que funcione log in
 composer require laravel/ui
 php artisan ui bootstrap --auth
